@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60">
+  <defs>
+    <filter id="crestGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+  <!-- Background Tab Arch -->
+  <path d="M 0,60 A 30,30 0 0,1 60,60 Z" fill="#0d1117" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+  
+  <!-- 3 Diamond Stars (Yellow top, Red bottom-left, Blue/Silver bottom-right) -->
+  <g transform="translate(30, 36) scale(0.9)" filter="url(#crestGlow)">
+    <!-- Top Yellow Diamond Star -->
+    <path d="M 0,-18 Q 0,-6 8,-6 Q 0,-6 0,0 Q 0,-6 -8,-6 Q 0,-6 0,-18 Z" fill="#ffc800" />
+    <!-- Bottom-Left Red Diamond Star -->
+    <path d="M -9,3 Q -9,-4 -2,-4 Q -9,-4 -9,-10 Q -9,-4 -16,-4 Q -9,-4 -9,3 Z" fill="#b91c1c" />
+    <!-- Bottom-Right Silver/Blue Diamond Star -->
+    <path d="M 9,3 Q 9,-4 16,-4 Q 9,-4 9,-10 Q 9,-4 2,-4 Q 9,-4 9,3 Z" fill="#94a3b8" />
+  </g>
+</svg>
