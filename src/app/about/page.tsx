@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
+import { HomeCTA } from "@/components/sections/HomeCTA";
 import type { TeamMember } from "@/types";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Why InterVu AI exists, what we believe about interview preparation, and who is building it.",
+    "Why Skillitrix exists, what we believe about interview preparation, and who is building it.",
 };
 
 const beliefs = [
@@ -48,19 +50,38 @@ const team: TeamMember[] = [
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-paper font-sans">
-      <section className="border-b border-rule bg-surface pt-32 pb-16 sm:pt-40 sm:pb-20">
-        <Container className="flex flex-col items-start">
-          <p className="eyebrow">About InterVu AI</p>
-          <h1 className="mt-4 max-w-3xl text-hero text-ink tracking-tight">
-            We built the AI interview coach we wished we had during our own job
-            searches.
-          </h1>
-          <p className="mt-5 max-w-2xl text-base sm:text-lg leading-relaxed text-ink-soft text-pretty">
-            Between the three of us, we have sat on both sides of the table — as
-            candidates who lost great offers to unstructured answers, and as
-            hiring managers watching talented engineers struggle under exam
-            pressure.
-          </p>
+      <section className="relative overflow-hidden border-b border-rule bg-surface pt-32 pb-16 sm:pt-40 sm:pb-20">
+        {/* Background image right side */}
+        <div className="absolute inset-y-0 right-0 w-full lg:w-1/2">
+          <Image
+            src="/images/about-hero-bg.jpg"
+            alt="Skillitrix engineering team collaborating on interview evaluation systems"
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover object-center lg:object-right"
+            priority
+          />
+          {/* Left fade gradient overlay blending into section background */}
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-surface via-surface/95 to-transparent lg:from-surface lg:via-surface/85 lg:to-transparent"
+            aria-hidden="true"
+          />
+        </div>
+
+        <Container className="relative z-10">
+          <div className="flex flex-col items-start lg:w-3/5 lg:pr-10">
+            <p className="eyebrow">About Skillitrix</p>
+            <h1 className="mt-4 max-w-3xl text-hero text-ink tracking-tight">
+              We built the AI interview coach we wished we had during our own job
+              searches.
+            </h1>
+            <p className="mt-5 max-w-2xl text-base sm:text-lg leading-relaxed text-ink-soft text-pretty">
+              Between the three of us, we have sat on both sides of the table — as
+              candidates who lost great offers to unstructured answers, and as
+              hiring managers watching talented engineers struggle under exam
+              pressure.
+            </p>
+          </div>
         </Container>
       </section>
 
@@ -107,20 +128,22 @@ export default function AboutPage() {
         <div className="mt-20 flex flex-col items-start gap-6 rounded-lg border border-rule bg-surface p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
           <div>
             <Badge tone="positive">We are hiring</Badge>
-            <h3 className="text-head text-ink mt-3">Join the InterVu AI team</h3>
+            <h3 className="text-head text-ink mt-3">Join the Skillitrix team</h3>
             <p className="mt-1 max-w-lg text-sm text-ink-soft">
               Building AI evaluation systems that help candidates land their
               dream roles.
             </p>
           </div>
           <a
-            href="mailto:jobs@intervu.ai"
+            href="mailto:jobs@skillitrix.com"
             className="shrink-0 text-sm font-semibold text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand"
           >
-            jobs@intervu.ai
+            jobs@skillitrix.com
           </a>
         </div>
       </Container>
+
+      <HomeCTA />
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/Badge";
 const testimonials = [
   {
     quote:
-      "I had four final-round rejections before InterVu AI. The report showed my answers lacked structured trade-offs — something human interviewers never pointed out. Two weeks later, I landed the offer at Stripe.",
+      "I had four final-round rejections before Skillitrix. The report showed my answers lacked structured trade-offs — something human interviewers never pointed out. Two weeks later, I landed the offer at Stripe.",
     author: "Priya Sharma",
     role: "Senior Product Manager, Stripe",
     outcome: "Landed offer at Stripe",

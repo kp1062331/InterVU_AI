@@ -13,6 +13,7 @@ const navigation = [
   { label: "Features", href: "/#features" },
   { label: "How it works", href: "/#how-it-works" },
   { label: "Coverage", href: "/#coverage" },
+  { label: "Blogs", href: "/blogs" },
   { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
 ] as const;
@@ -28,35 +29,17 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [visible, setVisible] = useState(true);
-  const prevScrollYRef = useRef(0);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const prevScrollY = prevScrollYRef.current;
-      const scrollDifference = currentScrollY - prevScrollY;
-
-      setScrolled(currentScrollY > 8);
-
-      if (currentScrollY <= 30) {
-        setVisible(true);
-      } else if (!menuOpen) {
-        if (scrollDifference > 8 && currentScrollY > 80) {
-          setVisible(false);
-        } else if (scrollDifference < -8) {
-          setVisible(true);
-        }
-      }
-
-      prevScrollYRef.current = currentScrollY;
+      setScrolled(window.scrollY > 8);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [menuOpen]);
+  }, []);
 
   const close = useCallback((returnFocus = false) => {
     setMenuOpen(false);
@@ -87,18 +70,19 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "fixed top-0 inset-x-0 z-50 transform bg-paper font-sans transition-transform duration-300",
-        visible ? "translate-y-0" : "-translate-y-full",
-        scrolled ? "border-b border-rule shadow-sm" : "border-b border-transparent",
+        "fixed top-0 inset-x-0 z-50 font-sans transition-all duration-300",
+        scrolled
+          ? "bg-paper/85 backdrop-blur-md border-b border-rule/80 shadow-xs"
+          : "bg-transparent border-b border-transparent",
       )}
     >
-      <div className="mx-auto flex h-16 sm:h-18 w-full max-w-8xl items-center justify-between px-5 sm:px-8">
+      <div className="mx-auto flex h-18 sm:h-20 w-full max-w-8xl items-center justify-between px-5 sm:px-8">
         <Link
           href="/"
           className="flex items-center rounded-sm focus-visible:outline-2 focus-visible:outline-brand"
           aria-label={`${siteConfig.name} — home`}
         >
-          <Wordmark />
+          <Wordmark imgClassName="h-9 sm:h-11.5" />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center lg:flex">

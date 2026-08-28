@@ -1,4 +1,4 @@
-# Intervu AI — Design System
+# Skillitrix — Design System
 
 A marketing site for an AI interview-preparation product. The visual language
 is deliberately restrained: one brand accent used with intent, a real
@@ -130,6 +130,27 @@ explicitly disabled under `prefers-reduced-motion`. This is the only
 scroll-linked effect on the site — it's tied to real content (the actual
 product screenshot), not a decorative shape, and should stay that way if
 more scroll motion is ever considered.
+
+**Intro splash** (`components/IntroSplash.tsx`, mounted only on the home
+page) — a brand moment shown once per browser session before the page
+content: four phrases cube-rotate through on a real CSS 3D cube
+(`perspective` + `preserve-3d` + `rotateX`, see the `.intro-*` rules and
+`@keyframes intro-cube-spin` at the bottom of `globals.css`), then settle on
+the wordmark and fade out (~4s total). It is intentionally the one place on
+the site that departs from "restrained" — treat it as a single, time-boxed
+exception, not a precedent for more of this elsewhere. Rules that keep it
+from becoming a liability: it never blocks the real page (content underneath
+is already in the DOM, unaffected); it's skippable (a visible "Skip intro"
+control, plus click-anywhere and Escape); it's `sessionStorage`-gated so a
+visitor sees it once per tab, not on every reload or inner-page visit; it's
+off entirely under `prefers-reduced-motion` (checked in JS before it ever
+mounts, not just animation-disabled); and the decorative phrases are
+`aria-hidden` so a screen reader reaches real content immediately instead of
+waiting through it — only the skip button stays in the accessibility tree.
+The four phrases are placeholder copy (`Skilled for every interview.` /
+`Liked by thousands of candidates.` / `Designed around real hiring
+rubrics.` / `Accessed anywhere, anytime.`) — easy one-line edits in
+`PHRASES` at the top of the component, not settled brand copy.
 
 ## 8. Do's and don'ts
 

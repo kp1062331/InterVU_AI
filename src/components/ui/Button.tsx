@@ -13,22 +13,22 @@ export type ButtonVariant =
 export type ButtonSize = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-sans font-semibold transition-colors duration-150 ease-standard " +
-  "disabled:pointer-events-none disabled:opacity-45 aria-disabled:pointer-events-none aria-disabled:opacity-45 cursor-pointer";
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-sans font-semibold rounded-full transition-all duration-200 ease-standard " +
+  "disabled:pointer-events-none disabled:opacity-45 aria-disabled:pointer-events-none aria-disabled:opacity-45 cursor-pointer active:scale-[0.98]";
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "rounded-md bg-brand text-white hover:bg-brand-hover active:bg-brand-hover",
+  primary: "bg-[#14161F] text-white hover:bg-brand hover:scale-105 hover:shadow-xl shadow-md",
   secondary:
-    "rounded-md border border-rule-strong bg-paper text-ink hover:border-brand/50 hover:text-brand",
-  quiet: "rounded-md text-ink-soft hover:bg-sunk hover:text-ink",
-  link: "text-brand underline decoration-brand/30 decoration-1 underline-offset-4 hover:decoration-brand",
-  danger: "rounded-md bg-critical text-white hover:bg-critical/90",
+    "border border-rule-strong bg-paper text-ink hover:border-black/30 hover:bg-surface hover:scale-105 hover:shadow-sm",
+  quiet: "text-ink-soft hover:bg-sunk hover:text-ink hover:scale-105",
+  link: "text-brand underline decoration-brand/30 decoration-1 underline-offset-4 hover:decoration-brand shadow-none rounded-none",
+  danger: "bg-critical text-white hover:bg-critical/90 hover:scale-105 shadow-md",
 };
 
 const sizes: Record<ButtonSize, string> = {
-  sm: "h-8 px-3 text-xs",
-  md: "h-10 px-4 text-sm",
-  lg: "h-12 px-6 text-base",
+  sm: "h-9 px-5 text-xs font-semibold",
+  md: "h-11 px-6 text-sm font-semibold",
+  lg: "h-12 sm:h-13 px-8 text-sm sm:text-base font-semibold",
 };
 
 export function buttonClass({

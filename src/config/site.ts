@@ -1,13 +1,13 @@
 export const siteConfig = {
-  name: "InterVu AI",
+  name: "SkillitriX",
   tagline: "Prepare for the assessments that actually matter.",
   description:
     "Practice company-oriented assessments, simulate real exam conditions, identify your weak areas, and understand exactly where you stand.",
-  url: "https://intervu.ai",
-  email: "hello@intervu.ai",
+  url: "https://skillitrix.com",
+  email: "hello@skillitrix.com",
   social: {
-    twitter: "https://twitter.com/intervuai",
-    linkedin: "https://linkedin.com/company/intervuai",
-    github: "https://github.com/intervuai",
+    twitter: "https://twitter.com/skillitrix",
+    linkedin: "https://linkedin.com/company/skillitrix",
+    github: "https://github.com/skillitrix",
   },
 } as const;

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
+import { ArrowRight } from "@/components/ui/icons";
 
 export function HomeCTA() {
   return (
@@ -8,7 +9,7 @@ export function HomeCTA() {
       <div className="absolute inset-y-0 right-0 w-full lg:w-1/2">
         <Image
           src="/images/home-cta-bg.jpg"
-          alt="Candidate performing real-time AI interview practice"
+          alt="Student taking an MNC placement assessment test"
           fill
           sizes="(max-width: 1024px) 100vw, 50vw"
           className="object-cover object-center lg:object-right"
@@ -23,47 +24,45 @@ export function HomeCTA() {
 
       <Container className="relative z-10">
         <div className="lg:w-3/5 lg:pr-8">
-          <p className="text-xs font-semibold uppercase tracking-wide text-white/50">
-            Ready to pass your next assessment?
+          <p className="text-xs font-semibold uppercase tracking-wider text-brand-tint/80">
+            Placement Prep Benchmark
           </p>
 
           <h2 className="mt-4 max-w-2xl text-display text-white tracking-tight text-balance">
-            Sit one real round before the one that counts.
+            Don’t wait for the real test to find your weak spots.
           </h2>
 
-          <p className="mt-4 max-w-xl text-base sm:text-lg leading-relaxed text-white/75 text-pretty">
-            The free plan gives you a full scored session with real hiring rubrics —
-            your exact weak areas, in under 60 seconds.
+          <p className="mt-4 max-w-xl text-base sm:text-lg leading-relaxed text-white/80 text-pretty">
+            Take a company-style assessment, see where you stand, and get a personalized AI-powered study plan to improve before test day.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3.5">
             <a
               href="https://intervu-frontend.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 items-center justify-center rounded-full bg-white px-7 text-base font-semibold text-ink shadow-lg transition-all hover:bg-white/90 hover:scale-105"
+              className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-8 text-sm sm:text-base font-semibold text-ink shadow-xl transition-all hover:bg-white/90 hover:scale-105 active:scale-[0.98]"
             >
-              Start practicing free
+              <span>Take Your First Test</span>
+              <ArrowRight className="size-4 text-ink transition-transform group-hover:translate-x-1" />
             </a>
             <a
-              href="https://intervu-frontend.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-6 text-base font-semibold text-white transition-all hover:border-white/40 hover:bg-white/5"
+              href="#coverage"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-6 text-sm sm:text-base font-semibold text-white transition-all hover:border-white/40 hover:bg-white/5"
             >
-              Explore all assessments
+              Explore Assessments
             </a>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-white/10 pt-6 text-xs font-medium text-white/50">
-            <span className="inline-flex items-center gap-1.5 text-white/80">
-              <span className="size-1.5 rounded-full bg-positive" />
-              Free session included
+          <div className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-white/10 pt-6 text-xs font-medium text-white/60">
+            <span className="inline-flex items-center gap-1.5 text-white/90">
+              <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Free diagnostic test included
             </span>
             <span aria-hidden="true">·</span>
             <span>No credit card required</span>
             <span aria-hidden="true">·</span>
-            <span className="figure text-white/80">51,400+ sessions scored</span>
+            <span className="figure text-white/90">75,000+ tests scored</span>
           </div>
         </div>
       </Container>

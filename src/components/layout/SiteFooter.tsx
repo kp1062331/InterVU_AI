@@ -2,92 +2,190 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Wordmark } from "./Wordmark";
 
-const columns = [
-  {
-    title: "Product",
-    links: [
-      { label: "AI voice coach", href: "/#features" },
-      { label: "Hiring rubrics", href: "/#features" },
-      { label: "How it works", href: "/#how-it-works" },
-      { label: "Score analytics", href: "/#coverage" },
-      { label: "Pricing", href: "/pricing" },
-    ],
-  },
-  {
-    title: "Assessments",
-    links: [
-      { label: "Software engineering", href: "/pricing" },
-      { label: "System design", href: "/pricing" },
-      { label: "Behavioral (STAR)", href: "/pricing" },
-      { label: "Product management", href: "/pricing" },
-      { label: "TCS & Infosys", href: "/pricing" },
-    ],
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Preparation guides", href: "/about" },
-      { label: "Interview rubrics", href: "/about" },
-      { label: "Candidate stories", href: "/about" },
-      { label: "Help & FAQ", href: "/contact" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About us", href: "/about" },
-      { label: "Contact", href: "/contact" },
-      { label: "Careers", href: "mailto:jobs@intervu.ai" },
-      { label: "Privacy policy", href: "/contact" },
-      { label: "Terms of service", href: "/contact" },
-    ],
-  },
-] as const;
-
 export function SiteFooter() {
   return (
     <footer className="border-t border-rule bg-surface font-sans">
       <Container className="pt-14 pb-10">
-        <div className="grid grid-cols-2 gap-x-8 gap-y-10 pb-10 border-b border-rule sm:grid-cols-3 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
-          <div className="col-span-2 sm:col-span-3 lg:col-span-1 lg:pr-6">
-            <Link href="/" className="inline-block" aria-label="InterVu AI — home">
-              <Wordmark />
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 pb-12 border-b border-rule sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr_1fr]">
+          {/* Logo & Tagline */}
+          <div className="col-span-2 sm:col-span-2 lg:col-span-1 lg:pr-6">
+            <Link href="/" className="inline-block" aria-label="Skillitrix — home">
+              <Wordmark imgClassName="h-10 sm:h-13" />
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-soft">
-              The AI-powered interview preparation platform, evaluated on
-              company-specific hiring rubrics — not generic advice.
+              AI-powered assessment preparation platform for students and job seekers.
             </p>
-            <p className="mt-4 text-xs text-ink-faint">
-              Available for candidates in the US, UK and India.
-            </p>
+            <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-brand">
+              <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Calibrated for 2026 MNC Hiring Tests</span>
+            </div>
           </div>
 
-          {columns.map((column) => (
-            <nav key={column.title} aria-label={column.title}>
-              <h3 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
-                {column.title}
+          {/* Column 1: PRODUCT */}
+          <nav aria-label="Product">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-ink">
+              PRODUCT
+            </h3>
+            <ul className="mt-3.5 space-y-2.5 text-sm text-ink-soft">
+              <li>
+                <Link href="/#how-it-works" className="transition-colors hover:text-ink">
+                  How it works
+                </Link>
+              </li>
+              <li>
+                <Link href="/#features" className="transition-colors hover:text-ink">
+                  Assessment practice
+                </Link>
+              </li>
+              <li>
+                <Link href="/#coverage" className="transition-colors hover:text-ink">
+                  AI performance insights
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="https://intervu-frontend.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-ink"
+                >
+                  Score &amp; analytics
+                </a>
+              </li>
+              <li>
+                <Link href="/pricing" className="transition-colors hover:text-ink">
+                  Pricing
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Column 2: ASSESSMENTS */}
+          <nav aria-label="Assessments">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-ink">
+              ASSESSMENTS
+            </h3>
+            <ul className="mt-3.5 space-y-2.5 text-sm text-ink-soft">
+              <li>
+                <Link href="/#coverage" className="transition-colors hover:text-ink">
+                  TCS NQT
+                </Link>
+              </li>
+              <li>
+                <Link href="/#coverage" className="transition-colors hover:text-ink">
+                  Infosys
+                </Link>
+              </li>
+              <li>
+                <Link href="/#coverage" className="transition-colors hover:text-ink">
+                  Cognizant GenC
+                </Link>
+              </li>
+              <li>
+                <Link href="/#coverage" className="transition-colors hover:text-ink">
+                  Accenture
+                </Link>
+              </li>
+              <li>
+                <Link href="/#coverage" className="transition-colors hover:text-ink">
+                  Capgemini
+                </Link>
+              </li>
+              <li>
+                <Link href="/#coverage" className="transition-colors hover:text-ink">
+                  IBM
+                </Link>
+              </li>
+              <li>
+                <Link href="/#coverage" className="font-semibold text-brand transition-colors hover:underline">
+                  More assessments →
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Column 3: COMING SOON */}
+          <nav aria-label="Coming soon">
+            <div className="flex items-center gap-2">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-ink">
+                COMING SOON
               </h3>
-              <ul className="mt-3 space-y-2.5 text-sm text-ink-soft">
-                {column.links.map((link) => (
-                  <li key={link.label}>
-                    <Link href={link.href} className="transition-colors hover:text-ink">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          ))}
+              <span className="rounded-full bg-brand/10 px-2 py-0.2 text-[10px] font-bold text-brand">
+                Beta
+              </span>
+            </div>
+            <ul className="mt-3.5 space-y-2.5 text-sm text-ink-soft">
+              <li className="flex items-center gap-1.5">
+                <span className="size-1 rounded-full bg-brand" />
+                AI Interview Coach
+              </li>
+              <li className="flex items-center gap-1.5">
+                <span className="size-1 rounded-full bg-brand" />
+                Company-wise AI Interviews
+              </li>
+              <li className="flex items-center gap-1.5">
+                <span className="size-1 rounded-full bg-brand" />
+                Company-grade Interview Simulations
+              </li>
+              <li className="flex items-center gap-1.5">
+                <span className="size-1 rounded-full bg-brand" />
+                Personalized Interview Feedback
+              </li>
+              <li className="pt-1 text-xs italic text-ink-muted">
+                New companies &amp; features added regularly
+              </li>
+            </ul>
+          </nav>
+
+          {/* Column 4: COMPANY */}
+          <nav aria-label="Company">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-ink">
+              COMPANY
+            </h3>
+            <ul className="mt-3.5 space-y-2.5 text-sm text-ink-soft">
+              <li>
+                <Link href="/about" className="transition-colors hover:text-ink">
+                  About us
+                </Link>
+              </li>
+              <li>
+                <Link href="/blogs" className="font-semibold text-brand transition-colors hover:underline">
+                  Blogs
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="transition-colors hover:text-ink">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="transition-colors hover:text-ink">
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="transition-colors hover:text-ink">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="transition-colors hover:text-ink">
+                  Terms of Service
+                </Link>
+              </li>
+            </ul>
+          </nav>
         </div>
 
+        {/* Bottom copyright & socials */}
         <div className="flex flex-col items-center justify-between gap-4 pt-6 sm:flex-row">
           <p className="text-xs text-ink-faint">
-            © {new Date().getFullYear()} InterVu AI. All rights reserved.
+            © {new Date().getFullYear()} Skillitrix. All rights reserved.
           </p>
 
           <div className="flex items-center gap-3">
             <a
-              href="https://linkedin.com/company/intervuai"
+              href="https://linkedin.com/company/skillitrix"
               target="_blank"
               rel="noreferrer noopener"
               className="flex size-8 items-center justify-center rounded-sm text-ink-soft transition-colors hover:text-brand"
@@ -98,7 +196,7 @@ export function SiteFooter() {
               </svg>
             </a>
             <a
-              href="https://twitter.com/intervuai"
+              href="https://twitter.com/skillitrix"
               target="_blank"
               rel="noreferrer noopener"
               className="flex size-8 items-center justify-center rounded-sm text-ink-soft transition-colors hover:text-brand"

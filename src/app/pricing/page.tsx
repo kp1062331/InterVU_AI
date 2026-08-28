@@ -4,7 +4,9 @@ import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { PlanComparison } from "@/components/sections/PlanComparison";
 import { PricingFaq } from "@/components/sections/PricingFaq";
+import { HomeCTA } from "@/components/sections/HomeCTA";
 import { Badge } from "@/components/ui/Badge";
+import { buttonClass } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -20,6 +22,8 @@ export default function PricingPage() {
         title="Three plans. The free plan includes full scored rounds."
         lede="Simple monthly billing. Cancel anytime from settings — no hidden fees or annual lock-ins."
         meta="Prices in USD."
+        imageSrc="/images/pricing-hero-bg.jpg"
+        imageAlt="Candidate practicing with Skillitrix mock interview system"
       />
 
       <Container className="pt-12 pb-24">
@@ -29,7 +33,7 @@ export default function PricingPage() {
           <PricingFaq />
         </div>
 
-        <div className="mt-16 flex flex-col items-start gap-6 rounded-lg border border-rule bg-surface p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
+        <div className="mt-16 flex flex-col items-start gap-6 rounded-2xl border border-rule bg-surface p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10 shadow-sm">
           <div>
             <Badge tone="brand">Enterprise & cohorts</Badge>
             <h3 className="text-head text-ink mt-3">
@@ -42,7 +46,7 @@ export default function PricingPage() {
           </div>
           <Link
             href="/contact"
-            className="inline-flex h-10 shrink-0 items-center justify-center rounded-md bg-brand px-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-brand-hover)]"
+            className={buttonClass({ variant: "primary", size: "md" })}
           >
             Contact sales
           </Link>
@@ -58,6 +62,8 @@ export default function PricingPage() {
           </Link>
         </p>
       </Container>
+
+      <HomeCTA />
     </div>
   );
 }

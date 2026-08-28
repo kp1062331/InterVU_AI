@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ContactForm } from "@/components/sections/ContactForm";
+import { HomeCTA } from "@/components/sections/HomeCTA";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -61,6 +62,8 @@ export default function ContactPage() {
           </aside>
         </div>
       </Container>
+
+      <HomeCTA />
     </div>
   );
 }

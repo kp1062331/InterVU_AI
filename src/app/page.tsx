@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import { IntroSplash } from "@/components/IntroSplash";
 import { Hero } from "@/components/sections/Hero";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { Features } from "@/components/sections/Features";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Coverage } from "@/components/sections/Coverage";
-import { Testimonials } from "@/components/sections/Testimonials";
 import { HomeCTA } from "@/components/sections/HomeCTA";
 import { siteConfig } from "@/config/site";
 
@@ -16,12 +16,11 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      <IntroSplash />
       <Hero />
       <AboutSection />
-      <Features />
       <HowItWorks />
       <Coverage />
-      <Testimonials />
       <HomeCTA />
     </>
   );
