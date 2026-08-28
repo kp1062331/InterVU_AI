@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { ArrowRight, Check } from "@/components/ui/icons";
 
@@ -6,8 +5,6 @@ interface CompanyAssessment {
   name: string;
   badge: string;
   focus: string;
-  rounds: string;
-  pattern: string;
 }
 
 const companyData: CompanyAssessment[] = [
@@ -15,43 +12,31 @@ const companyData: CompanyAssessment[] = [
     name: "TCS iON NQT",
     badge: "National Benchmark",
     focus: "Placement assessment",
-    rounds: "Aptitude + Advanced Coding",
-    pattern: "Numerical, Verbal & Reasoning",
   },
   {
     name: "Infosys",
     badge: "Specialist & SE",
     focus: "Technical & coding",
-    rounds: "DSA + Hands-on Coding",
-    pattern: "Pseudocode & Algorithmic Design",
   },
   {
     name: "Cognizant",
     badge: "GenC & GenC Next",
     focus: "Aptitude & technical",
-    rounds: "Quantitative + Analytical",
-    pattern: "Domain Specific Tech MCQs",
   },
   {
     name: "Accenture",
     badge: "Prime Assessment",
     focus: "Coding & communication",
-    rounds: "Cognitive + Technical + Comm",
-    pattern: "Full-Stack Coding & MCQs",
   },
   {
     name: "Capgemini",
     badge: "Exceller Track",
     focus: "Pseudocode & English",
-    rounds: "Pseudocode + Game Aptitude",
-    pattern: "Behavioral & English Proficiency",
   },
   {
     name: "IBM",
     badge: "Cognitive Assessment",
     focus: "Technical & coding",
-    rounds: "Coding Challenge + Learning Agility",
-    pattern: "Data Structures & Complex Logic",
   },
 ];
 
@@ -73,8 +58,6 @@ export function Coverage() {
               <tr className="border-b border-rule bg-surface/80 text-xs font-bold uppercase tracking-wider text-ink-muted">
                 <th className="py-4 px-6">Company</th>
                 <th className="py-4 px-6">Assessment Focus</th>
-                <th className="py-4 px-6 hidden sm:table-cell">Rounds Covered</th>
-                <th className="py-4 px-6 hidden md:table-cell">Pattern Calibration</th>
                 <th className="py-4 px-6 text-right">Action</th>
               </tr>
             </thead>
@@ -102,12 +85,6 @@ export function Coverage() {
                       <Check className="size-3 text-brand" />
                       {row.focus}
                     </span>
-                  </td>
-                  <td className="py-4 px-6 text-ink-soft hidden sm:table-cell font-medium">
-                    {row.rounds}
-                  </td>
-                  <td className="py-4 px-6 text-ink-faint hidden md:table-cell text-xs font-medium">
-                    {row.pattern}
                   </td>
                   <td className="py-4 px-6 text-right">
                     <a

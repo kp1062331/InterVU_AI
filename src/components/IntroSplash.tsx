@@ -18,12 +18,12 @@ import Image from "next/image";
  */
 
 const PREFIXES = [
-  "Skill UP",
-  "LIT UP",
-  "Tricks UP",
+  "Skill UP !",
+  "LIT UP !!",
+  "Tricks UP !!!",
 ] as const;
 
-const CUBE_MS = 3200;
+const CUBE_MS = 2800;
 const REVEAL_MS = 1400;
 const EXIT_MS = 500;
 
@@ -100,11 +100,7 @@ export function IntroSplash() {
           </div>
 
           {/* Stable SkillitriX Brand */}
-          <div className="flex items-center gap-1.5 shrink-0">
-            <span className="text-3xl sm:text-5xl font-bold tracking-tight text-white font-sans">
-              Skillitri<span className="bg-gradient-to-r from-[#6366F1] to-[#A855F7] bg-clip-text text-transparent">X</span>
-            </span>
-          </div>
+
         </div>
       )}
 
