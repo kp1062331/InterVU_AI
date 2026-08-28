@@ -10,22 +10,18 @@ interface PageHeaderProps {
 
 export function PageHeader({ eyebrow, title, lede, meta }: PageHeaderProps) {
   return (
-    <div className="border-b border-slate-200/80 bg-slate-50 text-slate-900 font-sans">
-      <Container className="pt-28 pb-14 sm:pt-36 sm:pb-20">
-        <span className="text-xs sm:text-sm font-semibold tracking-widest uppercase text-purple-600 block mb-3">
-          {eyebrow}
-        </span>
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-medium text-[#0B1E3D] tracking-tight max-w-4xl leading-tight">
+    <div className="border-b border-rule bg-surface font-sans">
+      <Container className="pt-28 pb-12 sm:pt-32 sm:pb-16">
+        <p className="eyebrow">{eyebrow}</p>
+        <h1 className="mt-3 max-w-3xl text-hero text-ink tracking-tight">
           {title}
         </h1>
         {lede && (
-          <p className="mt-5 max-w-3xl text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+          <p className="mt-5 max-w-2xl text-base sm:text-lg leading-relaxed text-ink-soft">
             {lede}
           </p>
         )}
-        {meta && (
-          <p className="mt-4 text-xs font-semibold text-purple-600">{meta}</p>
-        )}
+        {meta && <p className="mt-4 text-xs font-medium text-ink-faint">{meta}</p>}
       </Container>
     </div>
   );

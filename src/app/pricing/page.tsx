@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { PlanComparison } from "@/components/sections/PlanComparison";
 import { PricingFaq } from "@/components/sections/PricingFaq";
+import { Badge } from "@/components/ui/Badge";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -13,46 +14,45 @@ export const metadata: Metadata = {
 
 export default function PricingPage() {
   return (
-    <div className="bg-white text-slate-800 min-h-screen font-sans">
+    <div className="min-h-screen bg-paper font-sans">
       <PageHeader
-        eyebrow="TRANSPARENT PRICING"
+        eyebrow="Transparent pricing"
         title="Three plans. The free plan includes full scored rounds."
-        lede="Simple monthly billing. Cancel anytime from settings with no hidden fees or annual lock-ins."
+        lede="Simple monthly billing. Cancel anytime from settings — no hidden fees or annual lock-ins."
         meta="Prices in USD."
       />
 
-      <Container className="pb-24 pt-12 w-full max-w-7xl mx-auto px-5 sm:px-8">
+      <Container className="pt-12 pb-24">
         <PlanComparison />
 
-        <div className="mt-24 border-t border-slate-200 pt-20">
+        <div className="mt-20 border-t border-rule pt-16">
           <PricingFaq />
         </div>
 
-        <div className="mt-20 p-8 sm:p-10 rounded-2xl bg-[#F8FAFC] border border-slate-200 shadow-xl shadow-slate-200/50 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="mt-16 flex flex-col items-start gap-6 rounded-lg border border-rule bg-surface p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
           <div>
-            <span className="px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-wider inline-block mb-2">
-              ENTERPRISE &amp; COHORTS
-            </span>
-            <h3 className="text-2xl font-medium text-[#0B1E3D]">
+            <Badge tone="brand">Enterprise & cohorts</Badge>
+            <h3 className="text-head text-ink mt-3">
               Preparing a bootcamp or university cohort?
             </h3>
-            <p className="mt-1 max-w-lg text-sm text-slate-600">
-              Cohort dashboards, custom question packs, SSO, and volume pricing available for teams over 25 seats.
+            <p className="mt-1 max-w-lg text-sm text-ink-soft">
+              Cohort dashboards, custom question packs, SSO, and volume pricing
+              for teams over 25 seats.
             </p>
           </div>
           <Link
             href="/contact"
-            className="btn-purple-pill px-8 py-3.5 text-sm uppercase tracking-wider shrink-0 cursor-pointer"
+            className="inline-flex h-10 shrink-0 items-center justify-center rounded-md bg-brand px-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-brand-hover)]"
           >
-            Contact Sales
+            Contact sales
           </Link>
         </div>
 
-        <p className="mt-12 text-center text-xs font-semibold text-slate-500">
+        <p className="mt-10 text-center text-sm text-ink-soft">
           Want to explore our question tracks?{" "}
           <Link
             href="/#coverage"
-            className="text-purple-600 font-bold underline decoration-purple-500/40 underline-offset-4 hover:text-purple-700"
+            className="font-semibold text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand"
           >
             See complete assessment coverage
           </Link>

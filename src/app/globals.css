@@ -1,105 +1,104 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   Intervu AI — Full White SaaS Visual System
-   Pure White Ground, Medium Font Weight Headings, Vibrant Purple Accents.
+   Intervu AI — Design tokens
+   One brand accent, restrained elevation, a real type scale. Every color,
+   radius and shadow a component uses should trace back to a token defined
+   here — see DESIGN.md for the rules this file is meant to enforce.
    ========================================================================== */
 
 @theme {
-  /* ── Type families (Sans-serif throughout) ────────────────────────── */
+  /* ── Type families ────────────────────────────────────────────────── */
   --font-sans: var(--font-inter), var(--font-plus-jakarta), "Inter", system-ui, sans-serif;
   --font-heading: var(--font-plus-jakarta), var(--font-inter), system-ui, sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
 
   /* ── Surfaces ─────────────────────────────────────────────────────── */
-  --color-navy-dark: #FFFFFF;
-  --color-navy-card: #F8FAFC;
-  --color-navy-light: #F1F5F9;
-  --color-navy-well: #E2E8F0;
-  
   --color-paper: #FFFFFF;
-  --color-surface: #F8FAFC;
-  --color-sunk: #F1F5F9;
+  --color-surface: #F7F7F9;
+  --color-sunk: #F0F1F4;
 
-  /* ── Accent & Brand ──────────────────────────────────────────────── */
-  --color-purple-vibrant: #8B5CF6;
-  --color-purple-deep: #7C3AED;
-  --color-purple-dark: #6D28D9;
-  --color-brand: #7C3AED;
-  --color-brand-strong: #6D28D9;
-  --color-brand-tint: rgba(124, 58, 237, 0.08);
+  /* ── Accent & brand — one hue, used with intent ─────────────────────
+     Text links, focus rings, the single primary action per view, and
+     small progress/selection marks. Not a fill for large surfaces. */
+  --color-brand: #6D28D9;
+  --color-brand-hover: #5B21B6;
+  --color-brand-tint: #F4F0FC;
   --color-brand-contrast: #FFFFFF;
 
-  /* ── Ink & Text ──────────────────────────────────────────────────── */
-  --color-ink: #0F172A;
-  --color-ink-muted: #334155;
-  --color-ink-soft: #64748B;
-  --color-ink-faint: #94A3B8;
+  /* ── Ink & text ───────────────────────────────────────────────────── */
+  --color-ink: #14161F;
+  --color-ink-muted: #43475A;
+  --color-ink-soft: #6B7086;
+  --color-ink-faint: #9A9EB0;
 
   /* ── Rules ────────────────────────────────────────────────────────── */
-  --color-rule: #E2E8F0;
-  --color-rule-strong: rgba(124, 58, 237, 0.25);
+  --color-rule: #E3E4EA;
+  --color-rule-strong: #C7C9D4;
 
   /* ── Signals ──────────────────────────────────────────────────────── */
-  --color-positive: #10B981;
-  --color-positive-tint: rgba(16, 185, 129, 0.1);
-  --color-caution: #F59E0B;
-  --color-caution-tint: rgba(245, 158, 11, 0.1);
-  --color-critical: #EF4444;
-  --color-critical-tint: rgba(239, 68, 68, 0.1);
+  --color-positive: #15803D;
+  --color-positive-tint: #EBF6EF;
+  --color-caution: #A85B00;
+  --color-caution-tint: #FBF0DE;
+  --color-critical: #B42318;
+  --color-critical-tint: #FBEAE8;
 
-  /* ── Radius ──────────────────────────────────────────────────────── */
+  /* ── Radius — deliberately not one value everywhere ─────────────────
+     xs/sm for controls, md for cards, lg for large panels, full only for
+     true pills (status dots, small tags). */
   --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
   --radius-full: 9999px;
 
-  /* ── Elevation ───────────────────────────────────────────────────── */
-  --shadow-raise: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(124, 58, 237, 0.08);
-  --shadow-overlay: 0 25px 60px -15px rgba(124, 58, 237, 0.15);
-  --shadow-purple-glow: 0 0 30px rgba(139, 92, 246, 0.25);
+  /* ── Elevation — two levels, no colour tint ──────────────────────────
+     Most surfaces separate with a border, not a shadow. Shadow only for
+     things that genuinely float above the page: the scrolled header,
+     dropdowns, modals. */
+  --shadow-sm: 0 1px 2px 0 rgba(20, 22, 31, 0.05);
+  --shadow-raised: 0 12px 32px -12px rgba(20, 22, 31, 0.18);
 
-  /* ── Type scale (Medium font weight for headings) ───────────────── */
-  --text-hero: clamp(3rem, 2.2rem + 3.8vw, 4.5rem);
-  --text-hero--line-height: 1.08;
-  --text-hero--font-weight: 500;
+  /* ── Type scale ──────────────────────────────────────────────────── */
+  --text-hero: clamp(2.75rem, 2.1rem + 3vw, 4rem);
+  --text-hero--line-height: 1.1;
+  --text-hero--font-weight: 600;
 
-  --text-display: clamp(2.25rem, 1.7rem + 2.5vw, 3.5rem);
-  --text-display--line-height: 1.1;
-  --text-display--font-weight: 500;
+  --text-display: clamp(2.1rem, 1.7rem + 1.9vw, 3rem);
+  --text-display--line-height: 1.15;
+  --text-display--font-weight: 600;
 
-  --text-title: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
-  --text-title--line-height: 1.18;
-  --text-title--font-weight: 500;
+  --text-title: clamp(1.6rem, 1.35rem + 1.1vw, 2.15rem);
+  --text-title--line-height: 1.2;
+  --text-title--font-weight: 600;
 
-  --text-head: clamp(1.35rem, 1.2rem + 0.8vw, 1.85rem);
-  --text-head--line-height: 1.25;
-  --text-head--font-weight: 500;
+  --text-head: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --text-head--line-height: 1.3;
+  --text-head--font-weight: 600;
 
-  --text-body: 1.0625rem;
+  --text-body: 1rem;
   --text-body--line-height: 1.65;
 
-  --text-micro: 0.8125rem;
+  --text-micro: 0.75rem;
   --text-micro--line-height: 1.4;
-  --text-micro--letter-spacing: 0.08em;
+  --text-micro--letter-spacing: 0.06em;
   --text-micro--font-weight: 600;
 
-  /* ── Spacing / Max Widths ────────────────────────────────────────── */
-  --max-w-8xl: 90rem;
+  /* ── Spacing / max widths ────────────────────────────────────────── */
+  --max-w-8xl: 88rem;
 
   /* ── Motion ───────────────────────────────────────────────────────── */
-  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-standard: cubic-bezier(0.2, 0.6, 0.2, 1);
 }
 
 @utility max-w-8xl {
-  max-width: 90rem;
+  max-width: var(--max-w-8xl);
 }
 
 /* ==========================================================================
-   Base Styles
+   Base styles
    ========================================================================== */
 
 @layer base {
@@ -114,10 +113,31 @@
     scroll-behavior: smooth;
   }
 
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
   body {
     margin: 0;
-    background-color: #FFFFFF;
-    color: #334155;
+    background-color: var(--color-paper);
+    color: var(--color-ink-muted);
     font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.65;
@@ -126,9 +146,8 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    color: #0F172A;
+    color: var(--color-ink);
     font-family: var(--font-heading);
-    font-weight: 500; /* Medium font weight for refined thickness */
     text-wrap: balance;
   }
 
@@ -141,12 +160,12 @@
   }
 
   ::selection {
-    background-color: rgba(139, 92, 246, 0.2);
-    color: #0F172A;
+    background-color: color-mix(in srgb, var(--color-brand) 18%, transparent);
+    color: var(--color-ink);
   }
 
   :focus-visible {
-    outline: 2px solid #8B5CF6;
+    outline: 2px solid var(--color-brand);
     outline-offset: 2px;
     border-radius: var(--radius-xs);
   }
@@ -170,46 +189,96 @@
 }
 
 /* ==========================================================================
-   Custom Button & Card Utilities
+   Small reusable utilities — used instead of repeating the same className
+   string across every section component.
    ========================================================================== */
 
-.btn-purple-pill, .btn-cyan-pill {
-  background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
-  color: #FFFFFF;
-  font-weight: 600;
-  border-radius: 9999px;
-  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-micro);
+  font-weight: var(--text-micro--font-weight);
+  letter-spacing: var(--text-micro--letter-spacing);
+  text-transform: uppercase;
+  color: var(--color-brand);
 }
 
-.btn-purple-pill:hover, .btn-cyan-pill:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(124, 58, 237, 0.45);
-  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+.figure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 
-.btn-navy-outline {
-  background: #FFFFFF;
-  border: 1px solid #CBD5E1;
-  color: #1E293B;
-  font-weight: 500;
-  border-radius: 9999px;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+/* ==========================================================================
+   Scroll-linked parallax — one signature moment, applied to real content
+   (the hero product screenshot), not a decorative shape. Pure CSS scroll-
+   driven animation: no scroll listener, no layout thrash, no JS dependency.
+   Browsers without `animation-timeline: view()` simply render it static —
+   that is an acceptable, deliberate fallback, not a broken one.
+   ========================================================================== */
+
+@supports (animation-timeline: view()) {
+  .parallax-drift {
+    animation: parallax-drift linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 100%;
+    will-change: transform;
+  }
 }
 
-.btn-navy-outline:hover {
-  background: #F8FAFC;
-  border-color: #8B5CF6;
-  color: #7C3AED;
-  transform: translateY(-2px);
+@keyframes parallax-drift {
+  from {
+    transform: translateY(-2.5%);
+  }
+  to {
+    transform: translateY(2.5%);
+  }
 }
 
-.hover-card-huru {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+@media (prefers-reduced-motion: reduce) {
+  .parallax-drift {
+    animation: none !important;
+  }
 }
 
-.hover-card-huru:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px -15px rgba(124, 58, 237, 0.18);
-  border-color: rgba(139, 92, 246, 0.4);
+/* ==========================================================================
+   Hero Perspective Grid & Floating Elements
+   ========================================================================== */
+
+.hero-perspective-grid {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  width: 180vw;
+  height: 900px;
+  margin-left: -90vw;
+  background-image: 
+    linear-gradient(to right, rgba(109, 40, 217, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(109, 40, 217, 0.08) 1px, transparent 1px);
+  background-size: 50px 50px;
+  transform: perspective(600px) rotateX(65deg);
+  transform-origin: top center;
+  mask-image: radial-gradient(circle at 50% 30%, black 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at 50% 30%, black 20%, transparent 75%);
+  pointer-events: none;
 }
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(var(--card-rotate, 0deg));
+  }
+  50% {
+    transform: translateY(-8px) rotate(var(--card-rotate, 0deg));
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 5s ease-in-out infinite;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+

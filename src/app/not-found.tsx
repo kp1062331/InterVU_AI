@@ -3,19 +3,17 @@ import { ButtonLink } from "@/components/ui/Button";
 
 export default function NotFound() {
   return (
-    <div className="min-h-[75vh] flex items-center bg-[#141312] text-white">
+    <div className="flex min-h-[75vh] items-center bg-paper font-sans">
       <Container className="pt-32 pb-24">
-        <span className="font-mono text-xs font-semibold tracking-[0.25em] uppercase text-amber-400 block mb-2" data-figure>
-          404 · ERROR
-        </span>
-        <h1 className="mt-3 max-w-xl font-sans font-black text-4xl sm:text-5xl text-white">
+        <p className="eyebrow">404 · Not found</p>
+        <h1 className="mt-3 max-w-xl text-display text-ink tracking-tight">
           That page is not here.
         </h1>
-        <p className="mt-4 max-w-md text-white/70 text-sm sm:text-base leading-relaxed">
-          The link may be out of date, or the page may have moved. The pricing
-          and coverage sections are what most people are looking for.
+        <p className="mt-4 max-w-md text-sm sm:text-base leading-relaxed text-ink-soft">
+          The link may be out of date, or the page may have moved. Pricing and
+          coverage are what most people are looking for.
         </p>
-        <div className="mt-8 flex flex-wrap gap-4">
+        <div className="mt-8 flex flex-wrap gap-3">
           <ButtonLink href="/" size="md">
             Back to the home page
           </ButtonLink>

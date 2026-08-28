@@ -3,6 +3,7 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { siteConfig } from "@/config/site";
 
 const inter = Inter({
@@ -53,16 +54,18 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${plusJakarta.variable}`}
     >
-      <body className="bg-white text-slate-800 font-sans antialiased selection:bg-purple-500/20 selection:text-purple-900">
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-purple-700 focus:shadow-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
-        >
-          Skip to content
-        </a>
-        <SiteHeader />
-        <main id="main">{children}</main>
-        <SiteFooter />
+      <body className="bg-paper text-ink-muted font-sans antialiased">
+        <SmoothScrollProvider>
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:rounded-sm focus:bg-paper focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-brand focus:shadow-raised focus:outline-none focus:ring-2 focus:ring-brand"
+          >
+            Skip to content
+          </a>
+          <SiteHeader />
+          <main id="main">{children}</main>
+          <SiteFooter />
+        </SmoothScrollProvider>
       </body>
     </html>
   );

@@ -6,18 +6,22 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import { Close, Menu } from "@/components/ui/icons";
+import { buttonClass } from "@/components/ui/Button";
 import { Wordmark } from "./Wordmark";
 
 const navigation = [
   { label: "Features", href: "/#features" },
-  { label: "How It Works", href: "/#how-it-works" },
+  { label: "How it works", href: "/#how-it-works" },
   { label: "Coverage", href: "/#coverage" },
   { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
 ] as const;
 
 function isCurrent(href: string, pathname: string) {
-  return href.startsWith("/#") ? pathname === "/" : pathname === href;
+  if (href.startsWith("/#")) {
+    return false;
+  }
+  return pathname === href;
 }
 
 export function SiteHeader() {
@@ -27,7 +31,6 @@ export function SiteHeader() {
   const [visible, setVisible] = useState(true);
   const prevScrollYRef = useRef(0);
   const toggleRef = useRef<HTMLButtonElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,7 +38,7 @@ export function SiteHeader() {
       const prevScrollY = prevScrollYRef.current;
       const scrollDifference = currentScrollY - prevScrollY;
 
-      setScrolled(currentScrollY > 20);
+      setScrolled(currentScrollY > 8);
 
       if (currentScrollY <= 30) {
         setVisible(true);
@@ -84,24 +87,22 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "fixed top-0 inset-x-0 z-50 transition-all duration-300 transform font-sans",
+        "fixed top-0 inset-x-0 z-50 transform bg-paper font-sans transition-transform duration-300",
         visible ? "translate-y-0" : "-translate-y-full",
-        "bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm"
+        scrolled ? "border-b border-rule shadow-sm" : "border-b border-transparent",
       )}
     >
-      <div className="mx-auto flex h-16 sm:h-20 w-full max-w-7xl items-center justify-between px-5 sm:px-8">
-        {/* Brand Logo */}
+      <div className="mx-auto flex h-16 sm:h-18 w-full max-w-8xl items-center justify-between px-5 sm:px-8">
         <Link
           href="/"
-          className="flex items-center rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+          className="flex items-center rounded-sm focus-visible:outline-2 focus-visible:outline-brand"
           aria-label={`${siteConfig.name} — home`}
         >
-          <Wordmark light={false} />
+          <Wordmark />
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav aria-label="Primary" className="hidden items-center lg:flex gap-8">
-          <ul className="flex items-center gap-7 text-sm font-semibold">
+        <nav aria-label="Primary" className="hidden items-center lg:flex">
+          <ul className="flex items-center gap-9 text-sm font-medium">
             {navigation.map((item) => {
               const current = isCurrent(item.href, pathname);
               return (
@@ -110,13 +111,14 @@ export function SiteHeader() {
                     href={item.href}
                     aria-current={current ? "page" : undefined}
                     className={cn(
-                      "transition-colors duration-150 py-2 inline-flex items-center gap-1",
+                      "relative inline-flex items-center py-2 text-sm font-medium transition-colors duration-150",
+                      "after:absolute after:bottom-0 after:inset-x-0 after:h-[2px] after:rounded-full after:bg-brand after:transition-transform after:duration-200 after:ease-out",
                       current
-                        ? "text-purple-600 font-bold"
-                        : "text-slate-700 hover:text-purple-600"
+                        ? "font-semibold text-ink after:scale-x-100"
+                        : "text-ink-soft hover:text-ink after:scale-x-0 hover:after:scale-x-100",
                     )}
                   >
-                    <span>{item.label}</span>
+                    {item.label}
                   </Link>
                 </li>
               );
@@ -124,52 +126,43 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        {/* Header Right Actions */}
-        <div className="hidden items-center gap-4 lg:flex">
-          {/* Secondary Contact Link */}
+        <div className="hidden items-center gap-5 lg:flex">
           <Link
             href="/contact"
-            className="text-xs font-semibold px-3 py-2 text-slate-700 hover:text-purple-600 transition-colors"
+            className="text-sm font-medium text-ink-soft transition-colors hover:text-ink"
           >
-            Contact Sales
+            Contact sales
           </Link>
-
-          {/* Primary Purple Pill CTA */}
           <a
             href="https://intervu-frontend.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-purple-pill px-6 py-2.5 text-xs sm:text-sm uppercase tracking-wide inline-flex items-center justify-center cursor-pointer"
+            className={buttonClass({ size: "sm" })}
           >
-            Start Practicing
+            Start practicing
           </a>
         </div>
 
-        {/* Mobile Menu Toggle */}
         <button
           ref={toggleRef}
           type="button"
           onClick={() => setMenuOpen((open) => !open)}
           aria-expanded={menuOpen}
           aria-controls="site-menu"
-          className="flex items-center rounded-lg p-2 lg:hidden text-slate-800 hover:text-purple-600 transition-colors"
+          className="flex items-center rounded-sm p-2 text-ink lg:hidden"
         >
-          {menuOpen ? <Close className="size-6" /> : <Menu className="size-6" />}
-          <span className="sr-only">
-            {menuOpen ? "Close menu" : "Open menu"}
-          </span>
+          {menuOpen ? <Close className="size-5" /> : <Menu className="size-5" />}
+          <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
         </button>
       </div>
 
-      {/* Mobile Drawer */}
       {menuOpen && (
         <div
-          ref={panelRef}
           id="site-menu"
-          className="border-t border-slate-200 bg-white/98 backdrop-blur-xl text-slate-900 shadow-2xl lg:hidden"
+          className="border-t border-rule bg-paper shadow-raised lg:hidden"
         >
-          <nav aria-label="Primary Mobile" className="px-6 py-6 space-y-4">
-            <ul className="divide-y divide-slate-100 text-sm font-semibold">
+          <nav aria-label="Primary mobile" className="px-5 py-4">
+            <ul className="divide-y divide-rule text-sm font-medium">
               {[...navigation, { label: "Contact", href: "/contact" }].map(
                 (item) => {
                   const current = isCurrent(item.href, pathname);
@@ -180,27 +173,25 @@ export function SiteHeader() {
                         aria-current={current ? "page" : undefined}
                         className={cn(
                           "flex min-h-12 items-center justify-between py-2",
-                          current ? "text-purple-600 font-bold" : "text-slate-800"
+                          current ? "text-brand" : "text-ink",
                         )}
                       >
-                        <span>{item.label}</span>
+                        {item.label}
                       </Link>
                     </li>
                   );
-                }
+                },
               )}
             </ul>
 
-            <div className="pt-4 flex flex-col gap-3">
-              <a
-                href="https://intervu-frontend.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-purple-pill w-full text-center py-3 text-sm font-bold uppercase tracking-wider block"
-              >
-                Start Practicing
-              </a>
-            </div>
+            <a
+              href="https://intervu-frontend.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(buttonClass({ size: "lg" }), "mt-4 w-full")}
+            >
+              Start practicing
+            </a>
           </nav>
         </div>
       )}

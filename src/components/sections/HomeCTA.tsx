@@ -1,92 +1,71 @@
-"use client";
-
 import Image from "next/image";
-import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 
 export function HomeCTA() {
   return (
-    <section className="relative py-24 sm:py-32 bg-white text-slate-900 font-sans overflow-hidden border-t border-slate-200/80">
-      
-      {/* ── High-Visibility Light Background Image Layer ─────────────────── */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <section className="relative overflow-hidden bg-ink py-16 sm:py-24 font-sans">
+      {/* Background image on the right side */}
+      <div className="absolute inset-y-0 right-0 w-full lg:w-1/2">
         <Image
           src="/images/home-cta-bg.jpg"
-          alt="InterVu AI CTA Light Background"
+          alt="Candidate performing real-time AI interview practice"
           fill
-          className="object-cover object-center opacity-25 filter contrast-110 saturate-110"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover object-center lg:object-right"
           priority
         />
-        {/* Soft Light Overlay Mask for Clean Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-slate-50/95" />
+        {/* Left fade gradient overlay blending into dark bg-ink background */}
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-ink via-ink/95 to-transparent lg:from-ink lg:via-ink/85 lg:to-transparent"
+          aria-hidden="true"
+        />
       </div>
 
-      {/* Ambient Purple Glow Mesh */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0 opacity-40"
-        style={{
-          backgroundImage: `
-            radial-gradient(circle 600px at 50% 50%, rgba(124, 58, 237, 0.12), transparent 70%),
-            radial-gradient(circle 400px at 20% 80%, rgba(139, 92, 246, 0.1), transparent 70%)
-          `,
-        }}
-        aria-hidden="true"
-      />
+      <Container className="relative z-10">
+        <div className="lg:w-3/5 lg:pr-8">
+          <p className="text-xs font-semibold uppercase tracking-wide text-white/50">
+            Ready to pass your next assessment?
+          </p>
 
-      <Container className="relative z-10 w-full max-w-5xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center">
-        
-        {/* Eyebrow Kicker */}
-        <span className="text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase text-purple-600 mb-4 block">
-          READY TO PASS YOUR NEXT ASSESSMENT?
-        </span>
+          <h2 className="mt-4 max-w-2xl text-display text-white tracking-tight text-balance">
+            Sit one real round before the one that counts.
+          </h2>
 
-        {/* Main Headline */}
-        <h2 className="text-3xl sm:text-5xl md:text-6xl font-medium text-[#0B1E3D] tracking-tight leading-tight max-w-4xl mb-6">
-          Sit one real round{" "}
-          <span className="font-medium bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">
-            before the one that counts.
-          </span>
-        </h2>
+          <p className="mt-4 max-w-xl text-base sm:text-lg leading-relaxed text-white/75 text-pretty">
+            The free plan gives you a full scored session with real hiring rubrics —
+            your exact weak areas, in under 60 seconds.
+          </p>
 
-        {/* Subhead */}
-        <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl text-pretty mb-10 font-normal">
-          The free plan gives you a full scored session with real hiring rubrics. Identify your exact weak areas in under 60 seconds.
-        </p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a
+              href="https://intervu-frontend.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-white px-7 text-base font-semibold text-ink shadow-lg transition-all hover:bg-white/90 hover:scale-105"
+            >
+              Start practicing free
+            </a>
+            <a
+              href="https://intervu-frontend.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 px-6 text-base font-semibold text-white transition-all hover:border-white/40 hover:bg-white/5"
+            >
+              Explore all assessments
+            </a>
+          </div>
 
-        {/* Action Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-12">
-          <a
-            href="https://intervu-frontend.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-purple-pill px-10 py-4 text-base uppercase tracking-wider shadow-purple-500/30 cursor-pointer inline-flex items-center gap-3"
-          >
-            <span>Start Practicing Free</span>
-            <span className="text-lg">→</span>
-          </a>
-
-          <a
-            href="https://intervu-frontend.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-4 text-base uppercase tracking-wider font-medium rounded-full border border-slate-300 bg-white/90 text-slate-800 hover:border-purple-500 hover:text-purple-600 hover:bg-slate-50 transition-all shadow-sm cursor-pointer"
-          >
-            Explore All Assessments
-          </a>
+          <div className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-white/10 pt-6 text-xs font-medium text-white/50">
+            <span className="inline-flex items-center gap-1.5 text-white/80">
+              <span className="size-1.5 rounded-full bg-positive" />
+              Free session included
+            </span>
+            <span aria-hidden="true">·</span>
+            <span>No credit card required</span>
+            <span aria-hidden="true">·</span>
+            <span className="figure text-white/80">51,400+ sessions scored</span>
+          </div>
         </div>
-
-        {/* Trust Badges Bar */}
-        <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-slate-600 pt-6 border-t border-slate-200/80 w-full max-w-xl">
-          <span className="flex items-center gap-2 text-emerald-600">
-            <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-            Free Session Included
-          </span>
-          <span className="text-slate-300">•</span>
-          <span>No Credit Card Required</span>
-          <span className="text-slate-300">•</span>
-          <span className="text-purple-600 font-bold">51,400+ Sessions Scored</span>
-        </div>
-
       </Container>
     </section>
   );

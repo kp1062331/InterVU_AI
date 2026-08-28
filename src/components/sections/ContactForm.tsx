@@ -107,9 +107,9 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-purple-200 bg-purple-50/50 p-8 shadow-xl">
-        <h2 className="text-xl font-bold text-[#0B1E3D]">Message sent!</h2>
-        <p className="mt-2 max-w-md text-sm text-slate-600">
+      <div className="rounded-lg border border-positive/20 bg-positive-tint p-8">
+        <h2 className="text-head text-ink">Message sent</h2>
+        <p className="mt-2 max-w-md text-sm text-ink-soft">
           Our team has received your message. We reply within one business day.
         </p>
         <Button
@@ -137,16 +137,16 @@ export function ContactForm() {
           ref={summaryRef}
           tabIndex={-1}
           role="alert"
-          className="rounded-xl border border-red-200 bg-red-50 px-5 py-4"
+          className="rounded-md border border-critical/20 bg-critical-tint px-5 py-4"
         >
-          <p className="text-sm font-bold text-red-600">
+          <p className="text-sm font-semibold text-critical">
             {errorEntries.length === 1
               ? "One field needs attention"
               : `${errorEntries.length} fields need attention`}
           </p>
           <ul className="mt-2 space-y-1">
             {errorEntries.map(([key, message]) => (
-              <li key={key} className="text-xs text-red-700">
+              <li key={key} className="text-xs text-critical">
                 <a
                   href={`#contact-${key}`}
                   className="underline underline-offset-2"
@@ -195,11 +195,11 @@ export function ContactForm() {
         onChange={(event) => update("subject", event.target.value)}
         onBlur={() => handleBlur("subject")}
       >
-        <option value="" disabled className="bg-white text-slate-400">
+        <option value="" disabled>
           Choose a subject
         </option>
         {subjects.map((subject) => (
-          <option key={subject} value={subject} className="bg-white text-slate-900">
+          <option key={subject} value={subject}>
             {subject}
           </option>
         ))}
@@ -219,7 +219,7 @@ export function ContactForm() {
       />
 
       {status === "error" && (
-        <p role="alert" className="text-sm text-red-600">
+        <p role="alert" className="text-sm text-critical">
           That did not send. Try again, or email us directly.
         </p>
       )}
@@ -233,7 +233,7 @@ export function ContactForm() {
         >
           Send message
         </Button>
-        <p className="text-xs text-slate-500">All fields are required.</p>
+        <p className="text-xs text-ink-faint">All fields are required.</p>
       </div>
     </form>
   );

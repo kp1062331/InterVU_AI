@@ -13,26 +13,22 @@ export type ButtonVariant =
 export type ButtonSize = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-sans font-bold transition-all duration-200 ease-standard " +
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-sans font-semibold transition-colors duration-150 ease-standard " +
   "disabled:pointer-events-none disabled:opacity-45 aria-disabled:pointer-events-none aria-disabled:opacity-45 cursor-pointer";
 
 const variants: Record<ButtonVariant, string> = {
-  primary:
-    "rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 hover:from-purple-500 hover:to-indigo-500 hover:-translate-y-0.5 active:translate-y-0",
+  primary: "rounded-md bg-brand text-white hover:bg-brand-hover active:bg-brand-hover",
   secondary:
-    "rounded-full border border-purple-500/40 bg-[#132C54]/60 text-white hover:bg-purple-500/15 hover:border-purple-400 hover:text-purple-300 backdrop-blur-sm hover:-translate-y-0.5 active:translate-y-0",
-  quiet:
-    "rounded-full text-slate-300 hover:bg-purple-500/10 hover:text-purple-300 active:translate-y-0",
-  link:
-    "text-purple-600 underline decoration-purple-500/40 decoration-1 underline-offset-4 hover:decoration-purple-600 hover:text-purple-700",
-  danger:
-    "rounded-full bg-red-500 text-white shadow-lg shadow-red-500/20 hover:bg-red-600 hover:-translate-y-0.5 active:translate-y-0",
+    "rounded-md border border-rule-strong bg-paper text-ink hover:border-brand/50 hover:text-brand",
+  quiet: "rounded-md text-ink-soft hover:bg-sunk hover:text-ink",
+  link: "text-brand underline decoration-brand/30 decoration-1 underline-offset-4 hover:decoration-brand",
+  danger: "rounded-md bg-critical text-white hover:bg-critical/90",
 };
 
 const sizes: Record<ButtonSize, string> = {
-  sm: "h-9 px-4 text-xs tracking-wide",
-  md: "h-11 px-6 text-sm tracking-wide",
-  lg: "h-13 px-8 text-base tracking-wide",
+  sm: "h-8 px-3 text-xs",
+  md: "h-10 px-4 text-sm",
+  lg: "h-12 px-6 text-base",
 };
 
 export function buttonClass({
@@ -102,6 +98,19 @@ export function ButtonLink({
   ...props
 }: ButtonLinkProps) {
   return <Link className={buttonClass({ variant, size, className })} {...props} />;
+}
+
+/** For an external `<a>` that should look like a Button — keeps every CTA on one class source. */
+export function ButtonAnchor({
+  variant = "primary",
+  size = "md",
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"a"> & {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+}) {
+  return <a className={buttonClass({ variant, size, className })} {...props} />;
 }
 
 function Spinner() {

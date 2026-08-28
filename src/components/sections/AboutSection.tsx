@@ -1,137 +1,120 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
-import { Container } from "@/components/ui/Container";
+import Image from "next/image";
+import { Section } from "@/components/ui/Section";
+import { Badge } from "@/components/ui/Badge";
+import { buttonClass } from "@/components/ui/Button";
+import { ArrowRight } from "@/components/ui/icons";
 
 const stats = [
   {
     value: "+95%",
     label: "Score improvement",
-    detail: "Candidates gain 2 full rubric bands within 3 practice sessions",
+    detail: "Candidates gain 2 full rubric bands within 3 practice sessions.",
     highlight: true,
   },
   {
     value: "12.5k+",
     label: "Offers landed",
-    detail: "At Stripe, TCS, Google, Infosys, Amazon & Fortune 500s",
+    detail: "At Stripe, TCS, Google, Infosys, Amazon and Fortune 500s.",
     highlight: false,
   },
   {
     value: "<60s",
     label: "Report speed",
-    detail: "Instant rubric feedback and per-sentence suggestions",
+    detail: "Instant rubric feedback with per-sentence suggestions.",
     highlight: false,
   },
 ] as const;
 
 export function AboutSection() {
   return (
-    <section
-      id="about"
-      className="relative py-20 sm:py-28 bg-[#F5F7FA] text-[#0B1E3D] font-sans overflow-hidden"
-      aria-labelledby="about-heading"
-    >
-      {/* ── Full Background Image Layer for About Section ────────────────── */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <Image
-          src="/images/home-about-lab.jpg"
-          alt="InterVu AI About Section Background"
-          fill
-          className="object-cover object-center opacity-15 filter contrast-125 saturate-110"
-        />
-        {/* Soft Light Overlay Mask */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F5F7FA]/90 via-[#F5F7FA]/80 to-[#F5F7FA]/95" />
-      </div>
+    <Section id="about" aria-labelledby="about-heading">
+      <div className="relative overflow-hidden">
+        {/* Image filling background right side */}
+        <div className="absolute inset-y-0 right-0 w-full lg:w-1/2">
+          <Image
+            src="/images/home-about-lab.jpg"
+            alt="InterVu AI speech assessment lab and real-time evaluation setup"
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover object-center lg:object-right"
+            priority
+          />
+          {/* Left fade gradient overlay blending into section background */}
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-paper via-paper/95 to-transparent lg:from-paper lg:via-paper/85 lg:to-transparent"
+            aria-hidden="true"
+          />
+        </div>
 
-      <Container className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8">
-        
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16 text-left">
-          <span className="text-xs font-semibold tracking-widest uppercase text-purple-600 mb-2 block">
-            THE AI-POWERED ADVANTAGE
-          </span>
-          <h2
-            id="about-heading"
-            className="text-3xl sm:text-5xl font-medium text-[#0B1E3D] tracking-tight leading-tight mb-5"
-          >
+        {/* Text Overlay Layer */}
+        <div className="relative z-10 py-4 lg:w-3/5 lg:py-8 lg:pr-8">
+          <p className="eyebrow">The AI-powered advantage</p>
+          <h2 id="about-heading" className="mt-3 text-display text-ink tracking-tight text-balance">
             Built for candidates who want real results, not canned advice.
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed text-pretty mb-6">
-            Traditional interview prep is passive — reading questions without knowing if your actual spoken response would pass a hiring panel. InterVu AI acts as your dedicated performance coach, evaluating structure, technical depth, and delivery in real time.
+          <p className="mt-4 text-base sm:text-lg leading-relaxed text-ink-soft text-pretty">
+            Traditional interview prep is passive — reading questions without knowing
+            if your actual spoken response would pass a hiring panel. InterVu AI
+            evaluates structure, technical depth, and delivery in real time.
           </p>
-          <Link
-            href="/about"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-purple-600 hover:text-purple-700 transition-colors"
-          >
-            <span>Read our full founding story</span>
-            <span>→</span>
-          </Link>
-        </div>
-
-        {/* 3 Stat Callouts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-16">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="p-8 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200 shadow-xl shadow-slate-200/50 hover-card-huru flex flex-col justify-between"
+          <div className="mt-6 flex flex-wrap items-center gap-4">
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:text-[var(--color-brand-hover)]"
             >
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                    {stat.label}
-                  </span>
-                  {stat.highlight && (
-                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">
-                      Proven Result
-                    </span>
-                  )}
-                </div>
-                <div className="text-5xl sm:text-6xl font-medium tracking-tight mb-3">
-                  <span className={stat.highlight ? "text-emerald-600 font-medium" : "text-purple-600 font-medium"}>
-                    {stat.value}
-                  </span>
-                </div>
-              </div>
-              <p className="text-sm text-slate-500 font-medium leading-relaxed border-t border-slate-100 pt-4">
-                {stat.detail}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Feature Highlights Banner */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-[#0B1E3D] text-white shadow-2xl relative overflow-hidden">
-          <div className="pointer-events-none absolute top-0 right-0 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl" />
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-            <div className="lg:col-span-8 space-y-4">
-              <span className="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-semibold uppercase tracking-wider inline-block">
-                Why It Works
-              </span>
-              <h3 className="text-2xl sm:text-4xl font-medium text-white tracking-tight leading-snug">
-                Adaptive follow-ups that challenge vague answers before the real interviewer does.
-              </h3>
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-normal">
-                If your technical explanation drops crucial trade-offs or rambles without structure, InterVu AI immediately probes deeper — just like a Staff Engineer or Hiring Lead would.
-              </p>
-            </div>
-
-            <div className="lg:col-span-4 flex justify-start lg:justify-end">
-              <a
-                href="https://intervu-frontend.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-purple-pill px-8 py-3.5 text-sm uppercase tracking-wider cursor-pointer inline-flex items-center gap-2"
-              >
-                <span>Try Free Assessment</span>
-                <span>→</span>
-              </a>
-            </div>
+              Read our full founding story
+              <ArrowRight className="size-3.5" />
+            </Link>
           </div>
         </div>
+      </div>
 
-      </Container>
-    </section>
+      <div className="mt-12 grid grid-cols-1 border-t border-l border-rule sm:grid-cols-3">
+        {stats.map((stat) => (
+          <div key={stat.label} className="border-r border-b border-rule px-6 py-6">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
+                {stat.label}
+              </span>
+              {stat.highlight && <Badge tone="positive">Proven</Badge>}
+            </div>
+            <div className="figure mt-3 text-4xl font-semibold text-ink">
+              {stat.value}
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-ink-soft">{stat.detail}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-12 rounded-lg bg-ink p-8 sm:p-10">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-8">
+            <span className="text-xs font-semibold uppercase tracking-wide text-white/50">
+              Why it works
+            </span>
+            <h3 className="mt-3 text-title text-white tracking-tight leading-snug">
+              Adaptive follow-ups that challenge vague answers before the real
+              interviewer does.
+            </h3>
+            <p className="mt-3 text-sm sm:text-base leading-relaxed text-white/70">
+              If a technical explanation drops crucial trade-offs or rambles
+              without structure, InterVu AI probes deeper — just like a staff
+              engineer or hiring lead would.
+            </p>
+          </div>
+          <div className="flex lg:col-span-4 lg:justify-end">
+            <a
+              href="https://intervu-frontend.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={buttonClass({ size: "md" })}
+            >
+              Try a free assessment
+            </a>
+          </div>
+        </div>
+      </div>
+    </Section>
   );
 }

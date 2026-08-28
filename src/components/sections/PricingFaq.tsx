@@ -15,7 +15,7 @@ const faqs = [
   {
     question: "Is there a free plan?",
     answer:
-      "Yes! The Free plan gives you full scored rounds every month with real hiring rubric feedback, so you can test your readiness with zero risk.",
+      "Yes — the Free plan gives you scored rounds every month with real hiring rubric feedback, so you can test your readiness with zero risk.",
   },
   {
     question: "How are Teams seats counted?",
@@ -30,7 +30,7 @@ const faqs = [
   {
     question: "What payment methods do you accept?",
     answer:
-      "We accept all major credit cards and debit cards worldwide through Stripe. Enterprise cohort invoices are also available.",
+      "We accept all major credit and debit cards worldwide through Stripe. Enterprise cohort invoices are also available.",
   },
 ] as const;
 
@@ -38,12 +38,12 @@ export function PricingFaq() {
   return (
     <div className="grid gap-8 md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] md:gap-16 font-sans">
       <div>
-        <h2 className="text-2xl sm:text-3xl font-medium text-[#0B1E3D]">Before you decide</h2>
-        <p className="mt-3 text-sm text-slate-600">
+        <h2 className="text-title text-ink">Before you decide</h2>
+        <p className="mt-3 text-sm text-ink-soft">
           Have questions?{" "}
           <Link
             href="/contact"
-            className="text-purple-600 font-semibold underline decoration-purple-500/40 underline-offset-4 hover:text-purple-700"
+            className="font-semibold text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand"
           >
             Contact our team directly
           </Link>{" "}
@@ -51,14 +51,14 @@ export function PricingFaq() {
         </p>
       </div>
 
-      <div className="border-t border-slate-200">
+      <div className="border-t border-rule">
         {faqs.map((faq) => (
-          <details key={faq.question} className="group border-b border-slate-200">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-4 text-base font-medium text-[#0B1E3D] transition-colors hover:text-purple-600 [&::-webkit-details-marker]:hidden">
+          <details key={faq.question} className="group border-b border-rule">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-4 text-base font-medium text-ink transition-colors hover:text-brand [&::-webkit-details-marker]:hidden">
               {faq.question}
-              <ChevronDown className="size-4 shrink-0 text-purple-600 transition-transform duration-200 group-open:rotate-180" />
+              <ChevronDown className="size-4 shrink-0 text-ink-soft transition-transform duration-200 group-open:rotate-180" />
             </summary>
-            <p className="max-w-2xl pb-5 text-sm text-slate-600 leading-relaxed font-normal">
+            <p className="max-w-2xl pb-5 text-sm leading-relaxed text-ink-soft">
               {faq.answer}
             </p>
           </details>

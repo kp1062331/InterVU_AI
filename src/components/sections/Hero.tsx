@@ -1,18 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { Play, Close } from "@/components/ui/icons";
+import { Play, Close, Mic, Layers, ClipboardCheck, TrendUp } from "@/components/ui/icons";
+import { Container } from "@/components/ui/Container";
 
 export function Hero() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setLightboxOpen(false);
-      }
+      if (e.key === "Escape") setLightboxOpen(false);
     };
     if (lightboxOpen) {
       document.body.style.overflow = "hidden";
@@ -27,148 +25,242 @@ export function Hero() {
   }, [lightboxOpen]);
 
   return (
-    <section
-      className="relative min-h-[92vh] w-full flex flex-col justify-center items-center text-center overflow-hidden bg-white text-slate-900 pt-24 pb-16 sm:pt-32 sm:pb-24 font-sans"
-      aria-label="Hero"
-    >
-      {/* Ambient Purple Glow */}
+    <section className="relative overflow-hidden bg-paper pt-28 pb-16 sm:pt-36 sm:pb-24 font-sans" aria-label="Hero">
+      {/* 3D Perspective Grid Background */}
+      <div className="hero-perspective-grid" aria-hidden="true" />
+
+      {/* Radial Light Glow Overlay */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 opacity-70"
+        className="pointer-events-none absolute inset-0 z-0"
         style={{
-          backgroundImage: `
-            radial-gradient(ellipse 75% 55% at 50% 15%, rgba(139, 92, 246, 0.15), transparent 70%),
-            radial-gradient(circle 500px at 15% 35%, rgba(124, 58, 237, 0.08), transparent 75%),
-            radial-gradient(circle 450px at 85% 65%, rgba(99, 102, 241, 0.06), transparent 75%)
-          `,
+          background:
+            "radial-gradient(circle at 50% 20%, rgba(109, 40, 217, 0.07) 0%, rgba(255, 255, 255, 0) 70%)",
         }}
         aria-hidden="true"
       />
 
-      {/* Dot Matrix */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 50% 50%, #0B1E3D 1px, transparent 1px)`,
-          backgroundSize: "28px 28px",
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Hero Stack */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 flex flex-col items-center">
-
-        {/* Trust Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-6 sm:mb-8 animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100/90 border border-slate-200/90 text-xs font-semibold text-slate-800 shadow-sm">
-            <span className="text-amber-500 font-bold">★★★★★</span>
-            <span className="text-slate-900 font-bold">4.8/5</span>
-            <span className="text-slate-500">· 12,500+ candidate evaluations</span>
+      <Container className="relative z-10 flex flex-col items-center text-center">
+        {/* Floating Tilted Cards (Matching reference screenshot card design) */}
+        <div className="pointer-events-none absolute inset-x-0 top-2 bottom-0 hidden lg:block" aria-hidden="true">
+          {/* Card 1: Top Left - System Architecture (Teal) */}
+          <div
+            className="animate-float-slow absolute top-2 left-0 xl:left-4 w-44 xl:w-48 rounded-[22px] bg-[#50A6B7] p-3.5 shadow-xl text-left transition-transform"
+            style={{ "--card-rotate": "12deg" } as React.CSSProperties}
+          >
+            <div className="relative mb-3 flex h-24 w-full items-center justify-center rounded-[16px] bg-white/20 p-2 overflow-hidden">
+              <svg className="size-16 drop-shadow-md" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="24" r="14" fill="#FFE0B2" />
+                <circle cx="17" cy="18" r="4" fill="#FFB74D" />
+                <circle cx="47" cy="18" r="4" fill="#FFB74D" />
+                <circle cx="27" cy="23" r="4" stroke="#1E293B" strokeWidth="2" fill="white" />
+                <circle cx="27" cy="23" r="1.5" fill="#1E293B" />
+                <circle cx="37" cy="23" r="4" stroke="#1E293B" strokeWidth="2" fill="white" />
+                <circle cx="37" cy="23" r="1.5" fill="#1E293B" />
+                <path d="M31 23H33" stroke="#1E293B" strokeWidth="2" />
+                <path d="M29 31C30.5 32 33.5 32 35 31" stroke="#1E293B" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M16 56C16 44 23 40 32 40C41 40 48 44 48 56" fill="#1E293B" />
+                <path d="M28 40L32 47L36 40" fill="white" />
+                <path d="M31 44L32 54L33 44" fill="#50A6B7" />
+              </svg>
+            </div>
+            <h4 className="text-xs sm:text-sm font-bold leading-tight text-white">
+              System Architecture &amp; Design
+            </h4>
+            <p className="mt-1 text-[11px] font-medium text-white/85">
+              120+ Scenarios
+            </p>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-700 shadow-sm">
-            <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>+95% Interview Pass Rate</span>
+          {/* Card 2: Top Right - Voice Mock (Lime Green) */}
+          <div
+            className="animate-float-slow absolute top-4 right-0 xl:right-4 w-44 xl:w-48 rounded-[22px] bg-[#96D62E] p-3.5 shadow-xl text-left transition-transform"
+            style={{ "--card-rotate": "-12deg", animationDelay: "-1.5s" } as React.CSSProperties}
+          >
+            <div className="relative mb-3 flex h-24 w-full items-center justify-center rounded-[16px] bg-black/10 p-2 overflow-hidden">
+              <svg className="size-16 drop-shadow-md" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="24" r="14" fill="#FFE0B2" />
+                <circle cx="17" cy="18" r="4" fill="#6EE7B7" />
+                <circle cx="47" cy="18" r="4" fill="#6EE7B7" />
+                <circle cx="27" cy="23" r="4" stroke="#064E3B" strokeWidth="2" fill="white" />
+                <circle cx="27" cy="23" r="1.5" fill="#064E3B" />
+                <circle cx="37" cy="23" r="4" stroke="#064E3B" strokeWidth="2" fill="white" />
+                <circle cx="37" cy="23" r="1.5" fill="#064E3B" />
+                <path d="M31 23H33" stroke="#064E3B" strokeWidth="2" />
+                <path d="M29 31C30.5 32 33.5 32 35 31" stroke="#064E3B" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M16 56C16 44 23 40 32 40C41 40 48 44 48 56" fill="#064E3B" />
+                <path d="M28 40L32 47L36 40" fill="white" />
+                <path d="M31 44L32 54L33 44" fill="#96D62E" />
+              </svg>
+            </div>
+            <h4 className="text-xs sm:text-sm font-bold leading-tight text-emerald-950">
+              Voice Mock &amp; Audio Prep
+            </h4>
+            <p className="mt-1 text-[11px] font-medium text-emerald-900/90">
+              Real-Time Adaptive AI
+            </p>
+          </div>
+
+          {/* Card 3: Mid/Left - Behavioral (Coral Red/Orange) */}
+          <div
+            className="animate-float-slow absolute top-54 left-0 xl:left-2 w-44 xl:w-48 rounded-[22px] bg-[#F36B4A] p-3.5 shadow-xl text-left transition-transform"
+            style={{ "--card-rotate": "-14deg", animationDelay: "-2.5s" } as React.CSSProperties}
+          >
+            <div className="relative mb-3 flex h-24 w-full items-center justify-center rounded-[16px] bg-white/20 p-2 overflow-hidden">
+              <svg className="size-16 drop-shadow-md" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="24" r="14" fill="#FFE0B2" />
+                <circle cx="17" cy="18" r="4" fill="#FF8A65" />
+                <circle cx="47" cy="18" r="4" fill="#FF8A65" />
+                <circle cx="27" cy="23" r="4" stroke="#7C2D12" strokeWidth="2" fill="white" />
+                <circle cx="27" cy="23" r="1.5" fill="#7C2D12" />
+                <circle cx="37" cy="23" r="4" stroke="#7C2D12" strokeWidth="2" fill="white" />
+                <circle cx="37" cy="23" r="1.5" fill="#7C2D12" />
+                <path d="M31 23H33" stroke="#7C2D12" strokeWidth="2" />
+                <path d="M29 31C30.5 32 33.5 32 35 31" stroke="#7C2D12" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M16 56C16 44 23 40 32 40C41 40 48 44 48 56" fill="#7C2D12" />
+                <path d="M28 40L32 47L36 40" fill="white" />
+                <path d="M31 44L32 54L33 44" fill="#F36B4A" />
+              </svg>
+            </div>
+            <h4 className="text-xs sm:text-sm font-bold leading-tight text-white">
+              Business &amp; Behavioral STAR
+            </h4>
+            <p className="mt-1 text-[11px] font-medium text-white/85">
+              80+ Calibrated Rubrics
+            </p>
+          </div>
+
+          {/* Card 4: Mid/Right - Company Placement (Yellowish) */}
+          <div
+            className="animate-float-slow absolute top-58 right-0 xl:right-2 w-44 xl:w-48 rounded-[22px] bg-[#EAB308] p-3.5 shadow-xl text-left transition-transform"
+            style={{ "--card-rotate": "14deg", animationDelay: "-3.5s" } as React.CSSProperties}
+          >
+            <div className="relative mb-3 flex h-24 w-full items-center justify-center rounded-[16px] bg-black/10 p-2 overflow-hidden">
+              <svg className="size-16 drop-shadow-md" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="24" r="14" fill="#FFE0B2" />
+                <circle cx="17" cy="18" r="4" fill="#FDE047" />
+                <circle cx="47" cy="18" r="4" fill="#FDE047" />
+                <circle cx="27" cy="23" r="4" stroke="#713F12" strokeWidth="2" fill="white" />
+                <circle cx="27" cy="23" r="1.5" fill="#713F12" />
+                <circle cx="37" cy="23" r="4" stroke="#713F12" strokeWidth="2" fill="white" />
+                <circle cx="37" cy="23" r="1.5" fill="#713F12" />
+                <path d="M31 23H33" stroke="#713F12" strokeWidth="2" />
+                <path d="M29 31C30.5 32 33.5 32 35 31" stroke="#713F12" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M16 56C16 44 23 40 32 40C41 40 48 44 48 56" fill="#713F12" />
+                <path d="M28 40L32 47L36 40" fill="white" />
+                <path d="M31 44L32 54L33 44" fill="#EAB308" />
+              </svg>
+            </div>
+            <h4 className="text-xs sm:text-sm font-bold leading-tight text-amber-950">
+              Company Placement Tests
+            </h4>
+            <p className="mt-1 text-[11px] font-medium text-amber-900/90">
+              TCS, Infosys, Stripe
+            </p>
           </div>
         </div>
 
-        {/* Eyebrow */}
-        <span className="text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase text-purple-600 mb-3 block">
-          AI-POWERED INTERVIEW COACH &amp; ASSESSMENT PLATFORM
-        </span>
-
-        {/* Hero Headline (Medium font weight for refined thickness) */}
-        <h1 className="font-medium text-4xl sm:text-6xl lg:text-7xl text-[#0B1E3D] tracking-tight leading-[1.08] max-w-5xl text-balance mb-6">
-          Land your dream job with your personal{" "}
-          <span className="font-medium bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 bg-clip-text text-transparent">
-            AI Interview Coach.
+        {/* Dual Capsule Top Badge */}
+        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-rule bg-paper/90 p-1.5 pr-4 shadow-sm backdrop-blur-md transition-transform hover:scale-[1.02]">
+          <span className="rounded-full bg-ink px-3.5 py-1 text-xs font-semibold text-white">
+            #1 AI-Powered Video &amp; Voice Interview Prep
           </span>
+          <span className="flex items-center gap-1 text-xs font-semibold text-ink-muted">
+            +95% Pass Rate <span aria-hidden="true">→</span>
+          </span>
+        </div>
+
+        {/* Main Headline (Reverted to old font and styling) */}
+        <h1 className="mt-4 max-w-4xl text-hero text-ink tracking-tight text-balance">
+          Land your dream job with your personal{" "}
+          <span className="text-brand">AI interview coach</span>.
         </h1>
 
-        {/* Subhead */}
-        <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl text-pretty font-normal mb-10">
-          Practice company-specific mock interviews, get instant voice feedback, eliminate weak answers, and enter your real assessment with total confidence.
+        {/* Subtitle */}
+        <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-ink-soft text-pretty">
+          Practice company-specific mock interviews, get instant voice feedback,
+          eliminate weak answers, and enter your real assessment with total confidence.
         </p>
 
-        {/* CTAs */}
-        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-16">
+        {/* Action CTAs */}
+        <div className="mt-8 mb-6 flex flex-wrap items-center justify-center gap-4">
           <a
             href="https://intervu-frontend.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-purple-pill px-9 py-4 text-sm sm:text-base uppercase tracking-wider shadow-purple-500/30 cursor-pointer inline-flex items-center gap-3"
+            className="inline-flex items-center gap-2.5 rounded-full bg-[#14161F] hover:bg-black px-8 py-4 text-sm sm:text-base font-semibold text-white shadow-xl transition-all hover:scale-105 hover:shadow-2xl active:scale-[0.98]"
           >
-            <span>Start Practicing Now</span>
-            <span className="text-lg">→</span>
+            Start practicing now
           </a>
-
 
         </div>
 
-        {/* Browser Device Frame */}
-        <div className="w-full max-w-6xl mx-auto relative group">
-          <div className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-purple-500/30 via-violet-400/30 to-indigo-500/20 opacity-50 blur-2xl group-hover:opacity-75 transition-opacity duration-500" />
+        {/* Social Proof (Candidate Avatar Stack & Rating) */}
+        <div className="mb-14 flex items-center justify-center gap-3">
+          <div className="flex -space-x-2 overflow-hidden">
+            <div className="inline-flex size-8 items-center justify-center rounded-full border-2 border-white bg-violet-600 text-[10px] font-bold text-white shadow-xs">AK</div>
+            <div className="inline-flex size-8 items-center justify-center rounded-full border-2 border-white bg-indigo-600 text-[10px] font-bold text-white shadow-xs">SP</div>
+            <div className="inline-flex size-8 items-center justify-center rounded-full border-2 border-white bg-emerald-600 text-[10px] font-bold text-white shadow-xs">RJ</div>
+            <div className="inline-flex size-8 items-center justify-center rounded-full border-2 border-white bg-amber-600 text-[10px] font-bold text-white shadow-xs">ML</div>
+          </div>
+          <div className="flex flex-col items-start text-xs text-left">
+            <div className="flex items-center gap-0.5 text-amber-400 font-bold text-sm leading-none">
+              ★★★★★
+            </div>
+            <span className="mt-0.5 font-medium text-ink-soft">
+              Rated <strong className="text-ink font-bold">4.8/5</strong> by 12,500+ candidate interviews
+            </span>
+          </div>
+        </div>
 
-          <div className="relative rounded-2xl bg-white border border-slate-200/90 shadow-[0_25px_60px_-15px_rgba(11,30,61,0.18)] overflow-hidden text-left">
-            <div className="flex items-center justify-between px-5 py-3.5 bg-slate-100/90 border-b border-slate-200">
+        {/* Dashboard Screenshot Preview with Perspective Container */}
+        <div className="perspective-1000 w-full max-w-5xl">
+          <div className="parallax-drift overflow-hidden rounded-2xl border border-rule bg-paper shadow-2xl transition-transform duration-500 hover:rotate-x-0">
+            <div className="flex items-center justify-between border-b border-rule bg-surface px-4 py-3">
               <div className="flex items-center gap-2">
-                <span className="size-3 rounded-full bg-red-400" />
+                <span className="size-3 rounded-full bg-rose-400" />
                 <span className="size-3 rounded-full bg-amber-400" />
                 <span className="size-3 rounded-full bg-emerald-400" />
-                <div className="ml-4 px-4 py-1 rounded-md bg-white border border-slate-200 text-xs font-mono text-slate-600 hidden sm:flex items-center gap-2">
-                  <span className="text-slate-400">https://</span>
-                  <span className="font-semibold text-slate-800">intervu.ai/dashboard/operations-control-center</span>
-                </div>
               </div>
-
-              <div className="flex items-center gap-2 text-xs font-semibold text-slate-700">
-                <span className="size-2 rounded-full bg-purple-600 animate-pulse" />
-                <span className="hidden sm:inline-block">Operations Active</span>
+              <div className="rounded-md border border-rule bg-paper px-4 py-1 font-mono text-xs text-ink-faint">
+                intervu.ai/report
               </div>
+              <div className="w-12" />
             </div>
-
-            <div className="relative w-full overflow-hidden bg-slate-50">
+            <div className="relative w-full bg-surface">
               <Image
                 src="/images/dashboard-hero.png"
-                alt="InterVu AI Operations Control Center Dashboard"
+                alt="InterVu AI scored feedback report after a mock interview"
                 width={1400}
                 height={750}
-                className="w-full h-auto object-cover object-top transition-transform duration-700 group-hover:scale-[1.008]"
+                className="h-auto w-full object-cover object-top"
                 priority
               />
             </div>
           </div>
         </div>
+      </Container>
 
-      </div>
-
-      {/* Lightbox Modal */}
       {lightboxOpen && (
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="InterVu AI Demo Video"
-          className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-8 bg-[#0B1E3D]/95 backdrop-blur-xl transition-opacity animate-in fade-in"
+          aria-label="InterVu AI demo video"
+          className="fixed inset-0 z-100 flex items-center justify-center bg-ink/90 p-4 sm:p-8"
           onClick={() => setLightboxOpen(false)}
         >
           <div
-            className="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden border border-purple-500/30 bg-[#0B1E3D] shadow-2xl"
+            className="relative aspect-video w-full max-w-3xl overflow-hidden rounded-lg border border-white/10 bg-black shadow-raised"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={() => setLightboxOpen(false)}
-              className="absolute top-4 right-4 z-20 flex items-center justify-center size-10 rounded-full bg-[#132C54] hover:bg-purple-600 text-white border border-purple-500/40 transition-colors cursor-pointer"
+              className="absolute top-3 right-3 z-20 flex size-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
               aria-label="Close demo video"
             >
-              <Close className="size-5" />
+              <Close className="size-4" />
             </button>
-
-            <video
-              controls
-              autoPlay
-              className="size-full object-contain bg-[#0B1E3D]"
-              src="/video/1.mp4"
-            />
+            <video controls autoPlay className="size-full object-contain" src="/video/1.mp4" />
           </div>
         </div>
       )}

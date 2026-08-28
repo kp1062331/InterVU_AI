@@ -29,14 +29,14 @@ export function describedBy({
 
 export function controlClass(error?: string, className?: string) {
   return cn(
-    "w-full rounded-xl border bg-[#132C54] px-4 py-3 text-sm text-white font-sans",
-    "placeholder:text-slate-400",
-    "transition-all duration-150 ease-standard",
+    "w-full rounded-sm border bg-paper px-3.5 py-2.5 text-sm text-ink font-sans",
+    "placeholder:text-ink-faint",
+    "transition-colors duration-150 ease-standard",
     "focus:outline-none focus:ring-2",
-    "disabled:cursor-not-allowed disabled:opacity-50",
+    "disabled:cursor-not-allowed disabled:bg-surface disabled:opacity-70",
     error
-      ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
-      : "border-purple-500/30 hover:border-purple-400/60 focus:border-purple-500 focus:ring-purple-500/20",
+      ? "border-critical focus:border-critical focus:ring-critical/15"
+      : "border-rule hover:border-rule-strong focus:border-brand focus:ring-brand/15",
     className,
   );
 }
@@ -54,21 +54,21 @@ export function FieldShell({
     <div className={cn("flex flex-col gap-1.5 font-sans", className)}>
       <label
         htmlFor={id}
-        className="flex items-baseline justify-between gap-3 text-sm font-semibold text-slate-200"
+        className="flex items-baseline justify-between gap-3 text-sm font-medium text-ink"
       >
         {label}
         {optional && (
-          <span className="text-xs font-normal text-slate-400">Optional</span>
+          <span className="text-xs font-normal text-ink-faint">Optional</span>
         )}
       </label>
       {children}
       {error ? (
-        <p id={errorId(id)} className="text-xs text-red-400 font-medium">
+        <p id={errorId(id)} className="text-xs font-medium text-critical">
           {error}
         </p>
       ) : (
         hint && (
-          <p id={hintId(id)} className="text-xs text-slate-400">
+          <p id={hintId(id)} className="text-xs text-ink-soft">
             {hint}
           </p>
         )
