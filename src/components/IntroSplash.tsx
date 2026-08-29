@@ -29,7 +29,7 @@ const PREFIXES = [
   "Tricks UP !!!",
 ] as const;
 
-const CUBE_MS = 1600;
+const CUBE_MS = 2800;
 const REVEAL_MS = 900;
 const EXIT_MS = 400;
 

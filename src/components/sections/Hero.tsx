@@ -2,13 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-
-declare global {
-  interface Window {
-    __skillitrixIntroHasPlayed?: boolean;
-  }
-}
-
 import { Close } from "@/components/ui/icons";
 import { Container } from "@/components/ui/Container";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -301,7 +294,7 @@ export function Hero() {
   const [introCompleted, setIntroCompleted] = useState(false);
 
   useEffect(() => {
-    const introDone = typeof window !== "undefined" && window.__skillitrixIntroHasPlayed === true;
+    const introDone = sessionStorage.getItem("skillitrix-intro-done") === "true";
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
@@ -333,7 +326,7 @@ export function Hero() {
 
     const interval = setInterval(() => {
       setTitleIdx((prev) => (prev + 1) % HERO_TITLES.length);
-    }, 3000);
+    }, 4500);
 
     return () => clearInterval(interval);
   }, [introCompleted]);
@@ -412,11 +405,7 @@ export function Hero() {
   }, [lightboxOpen]);
 
   return (
-    <section 
-      className="relative overflow-hidden bg-paper pt-28 pb-16 sm:pt-36 sm:pb-24 font-sans transition-opacity duration-300" 
-      style={{ opacity: introCompleted ? 1 : 0 }}
-      aria-label="Hero"
-    >
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-paper py-28 sm:py-46 font-sans" aria-label="Hero">
       {/* Texture Background */}
       <div className="hero-bg-texture" aria-hidden="true" />
 
@@ -496,7 +485,7 @@ export function Hero() {
         })}
       </div>
 
-      <Container className="relative z-10 flex flex-col items-center text-center">
+      <Container className="relative z-10 w-full flex flex-col items-center text-center">
         {/* 1. Modern Linear/Vercel-style Shimmer Gradient Glass Capsule */}
         <ScrollReveal delay={0} duration={800} active={introCompleted}>
           <a
@@ -639,14 +628,13 @@ export function Hero() {
               </div>
 
               {/* Screen Content */}
-              <div className="w-full bg-[#0C0E14] overflow-hidden transition-all duration-300">
+              <div className="relative w-full aspect-video min-h-[300px] sm:min-h-[400px] md:min-h-[500px] bg-[#0C0E14] overflow-hidden transition-all duration-300">
                 <Image
                   src={ASSESSMENT_SCREENS[activeSlide].image}
                   alt={ASSESSMENT_SCREENS[activeSlide].title}
-                  width={1920}
-                  height={1080}
-                  sizes="(max-width: 1200px) 100vw, 1200px"
-                  className="w-full h-auto block select-none"
+                  fill
+                  unoptimized
+                  className="object-cover object-top select-none"
                   priority={activeSlide === 0}
                 />
               </div>
