@@ -42,8 +42,9 @@ export function IntroSplash() {
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const introDone = window.__skillitrixIntroHasPlayed === true;
+    const isBot = /bot|googlebot|crawler|spider|robot|crawling|lighthouse/i.test(navigator.userAgent);
 
-    if (reduced || introDone) {
+    if (reduced || introDone || isBot) {
       Promise.resolve().then(() => {
         setPhase("done");
         window.dispatchEvent(new CustomEvent("intro-complete"));

@@ -179,7 +179,7 @@ export function SiteFooter() {
 
         {/* Bottom copyright & socials */}
         <div className="flex flex-col items-center justify-between gap-4 pt-6 sm:flex-row">
-          <p className="text-xs text-ink-faint">
+          <p className="text-xs text-ink-muted">
             © {new Date().getFullYear()} Skillitrix. All rights reserved.
           </p>
 

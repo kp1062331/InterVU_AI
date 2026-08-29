@@ -597,8 +597,8 @@ export function Hero() {
                   <span className="size-3 rounded-full bg-amber-400" />
                   <span className="size-3 rounded-full bg-emerald-400" />
                 </div>
-                <div className="flex items-center gap-2 rounded-md border border-rule bg-paper px-4 py-1 font-mono text-xs text-ink-faint">
-                  <span className="text-emerald-500">🔒</span>
+                <div className="flex items-center gap-2 rounded-md border border-rule bg-paper px-4 py-1 font-mono text-xs text-ink-muted">
+                  <span className="text-emerald-700">🔒</span>
                   <span>skillitrix.com/assessment/{ASSESSMENT_SCREENS[activeSlide].id}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
@@ -643,7 +643,7 @@ export function Hero() {
               <div className="flex flex-wrap items-center justify-between border-t border-rule bg-white px-4 py-2.5 text-xs text-ink-muted">
                 <div className="flex items-center gap-2">
                   <span className="font-semibold text-ink">{ASSESSMENT_SCREENS[activeSlide].title}</span>
-                  <span className="hidden sm:inline text-ink-soft">— {ASSESSMENT_SCREENS[activeSlide].description}</span>
+                  <span className="hidden sm:inline text-ink-muted">— {ASSESSMENT_SCREENS[activeSlide].description}</span>
                 </div>
                 <div className="flex items-center ml-auto">
                   {ASSESSMENT_SCREENS.map((_, idx) => (
