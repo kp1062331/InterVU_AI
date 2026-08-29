@@ -50,7 +50,7 @@ export function Coverage() {
       <ScrollReveal variant="fade-in" duration={900}>
         <div className="relative overflow-hidden border-b border-rule bg-paper" style={{ minHeight: 340 }}>
           {/* Right-side image */}
-          <div className="absolute inset-y-0 right-0 w-full lg:w-1/2">
+          <div className="absolute inset-y-0 right-0 w-full lg:w-3/5">
             <Image
               src="/images/dynamic_questions.jpg"
               alt="SkillitriX analytics report showing per-company benchmark scores and section-wise performance"
@@ -67,7 +67,7 @@ export function Coverage() {
           </div>
           {/* Left-side text */}
           <Container className="relative z-10">
-            <ScrollReveal className="flex flex-col items-start lg:w-3/5 lg:pr-10 py-14 sm:py-20">
+            <ScrollReveal className="flex flex-col items-start lg:w-2/5 lg:pr-10 py-14 sm:py-20">
               <p className="eyebrow">Dynamic Question Bank</p>
               <h2 id="coverage-heading" className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-ink leading-snug">
                 Same company. New test. Every time.

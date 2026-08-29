@@ -59,7 +59,7 @@ export function HowItWorks() {
       <ScrollReveal variant="fade-in" duration={900}>
         <div className="relative overflow-hidden border-b border-rule bg-surface" style={{ minHeight: 340 }}>
           {/* Right-side image */}
-          <div className="absolute inset-y-0 right-0 w-full lg:w-1/2">
+          <div className="absolute inset-y-0 right-0 w-full lg:w-3/5">
             <Image
               src="/images/workflow_dashboard.jpg"
               alt="SkillitriX assessment catalog page showing company-specific tests"
@@ -76,7 +76,7 @@ export function HowItWorks() {
           </div>
           {/* Left-side text */}
           <Container className="relative z-10">
-            <ScrollReveal className="flex flex-col items-start lg:w-3/5 lg:pr-10 py-14 sm:py-20">
+            <ScrollReveal className="flex flex-col items-start lg:w-2/5 lg:pr-10 py-14 sm:py-20">
               <p className="eyebrow">3-step workflow</p>
               <h2 id="how-it-works-heading" className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-ink leading-snug">
                 Pick your company. Take the test. Get AI insights.

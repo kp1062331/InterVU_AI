@@ -116,8 +116,8 @@ export function AboutSection() {
       {/* ── Full-bleed Split Image Banner (About-page style) ─────────────── */}
       <ScrollReveal variant="fade-in" duration={900}>
         <div className="relative overflow-hidden border-b border-rule bg-paper" style={{ minHeight: 340 }}>
-          {/* Right-side image — absolute, takes right half on lg */}
-          <div className="absolute inset-y-0 right-0 w-full lg:w-1/2">
+          {/* Right-side image — absolute, takes right 60% on lg */}
+          <div className="absolute inset-y-0 right-0 w-full lg:w-3/5">
             <Image
               src="/images/home-about-lab.jpg"
               alt="Students practicing assessments in a collaborative study environment"
@@ -134,7 +134,7 @@ export function AboutSection() {
           </div>
           {/* Left-side text */}
           <Container className="relative z-10">
-            <ScrollReveal className="flex flex-col items-start lg:w-3/5 lg:pr-10 py-14 sm:py-20">
+            <ScrollReveal className="flex flex-col items-start lg:w-2/5 lg:pr-10 py-14 sm:py-20">
               <p className="eyebrow">The AI-powered advantage</p>
               <h2 id="features-heading" className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-ink leading-snug">
                 Everything you need to ace your next assessment.
