@@ -298,8 +298,9 @@ export function Hero() {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+    const isBot = /bot|googlebot|crawler|spider|robot|crawling|lighthouse/i.test(navigator.userAgent);
 
-    if (introDone || prefersReducedMotion) {
+    if (introDone || prefersReducedMotion || isBot) {
       Promise.resolve().then(() => setIntroCompleted(true));
       return;
     }

@@ -28,12 +28,13 @@ export function ScrollReveal({
   useEffect(() => {
     if (!active) return;
 
-    // Check if user prefers reduced motion
+    // Check if user prefers reduced motion or is a crawler/bot
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+    const isBot = /bot|googlebot|crawler|spider|robot|crawling|lighthouse/i.test(navigator.userAgent);
 
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || isBot) {
       Promise.resolve().then(() => setIsRevealed(true));
       return;
     }
