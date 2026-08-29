@@ -61,7 +61,7 @@ export function HowItWorks() {
           {/* Right-side image */}
           <div className="absolute inset-y-0 right-0 w-full lg:w-1/2">
             <Image
-              src="/images/hero-assessments.png"
+              src="/images/workflow_dashboard.jpg"
               alt="SkillitriX assessment catalog page showing company-specific tests"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

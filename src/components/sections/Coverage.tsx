@@ -52,7 +52,7 @@ export function Coverage() {
           {/* Right-side image */}
           <div className="absolute inset-y-0 right-0 w-full lg:w-1/2">
             <Image
-              src="/images/hero-analytics.png"
+              src="/images/dynamic_questions.jpg"
               alt="SkillitriX analytics report showing per-company benchmark scores and section-wise performance"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
