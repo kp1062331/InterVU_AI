@@ -27,14 +27,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   icons: {
     icon: [
-      { url: "/images/skillitrix-icon.png", sizes: "any" },
       { url: "/icon.png", type: "image/png", sizes: "32x32" },
+      { url: "/images/skillitrix-icon.png", sizes: "any" },
     ],
     apple: [
       { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
-      { url: "/images/skillitrix-icon.png", sizes: "180x180", type: "image/png" },
     ],
-    shortcut: "/images/skillitrix-icon.png",
+    shortcut: "/icon.png",
   },
   openGraph: {
     type: "website",
@@ -45,18 +44,24 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [
       {
-        url: "/images/skillitrix-icon.png",
-        width: 512,
-        height: 512,
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} Logo`,
+      },
+      {
+        url: "/images/skillitrix-logo.png",
+        width: 1200,
+        height: 630,
         alt: `${siteConfig.name} Logo`,
       },
     ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
-    images: ["/images/skillitrix-icon.png"],
+    images: ["/og-image.png", "/images/skillitrix-logo.png"],
   },
   robots: { index: true, follow: true },
 };
