@@ -579,7 +579,7 @@ export function Hero() {
                 >
                   <span>{item.tabLabel}</span>
                   <span
-                    className={`rounded-full px-1.5 py-0.5 text-[9px] font-bold ${activeSlide === idx ? "bg-brand text-white" : "bg-rule text-ink-soft"
+                    className={`rounded-full px-1.5 py-0.5 text-[9px] font-bold ${activeSlide === idx ? "bg-[#4c1d95] text-white" : "bg-rule text-ink-soft"
                       }`}
                   >
                     {item.badge}
@@ -633,7 +633,7 @@ export function Hero() {
                   src={ASSESSMENT_SCREENS[activeSlide].image}
                   alt={ASSESSMENT_SCREENS[activeSlide].title}
                   fill
-                  unoptimized
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                   className="object-cover object-top select-none"
                   priority={activeSlide === 0}
                 />
@@ -645,16 +645,23 @@ export function Hero() {
                   <span className="font-semibold text-ink">{ASSESSMENT_SCREENS[activeSlide].title}</span>
                   <span className="hidden sm:inline text-ink-soft">— {ASSESSMENT_SCREENS[activeSlide].description}</span>
                 </div>
-                <div className="flex items-center gap-1.5 ml-auto">
+                <div className="flex items-center ml-auto">
                   {ASSESSMENT_SCREENS.map((_, idx) => (
                     <button
                       key={idx}
                       type="button"
                       onClick={() => setActiveSlide(idx)}
-                      className={`h-1.5 rounded-full transition-all ${activeSlide === idx ? "w-6 bg-brand" : "w-1.5 bg-rule hover:bg-rule-strong"
-                        }`}
+                      className="p-2 -mr-1 last:mr-0 group flex items-center justify-center"
                       aria-label={`Jump to assessment screen ${idx + 1}`}
-                    />
+                    >
+                      <span
+                        className={`h-1.5 rounded-full transition-all duration-200 ${
+                          activeSlide === idx
+                            ? "w-6 bg-brand"
+                            : "w-1.5 bg-rule group-hover:bg-rule-strong"
+                        }`}
+                      />
+                    </button>
                   ))}
                 </div>
               </div>
