@@ -58,7 +58,6 @@ export default function AboutPage() {
             src="/images/about-hero-bg.jpg"
             alt="Skillitrix engineering team collaborating on interview evaluation systems"
             fill
-            unoptimized
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover object-center lg:object-right"
             priority

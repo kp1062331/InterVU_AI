@@ -29,9 +29,9 @@ const PREFIXES = [
   "Tricks UP !!!",
 ] as const;
 
-const CUBE_MS = 2800;
-const REVEAL_MS = 1400;
-const EXIT_MS = 500;
+const CUBE_MS = 1600;
+const REVEAL_MS = 900;
+const EXIT_MS = 400;
 
 type Phase = "idle" | "cube" | "reveal" | "exit" | "done";
 
@@ -131,7 +131,6 @@ export function IntroSplash() {
             alt="SkillitriX"
             width={72}
             height={72}
-            unoptimized
             className="size-12 sm:size-16 object-contain drop-shadow-xl"
             priority
           />

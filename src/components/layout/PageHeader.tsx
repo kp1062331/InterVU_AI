@@ -28,7 +28,6 @@ export function PageHeader({
             src={imageSrc}
             alt={imageAlt}
             fill
-            unoptimized
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover object-center lg:object-right"
             priority

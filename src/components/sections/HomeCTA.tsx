@@ -12,10 +12,9 @@ export function HomeCTA() {
           src="/images/home-cta-bg.jpg"
           alt="Student taking an MNC placement assessment test"
           fill
-          unoptimized
           sizes="(max-width: 1024px) 100vw, 50vw"
           className="object-cover object-center lg:object-right"
-          priority
+          loading="lazy"
         />
         {/* Left fade gradient overlay blending into dark bg-ink background */}
         <div

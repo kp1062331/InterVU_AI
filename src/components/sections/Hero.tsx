@@ -645,7 +645,7 @@ export function Hero() {
                   alt={ASSESSMENT_SCREENS[activeSlide].title}
                   width={1920}
                   height={1080}
-                  unoptimized
+                  sizes="(max-width: 1200px) 100vw, 1200px"
                   className="w-full h-auto block select-none"
                   priority={activeSlide === 0}
                 />
