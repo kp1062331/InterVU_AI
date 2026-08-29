@@ -477,3 +477,43 @@
     filter: none !important;
   }
 }
+
+/* ==========================================================================
+   Hero Floating Cards Physics & Hover Pop
+   ========================================================================== */
+
+.hero-floating-card {
+  pointer-events: auto !important;
+  transition: 
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+    box-shadow 0.4s ease, 
+    border-color 0.4s ease, 
+    background-color 0.4s ease, 
+    opacity 0.5s ease !important;
+}
+
+.hero-floating-card:hover {
+  transform: scale(1.06) rotate(0deg) !important;
+  box-shadow: 
+    0 20px 40px -10px rgba(109, 40, 217, 0.16), 
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(109, 40, 217, 0.25) !important;
+  background-color: rgba(255, 255, 255, 0.94) !important;
+  z-index: 50 !important;
+}
+
+.hero-floating-card:hover .status-dot {
+  background-color: #6366F1 !important;
+  box-shadow: 0 0 12px 3px rgba(99, 102, 241, 0.6) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-floating-card {
+    transition: none !important;
+  }
+  .hero-floating-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}

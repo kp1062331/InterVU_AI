@@ -326,7 +326,7 @@ export function Hero() {
 
     const interval = setInterval(() => {
       setTitleIdx((prev) => (prev + 1) % HERO_TITLES.length);
-    }, 4500);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [introCompleted]);
@@ -432,7 +432,7 @@ export function Hero() {
           return (
             <div
               key={slot.id}
-              className={`animate-float-slow absolute ${slot.positionClass} w-44 xl:w-48 h-[200px] xl:h-[210px] rounded-[22px] ${slot.bgColor} p-3.5 shadow-2xl text-left flex flex-col justify-between transition-all duration-500 backdrop-blur-sm ${isEntered && !isExiting
+              className={`animate-float-slow absolute hero-floating-card ${slot.positionClass} w-44 xl:w-48 h-[200px] xl:h-[210px] rounded-[22px] p-3.5 shadow-[0_8px_30px_rgba(0,0,0,0.05),inset_0_1px_1px_rgba(255,255,255,0.7)] text-left flex flex-col justify-between backdrop-blur-md bg-white/75 border border-black/[0.08] transition-all duration-500 ${isEntered && !isExiting
                 ? "opacity-100 scale-100 translate-y-0"
                 : "opacity-0 scale-90 -translate-y-4"
                 }`}
@@ -441,25 +441,28 @@ export function Hero() {
               {/* Card Top / Company Header */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="flex size-7 items-center justify-center rounded-full bg-[#F4F5F8] border border-black/[0.06] shadow-xs">
+                  <div className="flex size-7 items-center justify-center rounded-full bg-white border border-black/[0.06] shadow-2xs">
                     <CompanyIcon type={profile.iconType} />
                   </div>
-                  <span className="rounded-full px-2.5 py-0.5 text-[11px] font-bold tracking-wide bg-[#F4F5F8] text-ink border border-black/[0.06]">
+                  <span className="text-[12px] font-bold text-ink tracking-tight">
                     {profile.company}
                   </span>
                 </div>
                 {/* Purple Top Right Dot */}
-                <span className="size-2 rounded-full bg-brand ring-2 ring-brand/20 shadow-[0_0_6px_rgba(109,40,217,0.35)]" />
+                <span className="status-dot size-2 rounded-full bg-brand ring-2 ring-brand/20 shadow-[0_0_6px_rgba(109,40,217,0.35)] transition-all duration-300" />
               </div>
 
-              {/* Card Middle / Benchmark Metric Off-White Box */}
-              <div className="rounded-xl bg-[#F7F8FA] p-2 border border-black/[0.06]">
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-ink-muted">
+              {/* Card Middle / Benchmark Metric Gradient Box */}
+              <div className="rounded-xl bg-gradient-to-br from-white/95 to-[#F7F8FA] p-2 border border-black/[0.05] shadow-2xs">
+                <p className="text-[9.5px] font-bold uppercase tracking-wider text-ink-soft">
                   {profile.packageOrBand}
                 </p>
-                <div className="mt-0.5 flex items-center gap-1.5">
-                  <span className="size-1.5 rounded-full bg-emerald-500" />
-                  <span className="text-[12px] font-bold text-ink">
+                <div className="mt-1 flex items-center gap-1.5">
+                  <span className="relative flex size-1.5">
+                    <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex size-1.5 rounded-full bg-emerald-500" />
+                  </span>
+                  <span className="text-[11.5px] font-bold text-ink tracking-tight leading-none">
                     {profile.metric}
                   </span>
                 </div>
@@ -467,12 +470,15 @@ export function Hero() {
 
               {/* Card Bottom / Role Details */}
               <div className="pb-0.5">
-                <h4 className="text-[13px] font-bold leading-tight text-ink line-clamp-1">
+                <h4 className="text-[12.5px] font-bold leading-tight text-ink line-clamp-1">
                   {profile.role}
                 </h4>
-                <p className="mt-1 text-[10.5px] font-medium text-ink-soft leading-snug line-clamp-1">
-                  {profile.skills}
-                </p>
+                <div className="mt-1.5 flex items-center gap-1">
+                  <span className="text-[9.5px] inline-flex items-center gap-1 font-medium text-ink-soft bg-surface border border-rule px-1.5 py-0.5 rounded-full">
+                    <span className="size-1 rounded-full bg-ink-faint" />
+                    {profile.skills}
+                  </span>
+                </div>
               </div>
             </div>
           );
