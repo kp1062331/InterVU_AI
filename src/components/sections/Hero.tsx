@@ -2,6 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+
+declare global {
+  interface Window {
+    __skillitrixIntroHasPlayed?: boolean;
+  }
+}
+
 import { Close } from "@/components/ui/icons";
 import { Container } from "@/components/ui/Container";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -294,7 +301,7 @@ export function Hero() {
   const [introCompleted, setIntroCompleted] = useState(false);
 
   useEffect(() => {
-    const introDone = sessionStorage.getItem("skillitrix-intro-done") === "true";
+    const introDone = typeof window !== "undefined" && window.__skillitrixIntroHasPlayed === true;
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
@@ -405,7 +412,11 @@ export function Hero() {
   }, [lightboxOpen]);
 
   return (
-    <section className="relative overflow-hidden bg-paper pt-28 pb-16 sm:pt-36 sm:pb-24 font-sans" aria-label="Hero">
+    <section 
+      className="relative overflow-hidden bg-paper pt-28 pb-16 sm:pt-36 sm:pb-24 font-sans transition-opacity duration-300" 
+      style={{ opacity: introCompleted ? 1 : 0 }}
+      aria-label="Hero"
+    >
       {/* Texture Background */}
       <div className="hero-bg-texture" aria-hidden="true" />
 
@@ -526,7 +537,7 @@ export function Hero() {
         {/* 3. Hero Title with Smooth Slide-Up Fade Transition */}
         <ScrollReveal delay={100} duration={800} active={introCompleted}>
           <div className="min-h-[90px] sm:min-h-[110px] md:min-h-[120px] flex items-center justify-center">
-            <h1 
+            <h1
               key={titleIdx}
               className="max-w-4xl text-hero text-ink tracking-tight text-balance animate-title-reveal"
             >
@@ -565,103 +576,104 @@ export function Hero() {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-          {/* Assessment Screen Selector Tabs */}
-          <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
-            {ASSESSMENT_SCREENS.map((item, idx) => (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => setActiveSlide(idx)}
-                className={`flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${activeSlide === idx
-                  ? "bg-ink text-white shadow-md scale-105"
-                  : "border border-rule bg-white/90 text-ink-muted hover:bg-surface hover:text-ink"
-                  }`}
-              >
-                <span>{item.tabLabel}</span>
-                <span
-                  className={`rounded-full px-1.5 py-0.5 text-[9px] font-bold ${activeSlide === idx ? "bg-brand text-white" : "bg-rule text-ink-soft"
+            {/* Assessment Screen Selector Tabs */}
+            <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
+              {ASSESSMENT_SCREENS.map((item, idx) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setActiveSlide(idx)}
+                  className={`flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${activeSlide === idx
+                    ? "bg-ink text-white shadow-md scale-105"
+                    : "border border-rule bg-white/90 text-ink-muted hover:bg-surface hover:text-ink"
                     }`}
                 >
-                  {item.badge}
-                </span>
-              </button>
-            ))}
-          </div>
-
-          {/* Screen Display Container */}
-          <div className="parallax-drift overflow-hidden rounded-2xl border border-rule bg-paper shadow-2xl transition-transform duration-500 hover:rotate-x-0 text-left">
-            {/* Browser Chrome Header */}
-            <div className="flex items-center justify-between border-b border-rule bg-surface px-4 py-3">
-              <div className="flex items-center gap-2">
-                <span className="size-3 rounded-full bg-rose-400" />
-                <span className="size-3 rounded-full bg-amber-400" />
-                <span className="size-3 rounded-full bg-emerald-400" />
-              </div>
-              <div className="flex items-center gap-2 rounded-md border border-rule bg-paper px-4 py-1 font-mono text-xs text-ink-faint">
-                <span className="text-emerald-500">🔒</span>
-                <span>skillitrix.com/assessment/{ASSESSMENT_SCREENS[activeSlide].id}</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <button
-                  type="button"
-                  onClick={() =>
-                    setActiveSlide(
-                      (prev) => (prev - 1 + ASSESSMENT_SCREENS.length) % ASSESSMENT_SCREENS.length
-                    )
-                  }
-                  className="flex size-7 items-center justify-center rounded-md border border-rule bg-white text-xs font-bold text-ink-muted hover:bg-surface"
-                  aria-label="Previous assessment screen"
-                >
-                  ‹
-                </button>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setActiveSlide((prev) => (prev + 1) % ASSESSMENT_SCREENS.length)
-                  }
-                  className="flex size-7 items-center justify-center rounded-md border border-rule bg-white text-xs font-bold text-ink-muted hover:bg-surface"
-                  aria-label="Next assessment screen"
-                >
-                  ›
-                </button>
-              </div>
-            </div>
-
-            {/* Screen Content */}
-            <div className="relative w-full aspect-video min-h-[300px] sm:min-h-[400px] md:min-h-[500px] bg-[#0C0E14] overflow-hidden transition-all duration-300">
-              <Image
-                src={ASSESSMENT_SCREENS[activeSlide].image}
-                alt={ASSESSMENT_SCREENS[activeSlide].title}
-                fill
-                unoptimized
-                className="object-cover object-top select-none"
-                priority={activeSlide === 0}
-              />
-            </div>
-
-            {/* Carousel Progress & Footer Indicator */}
-            <div className="flex flex-wrap items-center justify-between border-t border-rule bg-white px-4 py-2.5 text-xs text-ink-muted">
-              <div className="flex items-center gap-2">
-                <span className="font-semibold text-ink">{ASSESSMENT_SCREENS[activeSlide].title}</span>
-                <span className="hidden sm:inline text-ink-soft">— {ASSESSMENT_SCREENS[activeSlide].description}</span>
-              </div>
-              <div className="flex items-center gap-1.5 ml-auto">
-                {ASSESSMENT_SCREENS.map((_, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setActiveSlide(idx)}
-                    className={`h-1.5 rounded-full transition-all ${activeSlide === idx ? "w-6 bg-brand" : "w-1.5 bg-rule hover:bg-rule-strong"
+                  <span>{item.tabLabel}</span>
+                  <span
+                    className={`rounded-full px-1.5 py-0.5 text-[9px] font-bold ${activeSlide === idx ? "bg-brand text-white" : "bg-rule text-ink-soft"
                       }`}
-                    aria-label={`Jump to assessment screen ${idx + 1}`}
-                  />
-                ))}
+                  >
+                    {item.badge}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {/* Screen Display Container */}
+            <div className="parallax-drift overflow-hidden rounded-2xl border border-rule bg-paper shadow-2xl transition-transform duration-500 hover:rotate-x-0 text-left">
+              {/* Browser Chrome Header */}
+              <div className="flex items-center justify-between border-b border-rule bg-surface px-4 py-3">
+                <div className="flex items-center gap-2">
+                  <span className="size-3 rounded-full bg-rose-400" />
+                  <span className="size-3 rounded-full bg-amber-400" />
+                  <span className="size-3 rounded-full bg-emerald-400" />
+                </div>
+                <div className="flex items-center gap-2 rounded-md border border-rule bg-paper px-4 py-1 font-mono text-xs text-ink-faint">
+                  <span className="text-emerald-500">🔒</span>
+                  <span>skillitrix.com/assessment/{ASSESSMENT_SCREENS[activeSlide].id}</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setActiveSlide(
+                        (prev) => (prev - 1 + ASSESSMENT_SCREENS.length) % ASSESSMENT_SCREENS.length
+                      )
+                    }
+                    className="flex size-7 items-center justify-center rounded-md border border-rule bg-white text-xs font-bold text-ink-muted hover:bg-surface"
+                    aria-label="Previous assessment screen"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setActiveSlide((prev) => (prev + 1) % ASSESSMENT_SCREENS.length)
+                    }
+                    className="flex size-7 items-center justify-center rounded-md border border-rule bg-white text-xs font-bold text-ink-muted hover:bg-surface"
+                    aria-label="Next assessment screen"
+                  >
+                    ›
+                  </button>
+                </div>
+              </div>
+
+              {/* Screen Content */}
+              <div className="w-full bg-[#0C0E14] overflow-hidden transition-all duration-300">
+                <Image
+                  src={ASSESSMENT_SCREENS[activeSlide].image}
+                  alt={ASSESSMENT_SCREENS[activeSlide].title}
+                  width={1920}
+                  height={1080}
+                  unoptimized
+                  className="w-full h-auto block select-none"
+                  priority={activeSlide === 0}
+                />
+              </div>
+
+              {/* Carousel Progress & Footer Indicator */}
+              <div className="flex flex-wrap items-center justify-between border-t border-rule bg-white px-4 py-2.5 text-xs text-ink-muted">
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold text-ink">{ASSESSMENT_SCREENS[activeSlide].title}</span>
+                  <span className="hidden sm:inline text-ink-soft">— {ASSESSMENT_SCREENS[activeSlide].description}</span>
+                </div>
+                <div className="flex items-center gap-1.5 ml-auto">
+                  {ASSESSMENT_SCREENS.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => setActiveSlide(idx)}
+                      className={`h-1.5 rounded-full transition-all ${activeSlide === idx ? "w-6 bg-brand" : "w-1.5 bg-rule hover:bg-rule-strong"
+                        }`}
+                      aria-label={`Jump to assessment screen ${idx + 1}`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </ScrollReveal>
-    </Container>
+        </ScrollReveal>
+      </Container>
 
       {lightboxOpen && (
         <div

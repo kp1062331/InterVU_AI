@@ -3,6 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
+declare global {
+  interface Window {
+    __skillitrixIntroHasPlayed?: boolean;
+  }
+}
+
 /**
  * A brief brand intro shown once per browser session, before the home page
  * content underneath. Four phrases cube-rotate through on one axis (a real
@@ -35,7 +41,7 @@ export function IntroSplash() {
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const introDone = sessionStorage.getItem("skillitrix-intro-done") === "true";
+    const introDone = window.__skillitrixIntroHasPlayed === true;
 
     if (reduced || introDone) {
       Promise.resolve().then(() => {
@@ -51,7 +57,7 @@ export function IntroSplash() {
     timers.current.push(
       setTimeout(() => {
         setPhase("done");
-        sessionStorage.setItem("skillitrix-intro-done", "true");
+        window.__skillitrixIntroHasPlayed = true;
         window.dispatchEvent(new CustomEvent("intro-complete"));
       }, CUBE_MS + REVEAL_MS + EXIT_MS),
     );
@@ -76,7 +82,7 @@ export function IntroSplash() {
     setPhase("exit");
     setTimeout(() => {
       setPhase("done");
-      sessionStorage.setItem("skillitrix-intro-done", "true");
+      window.__skillitrixIntroHasPlayed = true;
       window.dispatchEvent(new CustomEvent("intro-complete"));
     }, EXIT_MS);
   }

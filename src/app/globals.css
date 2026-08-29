@@ -412,30 +412,42 @@
 
 /* Only set initial hidden state if JS is enabled */
 .js-enabled .reveal-transition {
-  will-change: opacity, transform;
+  will-change: opacity, transform, filter;
 }
 
 .js-enabled .reveal-fade-up {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s var(--ease-standard), transform 0.8s var(--ease-standard);
+  transform: translateY(32px);
+  filter: blur(4px);
+  transition: 
+    opacity 0.9s var(--ease-standard), 
+    transform 0.9s var(--ease-standard),
+    filter 0.9s var(--ease-standard);
 }
 
 .js-enabled .reveal-fade-in {
   opacity: 0;
-  transition: opacity 0.8s var(--ease-standard);
+  filter: blur(4px);
+  transition: 
+    opacity 0.9s var(--ease-standard),
+    filter 0.9s var(--ease-standard);
 }
 
 .js-enabled .reveal-scale-in {
   opacity: 0;
-  transform: scale(0.96);
-  transition: opacity 0.8s var(--ease-standard), transform 0.8s var(--ease-standard);
+  transform: scale(0.95) translateY(16px);
+  filter: blur(4px);
+  transition: 
+    opacity 0.95s var(--ease-standard), 
+    transform 0.95s var(--ease-standard),
+    filter 0.95s var(--ease-standard);
 }
 
 /* Revealed states */
 .js-enabled .reveal-transition.is-revealed {
   opacity: 1;
   transform: translateY(0) scale(1);
+  filter: blur(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
