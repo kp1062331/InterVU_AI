@@ -7,6 +7,7 @@ import { PricingFaq } from "@/components/sections/PricingFaq";
 import { HomeCTA } from "@/components/sections/HomeCTA";
 import { Badge } from "@/components/ui/Badge";
 import { buttonClass } from "@/components/ui/Button";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -27,30 +28,36 @@ export default function PricingPage() {
       />
 
       <Container className="pt-12 pb-24">
-        <PlanComparison />
+        <ScrollReveal>
+          <PlanComparison />
+        </ScrollReveal>
 
         <div className="mt-20 border-t border-rule pt-16">
-          <PricingFaq />
+          <ScrollReveal>
+            <PricingFaq />
+          </ScrollReveal>
         </div>
 
-        <div className="mt-16 flex flex-col items-start gap-6 rounded-2xl border border-rule bg-surface p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10 shadow-sm">
-          <div>
-            <Badge tone="brand">Enterprise & cohorts</Badge>
-            <h3 className="text-head text-ink mt-3">
-              Preparing a bootcamp or university cohort?
-            </h3>
-            <p className="mt-1 max-w-lg text-sm text-ink-soft">
-              Cohort dashboards, custom question packs, SSO, and volume pricing
-              for teams over 25 seats.
-            </p>
+        <ScrollReveal delay={150} duration={800}>
+          <div className="mt-16 flex flex-col items-start gap-6 rounded-2xl border border-rule bg-surface p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10 shadow-sm">
+            <div>
+              <Badge tone="brand">Enterprise & cohorts</Badge>
+              <h3 className="text-head text-ink mt-3">
+                Preparing a bootcamp or university cohort?
+              </h3>
+              <p className="mt-1 max-w-lg text-sm text-ink-soft">
+                Cohort dashboards, custom question packs, SSO, and volume pricing
+                for teams over 25 seats.
+              </p>
+            </div>
+            <Link
+              href="/contact"
+              className={buttonClass({ variant: "primary", size: "md" })}
+            >
+              Contact sales
+            </Link>
           </div>
-          <Link
-            href="/contact"
-            className={buttonClass({ variant: "primary", size: "md" })}
-          >
-            Contact sales
-          </Link>
-        </div>
+        </ScrollReveal>
 
         <p className="mt-10 text-center text-sm text-ink-soft">
           Want to explore our question tracks?{" "}

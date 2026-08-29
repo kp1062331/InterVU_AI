@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 interface PageHeaderProps {
   eyebrow: string;
@@ -27,6 +28,7 @@ export function PageHeader({
             src={imageSrc}
             alt={imageAlt}
             fill
+            unoptimized
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover object-center lg:object-right"
             priority
@@ -39,7 +41,7 @@ export function PageHeader({
         </div>
       )}
       <Container className="relative z-10 pt-28 pb-12 sm:pt-32 sm:pb-16">
-        <div className="flex flex-col items-start lg:w-3/5 lg:pr-10">
+        <ScrollReveal className="flex flex-col items-start lg:w-3/5 lg:pr-10">
           <p className="eyebrow">{eyebrow}</p>
           <h1 className="mt-3 max-w-3xl text-hero text-ink tracking-tight">
             {title}
@@ -50,7 +52,7 @@ export function PageHeader({
             </p>
           )}
           {meta && <p className="mt-4 text-xs font-medium text-ink-faint">{meta}</p>}
-        </div>
+        </ScrollReveal>
       </Container>
     </div>
   );

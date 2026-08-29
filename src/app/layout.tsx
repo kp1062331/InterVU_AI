@@ -73,7 +73,15 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${plusJakarta.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add('js-enabled')`,
+          }}
+        />
+      </head>
       <body className="bg-paper text-ink-muted font-sans antialiased">
         <SmoothScrollProvider>
           <a

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { ArrowRight } from "@/components/ui/icons";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export function HomeCTA() {
   return (
@@ -11,6 +12,7 @@ export function HomeCTA() {
           src="/images/home-cta-bg.jpg"
           alt="Student taking an MNC placement assessment test"
           fill
+          unoptimized
           sizes="(max-width: 1024px) 100vw, 50vw"
           className="object-cover object-center lg:object-right"
           priority
@@ -23,7 +25,7 @@ export function HomeCTA() {
       </div>
 
       <Container className="relative z-10">
-        <div className="lg:w-3/5 lg:pr-8">
+        <ScrollReveal className="lg:w-3/5 lg:pr-8">
           <p className="text-xs font-semibold uppercase tracking-wider text-brand-tint/80">
             Placement Prep Benchmark
           </p>
@@ -64,7 +66,7 @@ export function HomeCTA() {
             <span aria-hidden="true">·</span>
             <span className="figure text-white/90">75,000+ tests scored</span>
           </div>
-        </div>
+        </ScrollReveal>
       </Container>
     </section>
   );

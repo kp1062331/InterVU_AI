@@ -47,7 +47,7 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => {
-    setMenuOpen(false);
+    Promise.resolve().then(() => setMenuOpen(false));
   }, [pathname]);
 
   useEffect(() => {

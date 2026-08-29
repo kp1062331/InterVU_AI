@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { IntroSplash } from "@/components/IntroSplash";
 import { Hero } from "@/components/sections/Hero";
 import { AboutSection } from "@/components/sections/AboutSection";
-import { Features } from "@/components/sections/Features";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Coverage } from "@/components/sections/Coverage";
 import { HomeCTA } from "@/components/sections/HomeCTA";

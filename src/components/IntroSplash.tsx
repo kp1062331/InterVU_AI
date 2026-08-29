@@ -35,20 +35,30 @@ export function IntroSplash() {
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) {
-      setPhase("done");
+    const introDone = sessionStorage.getItem("skillitrix-intro-done") === "true";
+
+    if (reduced || introDone) {
+      Promise.resolve().then(() => {
+        setPhase("done");
+        window.dispatchEvent(new CustomEvent("intro-complete"));
+      });
       return;
     }
 
-    setPhase("cube");
+    Promise.resolve().then(() => setPhase("cube"));
     timers.current.push(setTimeout(() => setPhase("reveal"), CUBE_MS));
     timers.current.push(setTimeout(() => setPhase("exit"), CUBE_MS + REVEAL_MS));
     timers.current.push(
-      setTimeout(() => setPhase("done"), CUBE_MS + REVEAL_MS + EXIT_MS),
+      setTimeout(() => {
+        setPhase("done");
+        sessionStorage.setItem("skillitrix-intro-done", "true");
+        window.dispatchEvent(new CustomEvent("intro-complete"));
+      }, CUBE_MS + REVEAL_MS + EXIT_MS),
     );
 
+    const currentTimers = timers.current;
     return () => {
-      timers.current.forEach(clearTimeout);
+      currentTimers.forEach(clearTimeout);
     };
   }, []);
 
@@ -64,7 +74,11 @@ export function IntroSplash() {
   function skip() {
     timers.current.forEach(clearTimeout);
     setPhase("exit");
-    setTimeout(() => setPhase("done"), EXIT_MS);
+    setTimeout(() => {
+      setPhase("done");
+      sessionStorage.setItem("skillitrix-intro-done", "true");
+      window.dispatchEvent(new CustomEvent("intro-complete"));
+    }, EXIT_MS);
   }
 
   if (phase === "idle" || phase === "done") return null;
@@ -111,6 +125,7 @@ export function IntroSplash() {
             alt="SkillitriX"
             width={72}
             height={72}
+            unoptimized
             className="size-12 sm:size-16 object-contain drop-shadow-xl"
             priority
           />

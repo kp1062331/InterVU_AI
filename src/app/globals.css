@@ -245,16 +245,29 @@
    Hero Circular Dotted Background & Floating Elements
    ========================================================================== */
 
-.hero-circular-dots {
+.hero-bg-texture {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/hero-bg-texture.png');
+  background-repeat: repeat;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-grid-lines {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 950px;
-  background-image: radial-gradient(circle, rgba(109, 40, 217, 0.22) 1.5px, transparent 1.5px);
-  background-size: 24px 24px;
-  mask-image: radial-gradient(circle at 50% 32%, black 25%, transparent 75%);
-  -webkit-mask-image: radial-gradient(circle at 50% 32%, black 25%, transparent 75%);
+  height: 900px;
+  background-image: 
+    linear-gradient(to right, rgba(109, 40, 217, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(109, 40, 217, 0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: center top;
+  mask-image: radial-gradient(circle at 50% 28%, black 15%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 28%, black 15%, transparent 80%);
   pointer-events: none;
 }
 
@@ -388,5 +401,79 @@
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+/* ==========================================================================
+   Scroll Reveal System — progressive enhancement.
+   If Javascript is disabled or user prefers reduced motion, elements are fully
+   visible. The .js-enabled class is added to <html> on load.
+   ========================================================================== */
+
+/* Only set initial hidden state if JS is enabled */
+.js-enabled .reveal-transition {
+  will-change: opacity, transform;
+}
+
+.js-enabled .reveal-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s var(--ease-standard), transform 0.8s var(--ease-standard);
+}
+
+.js-enabled .reveal-fade-in {
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-standard);
+}
+
+.js-enabled .reveal-scale-in {
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.8s var(--ease-standard), transform 0.8s var(--ease-standard);
+}
+
+/* Revealed states */
+.js-enabled .reveal-transition.is-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-enabled .reveal-fade-up,
+  .js-enabled .reveal-fade-in,
+  .js-enabled .reveal-scale-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   Hero Title Cross-Fade/Slide-up Animation
+   ========================================================================== */
+
+@keyframes title-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.animate-title-reveal {
+  animation: title-reveal 0.8s var(--ease-standard) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-title-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
   }
 }

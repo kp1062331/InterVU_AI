@@ -17,6 +17,7 @@ export function Wordmark({
         alt="SkillitriX"
         width={240}
         height={65}
+        unoptimized
         className={cn(
           "h-9 sm:h-11.5 w-auto object-contain transition-opacity hover:opacity-90",
           imgClassName,

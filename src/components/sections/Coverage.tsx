@@ -1,5 +1,6 @@
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { ArrowRight, Check } from "@/components/ui/icons";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 interface CompanyAssessment {
   name: string;
@@ -43,84 +44,88 @@ const companyData: CompanyAssessment[] = [
 export function Coverage() {
   return (
     <Section id="coverage" tone="paper" divided aria-labelledby="coverage-heading">
-      <SectionHeading
-        eyebrow="Dynamic Question Bank"
-        titleId="coverage-heading"
-        title="Same company. New test. Every time."
-        lede="Practice with company-specific assessments built around the test patterns and skills relevant to each hiring process. Every new attempt gives you a different set, so you can keep practicing without repeating the same questions."
-      />
+      <ScrollReveal>
+        <SectionHeading
+          eyebrow="Dynamic Question Bank"
+          titleId="coverage-heading"
+          title="Same company. New test. Every time."
+          lede="Practice with company-specific assessments built around the test patterns and skills relevant to each hiring process. Every new attempt gives you a different set, so you can keep practicing without repeating the same questions."
+        />
+      </ScrollReveal>
 
       {/* Structured Table of Company Assessments */}
-      <div className="mt-12 overflow-hidden rounded-2xl border border-rule bg-white shadow-xl shadow-black/5">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="border-b border-rule bg-surface/80 text-xs font-bold uppercase tracking-wider text-ink-muted">
-                <th className="py-4 px-6">Company</th>
-                <th className="py-4 px-6">Assessment Focus</th>
-                <th className="py-4 px-6 text-right">Action</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-rule/70 text-sm">
-              {companyData.map((row) => (
-                <tr
-                  key={row.name}
-                  className="group hover:bg-surface/50 transition-colors duration-150"
-                >
-                  <td className="py-4 px-6 font-bold text-ink">
-                    <div className="flex items-center gap-3">
-                      <span className="flex size-8 items-center justify-center rounded-lg bg-ink text-xs font-bold text-white shadow-xs group-hover:bg-brand transition-colors">
-                        {row.name[0]}
-                      </span>
-                      <div>
-                        <span className="text-sm font-bold text-ink block">{row.name}</span>
-                        <span className="text-[10px] font-semibold text-brand sm:hidden block">
-                          {row.badge}
-                        </span>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="py-4 px-6">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/8 px-3 py-1 text-xs font-semibold text-brand border border-brand/20">
-                      <Check className="size-3 text-brand" />
-                      {row.focus}
-                    </span>
-                  </td>
-                  <td className="py-4 px-6 text-right">
-                    <a
-                      href="https://intervu-frontend.vercel.app/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs font-bold text-ink hover:text-brand transition-colors"
-                    >
-                      Practice
-                      <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
-                    </a>
-                  </td>
+      <ScrollReveal delay={100} duration={800}>
+        <div className="mt-12 overflow-hidden rounded-2xl border border-rule bg-white shadow-xl shadow-black/5">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-rule bg-surface/80 text-xs font-bold uppercase tracking-wider text-ink-muted">
+                  <th className="py-4 px-6">Company</th>
+                  <th className="py-4 px-6">Assessment Focus</th>
+                  <th className="py-4 px-6 text-right">Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Table Footer Banner */}
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-rule bg-surface/50 px-6 py-4 text-xs text-ink-soft">
-          <div className="flex items-center gap-2">
-            <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="font-semibold text-ink">
-              All assessment sets refreshed weekly with latest 2026 hiring patterns.
-            </span>
+              </thead>
+              <tbody className="divide-y divide-rule/70 text-sm">
+                {companyData.map((row) => (
+                  <tr
+                    key={row.name}
+                    className="group hover:bg-surface/50 transition-colors duration-150"
+                  >
+                    <td className="py-4 px-6 font-bold text-ink">
+                      <div className="flex items-center gap-3">
+                        <span className="flex size-8 items-center justify-center rounded-lg bg-ink text-xs font-bold text-white shadow-xs group-hover:bg-brand transition-colors">
+                          {row.name[0]}
+                        </span>
+                        <div>
+                          <span className="text-sm font-bold text-ink block">{row.name}</span>
+                          <span className="text-[10px] font-semibold text-brand sm:hidden block">
+                            {row.badge}
+                          </span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="py-4 px-6">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/8 px-3 py-1 text-xs font-semibold text-brand border border-brand/20">
+                        <Check className="size-3 text-brand" />
+                        {row.focus}
+                      </span>
+                    </td>
+                    <td className="py-4 px-6 text-right">
+                      <a
+                        href="https://intervu-frontend.vercel.app/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-bold text-ink hover:text-brand transition-colors"
+                      >
+                        Practice
+                        <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <a
-            href="https://intervu-frontend.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-bold text-brand hover:underline"
-          >
-            Explore full company question bank →
-          </a>
+
+          {/* Table Footer Banner */}
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-rule bg-surface/50 px-6 py-4 text-xs text-ink-soft">
+            <div className="flex items-center gap-2">
+              <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="font-semibold text-ink">
+                All assessment sets refreshed weekly with latest 2026 hiring patterns.
+              </span>
+            </div>
+            <a
+              href="https://intervu-frontend.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-brand hover:underline"
+            >
+              Explore full company question bank →
+            </a>
+          </div>
         </div>
-      </div>
+      </ScrollReveal>
     </Section>
   );
 }

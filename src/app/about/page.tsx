@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { HomeCTA } from "@/components/sections/HomeCTA";
 import type { TeamMember } from "@/types";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "About",
@@ -57,6 +58,7 @@ export default function AboutPage() {
             src="/images/about-hero-bg.jpg"
             alt="Skillitrix engineering team collaborating on interview evaluation systems"
             fill
+            unoptimized
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover object-center lg:object-right"
             priority
@@ -69,7 +71,7 @@ export default function AboutPage() {
         </div>
 
         <Container className="relative z-10">
-          <div className="flex flex-col items-start lg:w-3/5 lg:pr-10">
+          <ScrollReveal className="flex flex-col items-start lg:w-3/5 lg:pr-10">
             <p className="eyebrow">About Skillitrix</p>
             <h1 className="mt-4 max-w-3xl text-hero text-ink tracking-tight">
               We built the AI interview coach we wished we had during our own job
@@ -81,66 +83,76 @@ export default function AboutPage() {
               hiring managers watching talented engineers struggle under exam
               pressure.
             </p>
-          </div>
+          </ScrollReveal>
         </Container>
       </section>
 
       <Container className="py-16 sm:py-24">
         <section aria-labelledby="beliefs">
-          <p className="eyebrow">Core principles</p>
-          <h2 id="beliefs" className="mt-3 text-title text-ink tracking-tight">
-            What we believe
-          </h2>
+          <ScrollReveal>
+            <p className="eyebrow">Core principles</p>
+            <h2 id="beliefs" className="mt-3 text-title text-ink tracking-tight">
+              What we believe
+            </h2>
+          </ScrollReveal>
           <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-3">
             {beliefs.map((belief, index) => (
-              <div key={belief.title}>
-                <span className="figure block text-sm text-brand">0{index + 1}</span>
-                <h3 className="text-head text-ink mt-2">{belief.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{belief.body}</p>
-              </div>
+              <ScrollReveal key={belief.title} delay={index * 100} duration={700}>
+                <div>
+                  <span className="figure block text-sm text-brand">0{index + 1}</span>
+                  <h3 className="text-head text-ink mt-2">{belief.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">{belief.body}</p>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
         </section>
 
         <section aria-labelledby="team" className="mt-20 border-t border-rule pt-16">
-          <p className="eyebrow">Leadership</p>
-          <h2 id="team" className="mt-3 text-title text-ink tracking-tight">
-            The team
-          </h2>
+          <ScrollReveal>
+            <p className="eyebrow">Leadership</p>
+            <h2 id="team" className="mt-3 text-title text-ink tracking-tight">
+              The team
+            </h2>
+          </ScrollReveal>
           <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-3">
-            {team.map((member) => (
-              <div key={member.name}>
-                <div className="flex items-center gap-3">
-                  <div className="flex size-11 items-center justify-center rounded-full bg-ink text-sm font-semibold text-white">
-                    {member.initials}
+            {team.map((member, index) => (
+              <ScrollReveal key={member.name} delay={index * 100} duration={700}>
+                <div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-11 items-center justify-center rounded-full bg-ink text-sm font-semibold text-white">
+                      {member.initials}
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-semibold text-ink">{member.name}</h3>
+                      <p className="text-xs text-brand">{member.role}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-sm font-semibold text-ink">{member.name}</h3>
-                    <p className="text-xs text-brand">{member.role}</p>
-                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-soft">{member.bio}</p>
                 </div>
-                <p className="mt-3 text-sm leading-relaxed text-ink-soft">{member.bio}</p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </section>
 
-        <div className="mt-20 flex flex-col items-start gap-6 rounded-lg border border-rule bg-surface p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
-          <div>
-            <Badge tone="positive">We are hiring</Badge>
-            <h3 className="text-head text-ink mt-3">Join the Skillitrix team</h3>
-            <p className="mt-1 max-w-lg text-sm text-ink-soft">
-              Building AI evaluation systems that help candidates land their
-              dream roles.
-            </p>
+        <ScrollReveal delay={150} duration={800}>
+          <div className="mt-20 flex flex-col items-start gap-6 rounded-lg border border-rule bg-surface p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
+            <div>
+              <Badge tone="positive">We are hiring</Badge>
+              <h3 className="text-head text-ink mt-3">Join the Skillitrix team</h3>
+              <p className="mt-1 max-w-lg text-sm text-ink-soft">
+                Building AI evaluation systems that help candidates land their
+                dream roles.
+              </p>
+            </div>
+            <a
+              href="mailto:jobs@skillitrix.com"
+              className="shrink-0 text-sm font-semibold text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand"
+            >
+              jobs@skillitrix.com
+            </a>
           </div>
-          <a
-            href="mailto:jobs@skillitrix.com"
-            className="shrink-0 text-sm font-semibold text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand"
-          >
-            jobs@skillitrix.com
-          </a>
-        </div>
+        </ScrollReveal>
       </Container>
 
       <HomeCTA />
