@@ -35,11 +35,9 @@ export default function PricingPage() {
           <Breadcrumbs items={[{ name: "Pricing", path: "/pricing" }]} />
         </ScrollReveal>
 
-        <div className="pt-8">
-          <ScrollReveal>
-            <PlanComparison />
-          </ScrollReveal>
-        </div>
+        <ScrollReveal>
+          <PlanComparison />
+        </ScrollReveal>
 
         <div className="mt-20 border-t border-rule pt-16">
           <ScrollReveal>

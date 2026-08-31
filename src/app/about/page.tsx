@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Badge } from "@/components/ui/Badge";
 import { HomeCTA } from "@/components/sections/HomeCTA";
 import type { TeamMember } from "@/types";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { buildMetadata } from "@/lib/seo";
 
@@ -94,7 +94,7 @@ export default function AboutPage() {
           <Breadcrumbs items={[{ name: "About", path: "/about" }]} />
         </ScrollReveal>
 
-        <section aria-labelledby="beliefs" className="pt-8 sm:pt-12">
+        <section aria-labelledby="beliefs" className="mt-8 sm:mt-12">
           <ScrollReveal>
             <p className="eyebrow">Core principles</p>
             <h2 id="beliefs" className="mt-3 text-title text-ink tracking-tight">

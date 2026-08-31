@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { HomeCTA } from "@/components/sections/HomeCTA";
 import { siteConfig } from "@/config/site";
@@ -29,7 +30,9 @@ export default function ContactPage() {
         lede="Questions about plans, cohort rollouts, or your practice score reports? We respond quickly."
       />
 
-      <Container className="pt-12 pb-24">
+      <Container className="pt-4 pb-24">
+        <Breadcrumbs items={[{ name: "Contact", path: "/contact" }]} />
+
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-16">
           <div className="rounded-lg border border-rule bg-surface p-6 sm:p-8">
             <ContactForm />

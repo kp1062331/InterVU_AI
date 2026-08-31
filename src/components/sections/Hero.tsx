@@ -294,15 +294,7 @@ export function Hero() {
   const [introCompleted, setIntroCompleted] = useState(false);
 
   useEffect(() => {
-    let introDone = false;
-    try {
-      introDone =
-        sessionStorage.getItem("skillitrix-intro-done") === "true" ||
-        window.__skillitrixIntroHasPlayed === true;
-    } catch {
-      introDone = window.__skillitrixIntroHasPlayed === true;
-    }
-
+    const introDone = sessionStorage.getItem("skillitrix-intro-done") === "true";
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
@@ -560,29 +552,6 @@ export function Hero() {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            {/* Assessment Screen Selector Tabs */}
-            <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
-              {ASSESSMENT_SCREENS.map((item, idx) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setActiveSlide(idx)}
-                  className={`flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${activeSlide === idx
-                    ? "bg-ink text-white shadow-md scale-105"
-                    : "border border-rule bg-white/90 text-ink-muted hover:bg-surface hover:text-ink"
-                    }`}
-                >
-                  <span>{item.tabLabel}</span>
-                  <span
-                    className={`rounded-full px-1.5 py-0.5 text-[9px] font-bold ${activeSlide === idx ? "bg-[#4c1d95] text-white" : "bg-rule text-ink-soft"
-                      }`}
-                  >
-                    {item.badge}
-                  </span>
-                </button>
-              ))}
-            </div>
-
             {/* Screen Display Container */}
             <div className="parallax-drift overflow-hidden rounded-2xl border border-rule bg-paper shadow-2xl transition-transform duration-500 hover:rotate-x-0 text-left">
               {/* Browser Chrome Header */}
