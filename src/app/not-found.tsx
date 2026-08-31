@@ -13,7 +13,7 @@ const popularLinks = [
   {
     title: "Assessment Tracks",
     description: "Browse company-oriented tracks for TCS, Infosys, Stripe, and Big Tech.",
-    href: "/#coverage",
+    href: "/companies",
     icon: Layers,
   },
   {

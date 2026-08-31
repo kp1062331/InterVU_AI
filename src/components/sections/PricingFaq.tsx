@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ChevronDown } from "@/components/ui/icons";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqPageJsonLd } from "@/lib/seo";
 
 const faqs = [
   {
@@ -37,6 +39,7 @@ const faqs = [
 export function PricingFaq() {
   return (
     <div className="grid gap-8 md:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] md:gap-16 font-sans">
+      <JsonLd data={faqPageJsonLd(faqs.map((faq) => ({ question: faq.question, answer: faq.answer })))} />
       <div>
         <h2 className="text-title text-ink">Before you decide</h2>
         <p className="mt-3 text-sm text-ink-soft">

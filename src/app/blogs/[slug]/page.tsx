@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { HomeCTA } from "@/components/sections/HomeCTA";
 import { BLOG_POSTS } from "@/lib/blogs";
+import { COMPANIES } from "@/lib/companies";
 import { ArrowRight, Clock, Check } from "@/components/ui/icons";
+import { buildMetadata, articleJsonLd, toISODate } from "@/lib/seo";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -20,10 +24,13 @@ export async function generateMetadata({ params }: Props) {
   const post = BLOG_POSTS.find((p) => p.slug === slug);
   if (!post) return { title: "Blog Post Not Found — Skillitrix" };
 
-  return {
+  return buildMetadata({
     title: `${post.title} — Skillitrix`,
     description: post.excerpt,
-  };
+    path: `/blogs/${post.slug}`,
+    type: "article",
+    publishedTime: toISODate(post.publishedAt),
+  });
 }
 
 export default async function BlogPostPage({ params }: Props) {
@@ -35,24 +42,22 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   const relatedPosts = BLOG_POSTS.filter((p) => p.slug !== slug).slice(0, 2);
+  const relatedCompany = COMPANIES.find((company) => company.relatedBlogSlugs.includes(slug));
 
   return (
     <main className="min-h-screen bg-paper pt-28 pb-20 font-sans">
+      <JsonLd
+        data={articleJsonLd({
+          headline: post.title,
+          description: post.excerpt,
+          path: `/blogs/${post.slug}`,
+          datePublished: toISODate(post.publishedAt),
+          authorName: post.author.name,
+        })}
+      />
+
       <Container className="max-w-4xl pt-4">
-        {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-ink-muted">
-          <Link href="/" className="hover:text-brand transition-colors">
-            Home
-          </Link>
-          <span>/</span>
-          <Link href="/blogs" className="hover:text-brand transition-colors">
-            Blogs
-          </Link>
-          <span>/</span>
-          <span className="text-ink font-semibold truncate max-w-[240px] sm:max-w-md">
-            {post.title}
-          </span>
-        </nav>
+        <Breadcrumbs items={[{ name: "Blogs", path: "/blogs" }, { name: post.title, path: `/blogs/${post.slug}` }]} />
 
         {/* Article Header */}
         <header className="border-b border-rule pb-8">
@@ -134,6 +139,7 @@ export default async function BlogPostPage({ params }: Props) {
               [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-2 [&_ol]:text-ink-soft [&_ol]:mb-4
               [&_li]:text-sm [&_li]:sm:text-base
               [&_strong]:font-semibold [&_strong]:text-ink
+              [&_a]:font-semibold [&_a]:text-brand [&_a]:underline [&_a]:decoration-brand/30 [&_a]:underline-offset-4 [&_a]:hover:decoration-brand
               [&_table]:w-full [&_table]:my-6 [&_table]:border-collapse [&_table]:rounded-xl [&_table]:overflow-hidden [&_table]:border [&_table]:border-rule
               [&_th]:bg-surface [&_th]:text-xs [&_th]:font-bold [&_th]:uppercase [&_th]:tracking-wider [&_th]:p-3.5 [&_th]:text-ink [&_th]:border-b [&_th]:border-rule
               [&_td]:p-3.5 [&_td]:text-xs [&_td]:sm:text-sm [&_td]:text-ink-soft [&_td]:border-b [&_td]:border-rule/60
@@ -143,6 +149,19 @@ export default async function BlogPostPage({ params }: Props) {
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </article>
+
+        {relatedCompany && (
+          <p className="mb-10 text-sm leading-relaxed text-ink-soft">
+            Want the full picture beyond this guide? See the complete{" "}
+            <Link
+              href={`/companies/${relatedCompany.slug}`}
+              className="font-semibold text-brand hover:underline"
+            >
+              {relatedCompany.shortName} placement preparation guide
+            </Link>{" "}
+            — process, eligibility, syllabus, and commonly asked interview questions.
+          </p>
+        )}
 
         {/* In-Article Placement Test CTA Banner */}
         <section className="my-14 rounded-2xl border border-rule bg-surface p-7 sm:p-9 shadow-md">

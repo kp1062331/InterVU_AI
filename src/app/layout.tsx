@@ -4,6 +4,8 @@ import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/config/site";
 
 const inter = Inter({
@@ -88,6 +90,8 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-paper text-ink-muted font-sans antialiased">
+        <JsonLd data={organizationJsonLd()} />
+        <JsonLd data={websiteJsonLd()} />
         <SmoothScrollProvider>
           <a
             href="#main"

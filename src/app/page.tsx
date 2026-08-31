@@ -6,11 +6,13 @@ import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Coverage } from "@/components/sections/Coverage";
 import { HomeCTA } from "@/components/sections/HomeCTA";
 import { siteConfig } from "@/config/site";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: `${siteConfig.name} — ${siteConfig.tagline}`,
   description: siteConfig.description,
-};
+  path: "/",
+});
 
 export default function HomePage() {
   return (

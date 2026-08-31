@@ -5,12 +5,14 @@ import { Badge } from "@/components/ui/Badge";
 import { HomeCTA } from "@/components/sections/HomeCTA";
 import type { TeamMember } from "@/types";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About",
+export const metadata: Metadata = buildMetadata({
+  title: "About Skillitrix — Our Mission & Team",
   description:
     "Why Skillitrix exists, what we believe about interview preparation, and who is building it.",
-};
+  path: "/about",
+});
 
 const beliefs = [
   {

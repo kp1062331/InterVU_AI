@@ -406,22 +406,8 @@ export function Hero() {
   }, [lightboxOpen]);
 
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden bg-paper py-28 sm:py-46 font-sans" aria-label="Hero">
-      {/* Texture Background */}
-      <div className="hero-bg-texture" aria-hidden="true" />
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-white py-28 sm:py-46 font-sans" aria-label="Hero">
 
-      {/* Fine Grid Background */}
-      <div className="hero-grid-lines" aria-hidden="true" />
-
-      {/* Radial Light Glow Overlay */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 25%, rgba(109, 40, 217, 0.08) 0%, rgba(255, 255, 255, 0) 70%)",
-        }}
-        aria-hidden="true"
-      />
 
       {/* Floating MNC Job Profile Cards (z-index is strictly in the back: z-0 pointer-events-none) */}
       <div className="pointer-events-none absolute inset-x-0 top-0 bottom-0 z-0 hidden lg:block" aria-hidden="true">

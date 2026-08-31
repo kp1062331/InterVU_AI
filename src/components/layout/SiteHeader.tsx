@@ -12,7 +12,7 @@ import { Wordmark } from "./Wordmark";
 const navigation = [
   { label: "Features", href: "/#features" },
   { label: "How it works", href: "/#how-it-works" },
-  { label: "Coverage", href: "/#coverage" },
+  { label: "Companies", href: "/companies" },
   { label: "Blogs", href: "/blogs" },
   { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },

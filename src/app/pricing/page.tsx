@@ -8,12 +8,14 @@ import { HomeCTA } from "@/components/sections/HomeCTA";
 import { Badge } from "@/components/ui/Badge";
 import { buttonClass } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Pricing",
+export const metadata: Metadata = buildMetadata({
+  title: "Skillitrix Pricing — Free & Paid Placement Practice Plans",
   description:
     "Transparent pricing for candidates and hiring cohorts. Start free and upgrade when you need unlimited practice rounds.",
-};
+  path: "/pricing",
+});
 
 export default function PricingPage() {
   return (
@@ -62,7 +64,7 @@ export default function PricingPage() {
         <p className="mt-10 text-center text-sm text-ink-soft">
           Want to explore our question tracks?{" "}
           <Link
-            href="/#coverage"
+            href="/companies"
             className="font-semibold text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand"
           >
             See complete assessment coverage

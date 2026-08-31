@@ -1,14 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { HomeCTA } from "@/components/sections/HomeCTA";
 import { BLOG_POSTS } from "@/lib/blogs";
 import { ArrowRight, Clock } from "@/components/ui/icons";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Placement Preparation Blogs & Guides — Skillitrix",
   description:
     "Expert insights, company test patterns, syllabus breakdowns, and speed problem-solving strategies for TCS, Infosys, Cognizant, and Tier-1 MNCs.",
-};
+  path: "/blogs",
+});
 
 export default function BlogsPage() {
   const featuredPost = BLOG_POSTS.find((p) => p.featured) || BLOG_POSTS[0];
@@ -33,6 +37,8 @@ export default function BlogsPage() {
       </Container>
 
       <Container>
+        <Breadcrumbs items={[{ name: "Blogs", path: "/blogs" }]} />
+
         {/* Featured Post Card */}
         <section className="mb-16" aria-label="Featured article">
           <Link

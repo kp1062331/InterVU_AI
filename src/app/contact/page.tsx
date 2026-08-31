@@ -4,12 +4,14 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { HomeCTA } from "@/components/sections/HomeCTA";
 import { siteConfig } from "@/config/site";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact",
+export const metadata: Metadata = buildMetadata({
+  title: "Contact Skillitrix — Placement Prep Support",
   description:
     "Questions about plans, cohorts or the product itself. Our team replies promptly.",
-};
+  path: "/contact",
+});
 
 const rails = [
   { label: "Email", value: siteConfig.email, href: `mailto:${siteConfig.email}` },

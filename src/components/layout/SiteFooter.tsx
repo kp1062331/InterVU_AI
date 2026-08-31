@@ -67,37 +67,37 @@ export function SiteFooter() {
             </h3>
             <ul className="mt-3.5 space-y-2.5 text-sm text-ink-soft">
               <li>
-                <Link href="/#coverage" className="transition-colors hover:text-ink">
+                <Link href="/companies/tcs" className="transition-colors hover:text-ink">
                   TCS NQT
                 </Link>
               </li>
               <li>
-                <Link href="/#coverage" className="transition-colors hover:text-ink">
+                <Link href="/companies/infosys" className="transition-colors hover:text-ink">
                   Infosys
                 </Link>
               </li>
               <li>
-                <Link href="/#coverage" className="transition-colors hover:text-ink">
+                <Link href="/companies/cognizant" className="transition-colors hover:text-ink">
                   Cognizant GenC
                 </Link>
               </li>
               <li>
-                <Link href="/#coverage" className="transition-colors hover:text-ink">
+                <Link href="/companies/accenture" className="transition-colors hover:text-ink">
                   Accenture
                 </Link>
               </li>
               <li>
-                <Link href="/#coverage" className="transition-colors hover:text-ink">
+                <Link href="/companies/capgemini" className="transition-colors hover:text-ink">
                   Capgemini
                 </Link>
               </li>
               <li>
-                <Link href="/#coverage" className="transition-colors hover:text-ink">
+                <Link href="/companies/ibm" className="transition-colors hover:text-ink">
                   IBM
                 </Link>
               </li>
               <li>
-                <Link href="/#coverage" className="font-semibold text-brand transition-colors hover:underline">
+                <Link href="/companies" className="font-semibold text-brand transition-colors hover:underline">
                   More assessments →
                 </Link>
               </li>
@@ -151,6 +151,11 @@ export function SiteFooter() {
               <li>
                 <Link href="/blogs" className="font-semibold text-brand transition-colors hover:underline">
                   Blogs
+                </Link>
+              </li>
+              <li>
+                <Link href="/placement-preparation" className="transition-colors hover:text-ink">
+                  Placement prep guide
                 </Link>
               </li>
               <li>

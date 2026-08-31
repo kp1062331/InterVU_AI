@@ -1,46 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { ArrowRight, Check } from "@/components/ui/icons";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-
-interface CompanyAssessment {
-  name: string;
-  badge: string;
-  focus: string;
-}
-
-const companyData: CompanyAssessment[] = [
-  {
-    name: "TCS iON NQT",
-    badge: "National Benchmark",
-    focus: "Placement assessment",
-  },
-  {
-    name: "Infosys",
-    badge: "Specialist & SE",
-    focus: "Technical & coding",
-  },
-  {
-    name: "Cognizant",
-    badge: "GenC & GenC Next",
-    focus: "Aptitude & technical",
-  },
-  {
-    name: "Accenture",
-    badge: "Prime Assessment",
-    focus: "Coding & communication",
-  },
-  {
-    name: "Capgemini",
-    badge: "Exceller Track",
-    focus: "Pseudocode & English",
-  },
-  {
-    name: "IBM",
-    badge: "Cognitive Assessment",
-    focus: "Technical & coding",
-  },
-];
+import { COMPANIES } from "@/lib/companies";
 
 export function Coverage() {
   return (
@@ -95,28 +58,33 @@ export function Coverage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-rule/70 text-sm">
-                  {companyData.map((row) => (
+                  {COMPANIES.map((company) => (
                     <tr
-                      key={row.name}
+                      key={company.slug}
                       className="group hover:bg-surface/50 transition-colors duration-150"
                     >
                       <td className="py-4 px-6 font-bold text-ink">
-                        <div className="flex items-center gap-3">
+                        <Link
+                          href={`/companies/${company.slug}`}
+                          className="flex items-center gap-3"
+                        >
                           <span className="flex size-8 items-center justify-center rounded-lg bg-ink text-xs font-bold text-white shadow-xs group-hover:bg-brand transition-colors">
-                            {row.name[0]}
+                            {company.logoInitial}
                           </span>
                           <div>
-                            <span className="text-sm font-bold text-ink block">{row.name}</span>
+                            <span className="text-sm font-bold text-ink group-hover:text-brand transition-colors block">
+                              {company.shortName} placement preparation
+                            </span>
                             <span className="text-[10px] font-semibold text-brand sm:hidden block">
-                              {row.badge}
+                              {company.badge}
                             </span>
                           </div>
-                        </div>
+                        </Link>
                       </td>
                       <td className="py-4 px-6">
                         <span className="inline-flex items-center gap-1.5 rounded-full bg-brand/8 px-3 py-1 text-xs font-semibold text-brand border border-brand/20">
                           <Check className="size-3 text-brand" />
-                          {row.focus}
+                          {company.focus}
                         </span>
                       </td>
                       <td className="py-4 px-6 text-right">
@@ -144,14 +112,9 @@ export function Coverage() {
                   All assessment sets refreshed weekly with latest 2026 hiring patterns.
                 </span>
               </div>
-              <a
-                href="https://intervu-frontend.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-bold text-brand hover:underline"
-              >
-                Explore full company question bank →
-              </a>
+              <Link href="/companies" className="font-bold text-brand hover:underline">
+                Explore full company placement preparation guides →
+              </Link>
             </div>
           </div>
         </ScrollReveal>

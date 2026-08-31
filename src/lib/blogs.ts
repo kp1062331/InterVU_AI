@@ -102,6 +102,8 @@ int findOptimalSubarray(vector<int>& arr, int target) {
         <li><strong>Practice on full-length mock timers:</strong> Simulating the 150-minute exam pressure is the single biggest predictor of clearance.</li>
         <li><strong>Master time management in Section 1:</strong> Never spend more than 75 seconds on a single numerical question.</li>
       </ul>
+
+      <p>For the full process, eligibility criteria, and commonly asked interview questions, see the <a href="/companies/tcs">TCS placement preparation guide</a>.</p>
     `,
   },
   {
@@ -133,6 +135,8 @@ int findOptimalSubarray(vector<int>& arr, int target) {
 
       <h3>Common Pitfalls in Infosys SP Compiler</h3>
       <p>The Infosys testing environment runs on customized strict time limits (usually 1.0s for C++ and 2.0s for Java/Python). Beware of large I/O overheads — always use fast I/O in C++ (<code>cin.tie(NULL); ios_base::sync_with_stdio(false);</code>).</p>
+
+      <p>For the full hiring process across all three tracks — Systems Engineer, DSE, and Specialist Programmer — see the <a href="/companies/infosys">Infosys placement preparation guide</a>.</p>
     `,
   },
   {
@@ -180,6 +184,8 @@ int findOptimalSubarray(vector<int>& arr, int target) {
 
       <h3>Round 1: Cognitive & Technical (90 Questions in 90 Mins)</h3>
       <p>Divided into 6 distinct modules: Critical Reasoning & Problem Solving (18 Qs), Abstract Reasoning (15 Qs), English Ability (17 Qs), Common Applications & MS Office (12 Qs), Pseudocode (18 Qs), and Cloud / Network Security (10 Qs).</p>
+
+      <p>See the full <a href="/companies/accenture">Accenture placement preparation guide</a> for eligibility, the coding and communication rounds, and commonly asked interview questions.</p>
     `,
   },
   {
@@ -199,6 +205,8 @@ int findOptimalSubarray(vector<int>& arr, int target) {
     content: `
       <h2>The Unique Capgemini Game-Based Aptitude Battery</h2>
       <p>Capgemini replaced traditional quantitative MCQs with interactive <strong>Game-Based Aptitude rounds</strong> (Grid Challenge, Motion Challenge, Deductive-logical Switch Challenge, and Digit Challenge). These games measure spatial memory, focus, response latency, and inductive reasoning.</p>
+
+      <p>For the complete process, eligibility, and interview breakdown, see the <a href="/companies/capgemini">Capgemini placement preparation guide</a>.</p>
     `,
   },
   {
