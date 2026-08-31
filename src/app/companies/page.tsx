@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { HomeCTA } from "@/components/sections/HomeCTA";
 import { COMPANIES } from "@/lib/companies";
 import { buildMetadata, itemListJsonLd } from "@/lib/seo";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { ArrowRight } from "@/components/ui/icons";
 
 export const metadata: Metadata = buildMetadata({
@@ -32,57 +33,64 @@ export default function CompaniesPage() {
         eyebrow="Company-wise preparation"
         title="Placement preparation guides, by company."
         lede="Placement process, eligibility, syllabus, aptitude and coding topics, and the questions each recruiter commonly asks — for every major campus recruiter we cover."
+        imageSrc="/images/companies-hero-bg.jpg"
+        imageAlt="Corporate technology campus offices for major recruiters"
       />
 
       <Container className="pt-4 pb-24">
-        <Breadcrumbs items={[{ name: "Companies", path: "/companies" }]} />
+        <ScrollReveal delay={50} duration={600}>
+          <Breadcrumbs items={[{ name: "Companies", path: "/companies" }]} />
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {COMPANIES.map((company) => (
-            <Link
-              key={company.slug}
-              href={`/companies/${company.slug}`}
-              className="group flex flex-col justify-between rounded-2xl border border-rule bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-black/20 hover:shadow-lg"
-            >
-              <div>
-                <div className="flex items-center gap-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-ink text-xs font-bold text-white transition-colors group-hover:bg-brand">
-                    {company.logoInitial}
-                  </span>
-                  <div>
-                    <h2 className="text-base font-bold text-ink transition-colors group-hover:text-brand">
-                      {company.shortName} placement preparation
-                    </h2>
-                    <span className="text-[11px] font-semibold text-brand">
-                      {company.badge}
+          {COMPANIES.map((company, idx) => (
+            <ScrollReveal key={company.slug} delay={idx * 80} duration={650}>
+              <Link
+                href={`/companies/${company.slug}`}
+                className="group flex h-full flex-col justify-between rounded-2xl border border-rule bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-black/20 hover:shadow-lg"
+              >
+                <div>
+                  <div className="flex items-center gap-3">
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-ink text-xs font-bold text-white transition-colors group-hover:bg-brand">
+                      {company.logoInitial}
                     </span>
+                    <div>
+                      <h2 className="text-base font-bold text-ink transition-colors group-hover:text-brand">
+                        {company.shortName} placement preparation
+                      </h2>
+                      <span className="text-[11px] font-semibold text-brand">
+                        {company.badge}
+                      </span>
+                    </div>
                   </div>
+                  <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-ink-soft">
+                    {company.summary}
+                  </p>
                 </div>
-                <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-ink-soft">
-                  {company.summary}
-                </p>
-              </div>
-              <div className="mt-5 flex items-center gap-1.5 border-t border-rule/60 pt-4 text-xs font-bold text-brand">
-                <span>{company.shortName} process, syllabus &amp; interview questions</span>
-                <ArrowRight className="size-3.5 shrink-0 transition-transform group-hover:translate-x-1" />
-              </div>
-            </Link>
+                <div className="mt-5 flex items-center gap-1.5 border-t border-rule/60 pt-4 text-xs font-bold text-brand">
+                  <span>{company.shortName} process, syllabus &amp; interview questions</span>
+                  <ArrowRight className="size-3.5 shrink-0 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            </ScrollReveal>
           ))}
         </div>
 
-        <div className="mt-12 rounded-2xl border border-rule bg-surface p-6 sm:p-8">
-          <p className="text-sm leading-relaxed text-ink-soft">
-            New to campus placements or preparing across multiple companies at once? Start with the{" "}
-            <Link href="/placement-preparation" className="font-semibold text-brand hover:underline">
-              general placement preparation guide
-            </Link>{" "}
-            for the stages every drive shares, or browse the{" "}
-            <Link href="/blogs" className="font-semibold text-brand hover:underline">
-              placement preparation blog
-            </Link>{" "}
-            for deeper syllabus and test-pattern breakdowns.
-          </p>
-        </div>
+        <ScrollReveal delay={200} duration={700}>
+          <div className="mt-12 rounded-2xl border border-rule bg-surface p-6 sm:p-8">
+            <p className="text-sm leading-relaxed text-ink-soft">
+              New to campus placements or preparing across multiple companies at once? Start with the{" "}
+              <Link href="/placement-preparation" className="font-semibold text-brand hover:underline">
+                general placement preparation guide
+              </Link>{" "}
+              for the stages every drive shares, or browse the{" "}
+              <Link href="/blogs" className="font-semibold text-brand hover:underline">
+                placement preparation blog
+              </Link>{" "}
+              for deeper syllabus and test-pattern breakdowns.
+            </p>
+          </div>
+        </ScrollReveal>
       </Container>
 
       <HomeCTA />
