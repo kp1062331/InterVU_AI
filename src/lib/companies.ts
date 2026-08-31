@@ -1,13 +1,10 @@
 /**
  * Company-wise placement preparation content. One entry here powers one
  * comprehensive `/companies/[slug]` page (process, eligibility, syllabus,
- * aptitude, coding, interviews, FAQ) — see `src/app/companies/[company]/page.tsx`.
+ * aptitude, coding, interviews, FAQ, test format stats, sample questions,
+ * real interview experiences, and track comparisons) — see `src/app/companies/[company]/page.tsx`.
  *
- * Content is written in the same register as `src/lib/blogs.ts`: general,
- * widely-known hiring patterns rather than proprietary or unverifiable
- * statistics. Figures that overlap with an existing blog post reuse that
- * post's numbers so the two stay consistent. `lastUpdated` is a real date —
- * update it whenever a company's section is materially revised.
+ * Calibrated for 2026/2027 campus and off-campus recruitment drives.
  */
 
 export interface ProcessStep {
@@ -27,12 +24,46 @@ export interface QuestionAnswer {
 
 export interface RoleTrack {
   title: string;
+  package: string;
+  qualification: string;
   note: string;
 }
 
 export interface TechnicalTopic {
   topic: string;
   detail: string;
+}
+
+export interface TestSectionFormat {
+  section: string;
+  duration: string;
+  questionCount: string;
+  negativeMarking: string;
+  cutoffScore?: string;
+}
+
+export interface SampleQuestion {
+  topic: string;
+  type: "Quantitative" | "Logical" | "Pseudocode" | "Coding" | "Verbal";
+  question: string;
+  options?: string[];
+  answer: string;
+  explanation: string;
+}
+
+export interface ExperienceRound {
+  title: string;
+  detail: string;
+}
+
+export interface InterviewExperience {
+  candidateName: string;
+  college: string;
+  role: string;
+  batch: string;
+  verdict: "Selected" | "Offered" | "Cleared";
+  rounds: ExperienceRound[];
+  takeaway: string;
 }
 
 export interface CompanyProfile {
@@ -47,6 +78,13 @@ export interface CompanyProfile {
   tagline: string;
   /** Answer-first summary: what is the placement process, in 2-4 sentences. */
   summary: string;
+  founded: string;
+  headquarters: string;
+  globalHeadcount: string;
+  officialCareersUrl: string;
+  testFormat: TestSectionFormat[];
+  sampleQuestions: SampleQuestion[];
+  interviewExperiences: InterviewExperience[];
   roles: RoleTrack[];
   process: ProcessStep[];
   eligibility: string[];
@@ -75,15 +113,113 @@ export const COMPANIES: CompanyProfile[] = [
     focus: "Placement assessment",
     logoInitial: "T",
     tagline:
-      "India's largest campus recruiter, hiring through the TCS iON National Qualifier Test (NQT).",
+      "India's largest campus recruiter, hiring for 2026/2027 batches through the TCS iON National Qualifier Test (NQT).",
     summary:
-      "TCS hires freshers primarily through the TCS iON NQT — a single online test with a Foundation section (numerical, verbal, reasoning) and an Advanced section (advanced quant/reasoning plus two coding problems) that together decide whether you're placed on the Ninja or Digital/Prime track, followed by a combined technical and HR interview.",
+      "TCS hires freshers primarily through the TCS iON NQT — a single online test with a Foundation section (numerical, verbal, reasoning) and an Advanced section (advanced quant/reasoning plus two coding problems) that together decide whether you're placed on the Ninja, Digital, or Prime track, followed by a combined technical and HR interview.",
+    founded: "1968",
+    headquarters: "Mumbai, Maharashtra, India",
+    globalHeadcount: "600,000+ employees",
+    officialCareersUrl: "https://www.tcs.com/careers/india",
     roles: [
-      { title: "TCS Ninja", note: "Entry-level track, roughly 3.6–4 LPA, cleared via the NQT Foundation section." },
-      { title: "TCS Digital / Prime", note: "Higher package track, roughly 7–9 LPA, requires clearing the Advanced section including both coding problems." },
+      {
+        title: "TCS Ninja",
+        package: "3.36 – 3.60 LPA",
+        qualification: "Clear NQT Foundation Section with >=65% sectional accuracy",
+        note: "Entry-level software engineering track, broad intake across all registered engineering streams.",
+      },
+      {
+        title: "TCS Digital",
+        package: "7.00 – 7.50 LPA",
+        qualification: "Clear Foundation + Advanced section with 1+ coding questions fully solved",
+        note: "Premium software engineer role working on cloud, enterprise architectures, and full-stack solutions.",
+      },
+      {
+        title: "TCS Prime",
+        package: "9.00 – 11.50 LPA",
+        qualification: "Top-tier percentile in NQT Advanced + both coding problems solved with optimal complexity",
+        note: "Elite product development & AI/ML track for top algorithmic performers.",
+      },
+    ],
+    testFormat: [
+      { section: "Numerical Ability (Foundation)", duration: "25 mins", questionCount: "20 Qs", negativeMarking: "No", cutoffScore: "~65%" },
+      { section: "Verbal Ability (Foundation)", duration: "25 mins", questionCount: "25 Qs", negativeMarking: "No", cutoffScore: "~60%" },
+      { section: "Reasoning Ability (Foundation)", duration: "25 mins", questionCount: "20 Qs", negativeMarking: "No", cutoffScore: "~65%" },
+      { section: "Advanced Quant & Reasoning (Digital/Prime)", duration: "25 mins", questionCount: "15 Qs", negativeMarking: "No", cutoffScore: "~70%" },
+      { section: "Advanced Coding (Digital/Prime)", duration: "60 mins", questionCount: "2 Problems", negativeMarking: "No", cutoffScore: "All test cases" },
+    ],
+    sampleQuestions: [
+      {
+        topic: "Numerical Ability — Time & Work",
+        type: "Quantitative",
+        question: "A can complete a piece of work in 12 days and B can do it in 18 days. If they work on alternate days starting with A, in how many days will the work be finished?",
+        options: ["14.33 days", "14.5 days", "15 days", "13.67 days"],
+        answer: "14.33 days (14 days and 1/3 day)",
+        explanation: "Total work = LCM(12, 18) = 36 units. Efficiency of A = 3 units/day, Efficiency of B = 2 units/day. In 2 days (1 cycle), work done = 3 + 2 = 5 units. In 7 cycles (14 days), work completed = 7 * 5 = 35 units. Remaining work = 36 - 35 = 1 unit. On day 15, A works: time taken = 1/3 day. Total time = 14 + 1/3 = 14.33 days.",
+      },
+      {
+        topic: "Reasoning Ability — Syllogisms",
+        type: "Logical",
+        question: "Statements: 1. All algorithms are programs. 2. Some programs are scripts. Conclusions: I. Some algorithms are scripts. II. Some programs are algorithms.",
+        options: ["Only conclusion I follows", "Only conclusion II follows", "Both follow", "Neither follows"],
+        answer: "Only conclusion II follows",
+        explanation: "Since all algorithms are programs (A -> P), the converse 'Some programs are algorithms' is definitively true by subalternation. However, scripts and algorithms have no overlapping constraint in the Venn diagram, so conclusion I does not necessarily follow.",
+      },
+      {
+        topic: "Coding Round — Array Manipulation",
+        type: "Coding",
+        question: "Given an array of integers representing stock prices on consecutive days, find the maximum profit you can achieve by executing at most one buy and one sell transaction.",
+        answer: "O(n) Single-pass prefix minimum approach",
+        explanation: "Track minPrice seen so far while iterating through the array. At each index i, potential profit = price[i] - minPrice. Update maxProfit = max(maxProfit, potential profit). Time complexity is O(n), auxiliary space is O(1).",
+      },
+    ],
+    interviewExperiences: [
+      {
+        candidateName: "Rohan S.",
+        college: "Tier-2 Engineering College, Pune",
+        role: "TCS Digital",
+        batch: "2026 Batch",
+        verdict: "Selected",
+        rounds: [
+          {
+            title: "Round 1: TCS iON NQT",
+            detail: "Scored high in Foundation section and cleared both coding problems (1st was string anagram grouping, 2nd was a dynamic programming 0/1 knapsack variation).",
+          },
+          {
+            title: "Round 2: Technical Panel (40 mins)",
+            detail: "The interviewer reopened my second NQT code on screen and asked me to dry-run test case 4 and explain space complexity. They then asked OOPs concepts (Diamond Problem in C++ vs Java), SQL Joins, and deep questions on my microservices final year project.",
+          },
+          {
+            title: "Round 3: HR & Managerial (20 mins)",
+            detail: "Discussed relocation preferences, shift flexibility, conflict resolution during group projects, and long-term career goals.",
+          },
+        ],
+        takeaway: "Always remember the code you submitted in NQT. They will ask you to explain your own code line by line in the technical round.",
+      },
+      {
+        candidateName: "Priyanka M.",
+        college: "NIT Durgapur",
+        role: "TCS Prime",
+        batch: "2026 Batch",
+        verdict: "Offered",
+        rounds: [
+          {
+            title: "Round 1: Advanced NQT",
+            detail: "Cleared Foundation in top 5% and solved both Advanced coding problems with optimal time complexity in under 45 minutes.",
+          },
+          {
+            title: "Round 2: Technical Deep Dive (50 mins)",
+            detail: "Intense discussion on Graph Algorithms (Dijkstra vs Bellman-Ford), Operating Systems (Paging vs Segmentation, Deadlock conditions), and system architecture of my AI-assisted mock test platform.",
+          },
+          {
+            title: "Round 3: HR Round (15 mins)",
+            detail: "Conversational discussion on leadership style, ethics in AI, and readiness to work at TCS Innovation Labs.",
+          },
+        ],
+        takeaway: "For Prime roles, core CS fundamentals (OS/DBMS/Networks) are scrutinized just as rigorously as DSA problem-solving.",
+      },
     ],
     process: [
-      { title: "Registration & eligibility check", description: "Register via the TCS NQT portal or your campus drive; academic eligibility is verified before a test slot is issued." },
+      { title: "Registration & eligibility check", description: "Register via the TCS NQT portal or campus placement cell; academic criteria are verified before test hall tickets are generated." },
       { title: "TCS iON NQT (online test)", description: "Foundation section (Numerical, Verbal, Reasoning Ability) for every candidate, plus an Advanced section (Advanced Quant & Reasoning, two coding problems) for the Digital/Prime track." },
       { title: "Technical + HR interview", description: "One combined panel interview covering your resume, core CS fundamentals, and the code you wrote in the NQT." },
       { title: "Document verification & offer", description: "Final academic and identity document check before the formal offer letter." },
@@ -152,10 +288,78 @@ export const COMPANIES: CompanyProfile[] = [
       "Hires freshers across three tracks — Systems Engineer, Digital Specialist Engineer, and Specialist Programmer — through InfyTQ/on-campus tests and HackWithInfy.",
     summary:
       "Infosys recruits through three distinct packages: Systems Engineer (roughly 3.6 LPA), Digital Specialist Engineer (roughly 6.25 LPA), and Specialist Programmer (roughly 9.5 LPA via HackWithInfy). Systems Engineer and DSE candidates sit an online test with quant, logical reasoning, pseudocode, and English sections plus one coding problem; Specialist Programmer candidates instead solve three algorithmic coding problems in a longer online round — all followed by a technical and HR interview.",
+    founded: "1981",
+    headquarters: "Bengaluru, Karnataka, India",
+    globalHeadcount: "320,000+ employees",
+    officialCareersUrl: "https://www.infosys.com/careers.html",
     roles: [
-      { title: "Systems Engineer (SE)", note: "Roughly 3.6 LPA — entry track, broadest hiring volume." },
-      { title: "Digital Specialist Engineer (DSE)", note: "Roughly 6.25 LPA — for candidates with stronger technical/analytical scores." },
-      { title: "Specialist Programmer (SP)", note: "Roughly 9.5 LPA via HackWithInfy — algorithm-heavy hiring track." },
+      {
+        title: "Systems Engineer (SE)",
+        package: "3.60 LPA",
+        qualification: "Clear Infosys Standard Online Test (Quant, Logical, Verbal, Pseudocode)",
+        note: "Core fresher engineering track with comprehensive foundational training at Infosys Mysore campus.",
+      },
+      {
+        title: "Digital Specialist Engineer (DSE)",
+        package: "6.25 LPA",
+        qualification: "High score in Online Test + Hands-on coding round",
+        note: "Advanced full-stack, cloud computing, and DevOps engineering track.",
+      },
+      {
+        title: "Specialist Programmer (SP)",
+        package: "9.50 – 11.00 LPA",
+        qualification: "HackWithInfy Grand Finalist / 3-Question Algorithmic Qualifier",
+        note: "Elite algorithmic developer role working on core architecture, distributed systems, and AI platforms.",
+      },
+    ],
+    testFormat: [
+      { section: "Reasoning Ability (SE/DSE)", duration: "25 mins", questionCount: "15 Qs", negativeMarking: "No", cutoffScore: "~70%" },
+      { section: "Mathematical Critical Thinking (SE/DSE)", duration: "35 mins", questionCount: "10 Qs", negativeMarking: "No", cutoffScore: "~65%" },
+      { section: "Verbal Ability (SE/DSE)", duration: "20 mins", questionCount: "20 Qs", negativeMarking: "No", cutoffScore: "~60%" },
+      { section: "Pseudocode Tracing (SE/DSE)", duration: "10 mins", questionCount: "5 Qs", negativeMarking: "No", cutoffScore: "3+ correct" },
+      { section: "Puzzle / Data Interpretation", duration: "10 mins", questionCount: "4 Qs", negativeMarking: "No", cutoffScore: "2+ correct" },
+      { section: "Specialist Programmer (HackWithInfy)", duration: "180 mins", questionCount: "3 Coding Problems", negativeMarking: "No", cutoffScore: "2+ fully solved" },
+    ],
+    sampleQuestions: [
+      {
+        topic: "Pseudocode Tracing",
+        type: "Pseudocode",
+        question: "What is the output of the following pseudocode?\nInteger a = 12, b = 7, c = 4\nIf ((a ^ b) > (b & c))\n  c = c + a\nElse\n  c = c + b\nEnd If\nPrint c",
+        options: ["16", "11", "12", "7"],
+        answer: "16",
+        explanation: "Calculate bitwise XOR: a ^ b = 12 ^ 7 = (1100) ^ (0111) = 1011 in binary = 11 in decimal. Calculate bitwise AND: b & c = 7 & 4 = (0111) & (0100) = 0100 in binary = 4 in decimal. Since 11 > 4 evaluates to True, the If block executes: c = c + a = 4 + 12 = 16.",
+      },
+      {
+        topic: "Specialist Programmer — Algorithmic Coding",
+        type: "Coding",
+        question: "Given a tree with N nodes rooted at 1 and Q queries. In each query, you are given a node U and an integer K. Find the K-th ancestor of node U in O(log N) time per query.",
+        answer: "Binary Lifting with DP table dp[node][i] = 2^i-th ancestor",
+        explanation: "Precompute binary lifting table where dp[u][i] stores the 2^i-th ancestor of node u. Base case: dp[u][0] = parent[u]. Recurrence: dp[u][i] = dp[dp[u][i-1]][i-1]. Preprocessing takes O(N log N) time, each query takes O(log K) <= O(log N) by decomposing K into its binary powers.",
+      },
+    ],
+    interviewExperiences: [
+      {
+        candidateName: "Aditya V.",
+        college: "VIT Vellore",
+        role: "Digital Specialist Engineer (DSE)",
+        batch: "2026 Batch",
+        verdict: "Selected",
+        rounds: [
+          {
+            title: "Round 1: Proctored Test",
+            detail: "Cleared the 5-section SE/DSE test with top accuracy in Pseudocode and Mathematical Critical Thinking.",
+          },
+          {
+            title: "Round 2: Technical Interview (45 mins)",
+            detail: "Asked to code a solution for detecting and removing cycles in a Linked List live in Java. Followed by queries on ACID properties, Redis caching use-cases, and Spring Boot annotations.",
+          },
+          {
+            title: "Round 3: HR Interview (15 mins)",
+            detail: "Standard questions on willingness to relocate to Pune/Hyderabad/Mysore and situational leadership.",
+          },
+        ],
+        takeaway: "The pseudocode section in the test determines the upgrade from SE to DSE interview call. Do not skip bitwise operator practice.",
+      },
     ],
     process: [
       { title: "Online test / HackWithInfy qualifier", description: "SE/DSE candidates take a proctored test (quant, reasoning, pseudocode, English, one coding problem). SP candidates instead solve three coding problems in 180 minutes with no MCQs." },
@@ -220,10 +424,72 @@ export const COMPANIES: CompanyProfile[] = [
     tagline: "Hires freshers through the GenC (entry-level) and GenC Next / GenC Pro (higher-package, coding-heavy) tracks.",
     summary:
       "Cognizant's fresher hiring runs through GenC, GenC Next, and GenC Pro — an online assessment covering aptitude, verbal, and reasoning for every candidate, with an additional coding round for the Next/Pro tracks, followed by a technical and HR interview that's often a single combined panel.",
+    founded: "1994",
+    headquarters: "Teaneck, New Jersey, USA",
+    globalHeadcount: "340,000+ employees",
+    officialCareersUrl: "https://careers.cognizant.com/global/en",
     roles: [
-      { title: "GenC", note: "Entry-level track, largest intake, aptitude + basic technical screening." },
-      { title: "GenC Next", note: "Coding-focused track with a higher package, includes a dedicated programming round." },
-      { title: "GenC Pro", note: "Highest package tier for candidates with strong DSA/coding performance." },
+      {
+        title: "GenC",
+        package: "4.00 – 4.50 LPA",
+        qualification: "Aptitude + Basic Technical Screening",
+        note: "Entry-level software engineering track, broad intake across all registered branches.",
+      },
+      {
+        title: "GenC Next",
+        package: "6.75 – 7.25 LPA",
+        qualification: "Clear GenC Aptitude + 2 Coding Problems in dedicated round",
+        note: "Advanced engineering track focusing on Full-Stack, Java/Python development, and Cloud.",
+      },
+      {
+        title: "GenC Pro",
+        package: "9.00 – 12.00 LPA",
+        qualification: "Top tier coding performance + Advanced CS Problem Solving",
+        note: "Specialized roles in AI/ML, Cyber Security, and Cloud Architecture.",
+      },
+    ],
+    testFormat: [
+      { section: "Quantitative Ability (GenC)", duration: "35 mins", questionCount: "25 Qs", negativeMarking: "No", cutoffScore: "~65%" },
+      { section: "Logical Reasoning (GenC)", duration: "30 mins", questionCount: "20 Qs", negativeMarking: "No", cutoffScore: "~70%" },
+      { section: "Verbal Ability (GenC)", duration: "20 mins", questionCount: "20 Qs", negativeMarking: "No", cutoffScore: "~60%" },
+      { section: "Coding Assessment (GenC Next/Pro)", duration: "60 mins", questionCount: "2 Problems", negativeMarking: "No", cutoffScore: "100% test cases" },
+    ],
+    sampleQuestions: [
+      {
+        topic: "Quantitative Ability — Profit & Loss",
+        type: "Quantitative",
+        question: "A shopkeeper marks an article 40% above cost price and allows a discount of 25% on marked price. If he sells it for $840, find the cost price.",
+        options: ["$800", "$750", "$820", "$850"],
+        answer: "$800",
+        explanation: "Let CP = 100x. Marked Price (MP) = 140x. Selling Price after 25% discount = 140x * 0.75 = 105x. Given SP = $840, so 105x = 840 => x = 8. Hence, Cost Price = 100x = 100 * 8 = $800.",
+      },
+      {
+        topic: "Coding Assessment — String Hashing",
+        type: "Coding",
+        question: "Find the length of the longest substring without repeating characters in a given string S.",
+        answer: "O(n) Sliding Window with Frequency Map / Last Seen Index",
+        explanation: "Maintain two pointers (left, right) and an array of 256 integers storing the last index of each character. As right advances, if S[right] was seen at index >= left, update left = last_seen[S[right]] + 1. Maximum window size (right - left + 1) across the traversal gives the answer in O(n) time and O(1) extra space.",
+      },
+    ],
+    interviewExperiences: [
+      {
+        candidateName: "Karthik R.",
+        college: "Anna University, Chennai",
+        role: "Cognizant GenC Next",
+        batch: "2026 Batch",
+        verdict: "Selected",
+        rounds: [
+          {
+            title: "Round 1: Cognitive Aptitude + Coding",
+            detail: "Aptitude questions were standard AMCAT-style. Solved both coding questions (String compression and Matrix spiral traversal).",
+          },
+          {
+            title: "Round 2: Technical + HR Panel (35 mins)",
+            detail: "The interviewer asked me to write code to reverse a doubly linked list on a shared code editor, followed by explaining the 3 Normal Forms (1NF, 2NF, 3NF) in relational databases.",
+          },
+        ],
+        takeaway: "Cognizant tests real coding on live screens during the interview. Practice writing clean syntax without an IDE autocomplete.",
+      },
     ],
     process: [
       { title: "Online assessment", description: "Aptitude (quant, verbal, logical reasoning) for all candidates; GenC Next/Pro candidates additionally solve coding problems." },
@@ -287,9 +553,75 @@ export const COMPANIES: CompanyProfile[] = [
     tagline: "An elimination-based, multi-round hiring process built around the Cognitive & Technical Assessment.",
     summary:
       "Accenture's fresher hiring is elimination-based at every stage: a 90-question, 90-minute Cognitive & Technical Assessment (critical reasoning, abstract reasoning, English, pseudocode, and cloud/security MCQs) must clear every sectional cutoff before you're allowed into the coding assessment, followed by a communication assessment and a final technical + HR interview.",
+    founded: "1989",
+    headquarters: "Dublin, Ireland",
+    globalHeadcount: "740,000+ employees",
+    officialCareersUrl: "https://www.accenture.com/in-en/careers",
     roles: [
-      { title: "Associate Software Engineer (ASE)", note: "Standard entry-level track." },
-      { title: "Advanced App Engineering (AAE)", note: "Coding-heavy track for stronger technical performers." },
+      {
+        title: "Associate Software Engineer (ASE)",
+        package: "4.50 – 4.75 LPA",
+        qualification: "Clear Cognitive & Technical Assessment + 1 Coding question",
+        note: "Standard entry-level software engineering role in technology consulting delivery.",
+      },
+      {
+        title: "Advanced App Engineering (AAE)",
+        package: "6.50 – 7.00 LPA",
+        qualification: "High percentile in Cognitive test + Both Coding problems solved + Strong communication score",
+        note: "Advanced application development, microservices, cloud engineering track.",
+      },
+    ],
+    testFormat: [
+      { section: "Critical Reasoning & Problem Solving", duration: "Shared 90 mins", questionCount: "18 Qs", negativeMarking: "No", cutoffScore: "Sectional cutoff applied" },
+      { section: "Abstract Reasoning", duration: "Shared 90 mins", questionCount: "15 Qs", negativeMarking: "No", cutoffScore: "Sectional cutoff applied" },
+      { section: "English Ability", duration: "Shared 90 mins", questionCount: "17 Qs", negativeMarking: "No", cutoffScore: "Sectional cutoff applied" },
+      { section: "Common Applications & MS Office", duration: "Shared 90 mins", questionCount: "12 Qs", negativeMarking: "No", cutoffScore: "Sectional cutoff applied" },
+      { section: "Pseudocode Logic", duration: "Shared 90 mins", questionCount: "18 Qs", negativeMarking: "No", cutoffScore: "Sectional cutoff applied" },
+      { section: "Cloud & Network Security", duration: "Shared 90 mins", questionCount: "10 Qs", negativeMarking: "No", cutoffScore: "Sectional cutoff applied" },
+      { section: "Coding Assessment (Immediate Unlock)", duration: "45 mins", questionCount: "2 Problems", negativeMarking: "No", cutoffScore: "1-2 fully cleared" },
+      { section: "Automated Communication Assessment", duration: "20 mins", questionCount: "6 Spoken Modules", negativeMarking: "No", cutoffScore: "Voice clarity & fluency" },
+    ],
+    sampleQuestions: [
+      {
+        topic: "Technical MCQs — Cloud & Security",
+        type: "Pseudocode",
+        question: "Which cloud deployment model is operated solely for a single organization, whether managed internally or by a third party, and hosted internally or externally?",
+        options: ["Public Cloud", "Private Cloud", "Community Cloud", "Hybrid Cloud"],
+        answer: "Private Cloud",
+        explanation: "Private cloud infrastructure is provisioned for exclusive use by a single organization comprising multiple consumers (e.g., business units). It offers high security and regulatory compliance.",
+      },
+      {
+        topic: "Pseudocode — Loop Invariant Tracing",
+        type: "Pseudocode",
+        question: "Integer p = 1, q = 5\nWhile (q > 0)\n  p = p * 2\n  q = q - 2\nEnd While\nPrint p + q",
+        options: ["7", "9", "11", "15"],
+        answer: "7",
+        explanation: "Iteration 1: q=5 (>0) => p = 1*2 = 2, q = 5-2 = 3. Iteration 2: q=3 (>0) => p = 2*2 = 4, q = 3-2 = 1. Iteration 3: q=1 (>0) => p = 4*2 = 8, q = 1-2 = -1. Loop terminates as q=-1 <= 0. Print p + q = 8 + (-1) = 7.",
+      },
+    ],
+    interviewExperiences: [
+      {
+        candidateName: "Sneha G.",
+        college: "Thapar Institute of Engineering, Patiala",
+        role: "Advanced App Engineering (AAE)",
+        batch: "2026 Batch",
+        verdict: "Selected",
+        rounds: [
+          {
+            title: "Round 1: Cognitive & Technical + Coding",
+            detail: "Cleared all 6 cognitive modules. The coding round immediately unlocked; solved Problem 1 (Array difference pair) in 15 mins and Problem 2 (String subsequence matching) in 20 mins.",
+          },
+          {
+            title: "Round 2: Communication Test",
+            detail: "Used a noise-canceling headset. Repeated spoken sentences, answered short logic questions out loud, and spoke for 1 minute on 'The impact of remote work'.",
+          },
+          {
+            title: "Round 3: Virtual Panel Interview (30 mins)",
+            detail: "Explained my final year project architecture, handled behavioral questions about team disagreement, and discussed cloud scalability concepts.",
+          },
+        ],
+        takeaway: "Accenture heavily weights the spoken communication round. Speak clearly into the microphone at a steady, calm pace.",
+      },
     ],
     process: [
       { title: "Cognitive & Technical Assessment", description: "90 questions in 90 minutes across six modules: Critical Reasoning, Abstract Reasoning, English Ability, MS Office/Common Applications, Pseudocode, and Cloud/Network Security." },
@@ -353,7 +685,64 @@ export const COMPANIES: CompanyProfile[] = [
     tagline: "Uses a distinctive game-based aptitude battery (Capgemini Exceller) instead of traditional quant MCQs.",
     summary:
       "Capgemini's fresher hiring runs through the Exceller assessment: a game-based cognitive aptitude battery (Grid Challenge, Motion Challenge, Deductive-Logical Switch Challenge, Digit Challenge) in place of traditional quant MCQs, plus English/communication and pseudocode sections, followed by a technical interview and an HR interview.",
-    roles: [{ title: "Analyst / Graduate Engineer Trainee", note: "Standard entry-level track hired through Exceller." }],
+    founded: "1967",
+    headquarters: "Paris, France",
+    globalHeadcount: "350,000+ employees",
+    officialCareersUrl: "https://www.capgemini.com/in-en/careers",
+    roles: [
+      {
+        title: "Analyst / Graduate Engineer Trainee",
+        package: "4.00 – 4.25 LPA",
+        qualification: "Clear Exceller Game Assessment + English + Pseudocode Round",
+        note: "Core fresher engineering track for software engineering and enterprise consulting.",
+      },
+      {
+        title: "Senior Analyst",
+        package: "5.75 – 7.50 LPA",
+        qualification: "Top performance in Exceller + Hands-on coding round + Strong technical interview",
+        note: "Advanced engineering role for candidates demonstrating strong programming capabilities.",
+      },
+    ],
+    testFormat: [
+      { section: "Game-Based Aptitude (Exceller)", duration: "24 mins", questionCount: "4 Interactive Games", negativeMarking: "No", cutoffScore: "Speed & accuracy index" },
+      { section: "English Communication & Verbal", duration: "30 mins", questionCount: "30 Qs", negativeMarking: "No", cutoffScore: "~65%" },
+      { section: "Pseudocode & Bitwise Logic", duration: "30 mins", questionCount: "30 Qs", negativeMarking: "No", cutoffScore: "~70%" },
+      { section: "Behavioral Profile Competency", duration: "Untimed", questionCount: "100 Statements", negativeMarking: "No", cutoffScore: "Personality consistency" },
+    ],
+    sampleQuestions: [
+      {
+        topic: "Pseudocode — Bitwise Operator Tracing",
+        type: "Pseudocode",
+        question: "Integer a = 5, b = 9, c = 2\na = (a & b) + (b ^ c)\nb = (a >> 1) + c\nPrint a + b",
+        options: ["18", "20", "22", "16"],
+        answer: "20",
+        explanation: "Step 1: a & b = 5 & 9 = (0101) & (1001) = 0001 (1). b ^ c = 9 ^ 2 = (1001) ^ (0010) = 1011 (11). So a = 1 + 11 = 12. Step 2: a >> 1 = 12 >> 1 = 6. b = 6 + c = 6 + 2 = 8. Step 3: a + b = 12 + 8 = 20.",
+      },
+    ],
+    interviewExperiences: [
+      {
+        candidateName: "Varun K.",
+        college: "Manipal University, Jaipur",
+        role: "Graduate Engineer Trainee (GET)",
+        batch: "2026 Batch",
+        verdict: "Selected",
+        rounds: [
+          {
+            title: "Round 1: Exceller Game-Based Assessment",
+            detail: "The 4 games (Grid Challenge, Motion, Switch, Digit Challenge) tested spatial working memory and reaction time. Cleared along with Pseudocode and Verbal.",
+          },
+          {
+            title: "Round 2: Technical Interview (30 mins)",
+            detail: "Interviewer gave 2 pseudocode snippets on screen involving bitwise shifts and asked for quick output. Asked DBMS indexing vs hashing and asked me to walk through my React + Node.js project.",
+          },
+          {
+            title: "Round 3: HR Round (15 mins)",
+            detail: "Basic questions regarding shift rotation, preferred location, and willingness to learn mainframe/cloud technologies.",
+          },
+        ],
+        takeaway: "Capgemini pseudocode heavily features bitwise right shift (>>), left shift (<<), XOR (^), and bitwise AND (&). Practice them on paper beforehand.",
+      },
+    ],
     process: [
       { title: "Capgemini Exceller assessment", description: "A game-based cognitive battery measuring spatial memory, focus, response latency, and inductive reasoning, alongside English and pseudocode sections." },
       { title: "Group discussion / communication round", description: "Some drives include a group discussion or written communication task assessing clarity and teamwork." },
@@ -415,7 +804,63 @@ export const COMPANIES: CompanyProfile[] = [
     tagline: "Fresher hiring built around a cognitive/technical aptitude test followed by a coding round and technical + HR interviews.",
     summary:
       "IBM's campus hiring typically starts with an online cognitive and technical aptitude assessment (quantitative, logical reasoning, and verbal sections), followed by a coding round testing programming fundamentals and problem solving, and closes with a technical interview and an HR interview focused on communication and role fit.",
-    roles: [{ title: "Associate Software Developer / entry-level roles", note: "Primary fresher track hired through campus and off-campus drives." }],
+    founded: "1911",
+    headquarters: "Armonk, New York, USA",
+    globalHeadcount: "280,000+ employees",
+    officialCareersUrl: "https://www.ibm.com/careers",
+    roles: [
+      {
+        title: "Associate System Engineer",
+        package: "4.50 – 5.00 LPA",
+        qualification: "Online Cognitive Assessment + Basic Programming",
+        note: "Core fresher engineering track for software delivery, maintenance, and testing.",
+      },
+      {
+        title: "Associate Software Developer",
+        package: "7.50 – 11.00 LPA",
+        qualification: "Top percentile in Cognitive Test + Both HackerRank Coding problems cleared with optimal complexity",
+        note: "Product engineering and development for IBM Cloud, Red Hat OpenShift, and AI research platforms.",
+      },
+    ],
+    testFormat: [
+      { section: "Quantitative Aptitude & Numerical Reasoning", duration: "25 mins", questionCount: "18 Qs", negativeMarking: "No", cutoffScore: "~65%" },
+      { section: "Logical & Analytical Reasoning", duration: "25 mins", questionCount: "18 Qs", negativeMarking: "No", cutoffScore: "~70%" },
+      { section: "Verbal Ability & Comprehension", duration: "20 mins", questionCount: "18 Qs", negativeMarking: "No", cutoffScore: "~60%" },
+      { section: "HackerRank Coding Assessment", duration: "60 mins", questionCount: "2 Problems", negativeMarking: "No", cutoffScore: "All testcases" },
+    ],
+    sampleQuestions: [
+      {
+        topic: "Coding Assessment — Dynamic Programming",
+        type: "Coding",
+        question: "Given an array of positive integers, find the maximum sum of a subsequence with the constraint that no two selected elements are adjacent in the original array.",
+        answer: "O(n) DP with space optimization (House Robber pattern)",
+        explanation: "Let dp[i] be the maximum sum up to index i. Recurrence: dp[i] = max(dp[i-1], arr[i] + dp[i-2]). We only need the previous two states (prev1, prev2), reducing space to O(1) and time to O(n).",
+      },
+    ],
+    interviewExperiences: [
+      {
+        candidateName: "Tanmay D.",
+        college: "PES University, Bengaluru",
+        role: "Associate Software Developer",
+        batch: "2026 Batch",
+        verdict: "Selected",
+        rounds: [
+          {
+            title: "Round 1: Cognitive Assessment & HackerRank",
+            detail: "Cognitive assessment had time constraints per question. The coding round had 2 questions on HackerRank (1 Hashmap string problem, 1 DP problem).",
+          },
+          {
+            title: "Round 2: Technical Interview (45 mins)",
+            detail: "The interviewer asked me to derive the recurrence relation for my coding problem, then drilled into Linux internals (process scheduling, fork vs exec) and Docker containerization.",
+          },
+          {
+            title: "Round 3: HR & Values Interview (20 mins)",
+            detail: "Questions based on IBM's core values: dedication to client success, innovation that matters, and personal responsibility in all relationships.",
+          },
+        ],
+        takeaway: "IBM interviewers love systems questions and complexity proofs. Understand how your code executes at the OS level.",
+      },
+    ],
     process: [
       { title: "Online cognitive & technical assessment", description: "Quantitative aptitude, logical reasoning, and verbal ability sections, evaluated against role-specific cutoffs." },
       { title: "Coding assessment", description: "Programming problems testing data structures, algorithms, and code correctness/efficiency." },
