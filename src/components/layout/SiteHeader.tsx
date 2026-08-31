@@ -10,12 +10,12 @@ import { buttonClass } from "@/components/ui/Button";
 import { Wordmark } from "./Wordmark";
 
 const navigation = [
-  { label: "Features", href: "/#features" },
-  { label: "How it works", href: "/#how-it-works" },
+  { label: "About", href: "/about" },
+  { label: "Placement Preparation", href: "/placement-preparation" },
   { label: "Companies", href: "/companies" },
   { label: "Blogs", href: "/blogs" },
   { label: "Pricing", href: "/pricing" },
-  { label: "About", href: "/about" },
+
 ] as const;
 
 function isCurrent(href: string, pathname: string) {
