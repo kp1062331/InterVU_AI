@@ -39,12 +39,30 @@ export function IntroSplash() {
   const [phase, setPhase] = useState<Phase>("idle");
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
+  const markIntroDone = () => {
+    window.__skillitrixIntroHasPlayed = true;
+    try {
+      sessionStorage.setItem("skillitrix-intro-done", "true");
+    } catch {
+      // Storage access may be restricted in some environments
+    }
+  };
+
   useEffect(() => {
+    let introDone = false;
+    try {
+      introDone =
+        sessionStorage.getItem("skillitrix-intro-done") === "true" ||
+        window.__skillitrixIntroHasPlayed === true;
+    } catch {
+      introDone = window.__skillitrixIntroHasPlayed === true;
+    }
+
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const introDone = window.__skillitrixIntroHasPlayed === true;
     const isBot = /bot|googlebot|crawler|spider|robot|crawling|lighthouse/i.test(navigator.userAgent);
 
     if (reduced || introDone || isBot) {
+      markIntroDone();
       Promise.resolve().then(() => {
         setPhase("done");
         window.dispatchEvent(new CustomEvent("intro-complete"));
@@ -52,13 +70,14 @@ export function IntroSplash() {
       return;
     }
 
+    // Set storage immediately when playback begins so returning to home never restarts it
+    markIntroDone();
     Promise.resolve().then(() => setPhase("cube"));
     timers.current.push(setTimeout(() => setPhase("reveal"), CUBE_MS));
     timers.current.push(setTimeout(() => setPhase("exit"), CUBE_MS + REVEAL_MS));
     timers.current.push(
       setTimeout(() => {
         setPhase("done");
-        window.__skillitrixIntroHasPlayed = true;
         window.dispatchEvent(new CustomEvent("intro-complete"));
       }, CUBE_MS + REVEAL_MS + EXIT_MS),
     );
@@ -80,10 +99,10 @@ export function IntroSplash() {
 
   function skip() {
     timers.current.forEach(clearTimeout);
+    markIntroDone();
     setPhase("exit");
     setTimeout(() => {
       setPhase("done");
-      window.__skillitrixIntroHasPlayed = true;
       window.dispatchEvent(new CustomEvent("intro-complete"));
     }, EXIT_MS);
   }

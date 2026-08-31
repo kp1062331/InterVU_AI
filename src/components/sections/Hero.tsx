@@ -294,7 +294,15 @@ export function Hero() {
   const [introCompleted, setIntroCompleted] = useState(false);
 
   useEffect(() => {
-    const introDone = sessionStorage.getItem("skillitrix-intro-done") === "true";
+    let introDone = false;
+    try {
+      introDone =
+        sessionStorage.getItem("skillitrix-intro-done") === "true" ||
+        window.__skillitrixIntroHasPlayed === true;
+    } catch {
+      introDone = window.__skillitrixIntroHasPlayed === true;
+    }
+
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;

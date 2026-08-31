@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { PlanComparison } from "@/components/sections/PlanComparison";
 import { PricingFaq } from "@/components/sections/PricingFaq";
 import { HomeCTA } from "@/components/sections/HomeCTA";
@@ -29,10 +30,16 @@ export default function PricingPage() {
         imageAlt="Candidate practicing with Skillitrix mock interview system"
       />
 
-      <Container className="pt-12 pb-24">
-        <ScrollReveal>
-          <PlanComparison />
+      <Container className="pt-4 pb-24">
+        <ScrollReveal delay={50} duration={600}>
+          <Breadcrumbs items={[{ name: "Pricing", path: "/pricing" }]} />
         </ScrollReveal>
+
+        <div className="pt-8">
+          <ScrollReveal>
+            <PlanComparison />
+          </ScrollReveal>
+        </div>
 
         <div className="mt-20 border-t border-rule pt-16">
           <ScrollReveal>

@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { HomeCTA } from "@/components/sections/HomeCTA";
 import type { TeamMember } from "@/types";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { buildMetadata } from "@/lib/seo";
 
@@ -88,8 +89,12 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <Container className="py-16 sm:py-24">
-        <section aria-labelledby="beliefs">
+      <Container className="pt-4 pb-16 sm:pb-24">
+        <ScrollReveal delay={50} duration={600}>
+          <Breadcrumbs items={[{ name: "About", path: "/about" }]} />
+        </ScrollReveal>
+
+        <section aria-labelledby="beliefs" className="pt-8 sm:pt-12">
           <ScrollReveal>
             <p className="eyebrow">Core principles</p>
             <h2 id="beliefs" className="mt-3 text-title text-ink tracking-tight">
