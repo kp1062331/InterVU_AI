@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { HomeCTA } from "@/components/sections/HomeCTA";
 import { BLOG_POSTS } from "@/lib/blogs";
 import { COMPANIES } from "@/lib/companies";
-import { ArrowRight, Clock, Check } from "@/components/ui/icons";
+import { ArrowRight, Clock, Check, FileText } from "@/components/ui/icons";
 import { buildMetadata, articleJsonLd, toISODate } from "@/lib/seo";
 
 interface Props {
@@ -44,6 +44,12 @@ export default async function BlogPostPage({ params }: Props) {
   const relatedPosts = BLOG_POSTS.filter((p) => p.slug !== slug).slice(0, 2);
   const relatedCompany = COMPANIES.find((company) => company.relatedBlogSlugs.includes(slug));
 
+  const takeaways = post.keyTakeaways && post.keyTakeaways.length > 0 ? post.keyTakeaways : [
+    "Calibrate your speed to under 60 seconds per quantitative aptitude question.",
+    "Simulate full exam condition test environments to eliminate mid-exam panic.",
+    "Practice automated problem-solving algorithms with strict time & memory constraints.",
+  ];
+
   return (
     <main className="min-h-screen bg-paper pt-28 pb-20 font-sans">
       <JsonLd
@@ -65,6 +71,16 @@ export default async function BlogPostPage({ params }: Props) {
             <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-bold text-brand border border-brand/20">
               {post.category}
             </span>
+            {post.funnelStage && (
+              <span className="rounded-full bg-surface px-2.5 py-1 text-[11px] font-semibold text-ink-muted border border-rule">
+                Stage: {post.funnelStage}
+              </span>
+            )}
+            {post.audience && (
+              <span className="rounded-full bg-surface px-2.5 py-1 text-[11px] font-semibold text-ink-muted border border-rule">
+                Audience: {post.audience}
+              </span>
+            )}
             <span className="flex items-center gap-1 text-xs text-ink-faint">
               <Clock className="size-3.5" />
               {post.readTime}
@@ -79,6 +95,13 @@ export default async function BlogPostPage({ params }: Props) {
           <p className="mt-4 text-base sm:text-lg leading-relaxed text-ink-soft text-pretty">
             {post.excerpt}
           </p>
+
+          {post.targetKeyword && (
+            <div className="mt-4 inline-flex items-center gap-2 rounded-lg bg-surface/80 px-3 py-1.5 text-xs text-ink-muted border border-rule/70">
+              <span className="font-semibold text-brand">Focus Keyword:</span>
+              <code className="font-mono text-xs text-ink">{post.targetKeyword}</code>
+            </div>
+          )}
 
           {/* Author info & Tags */}
           <div className="mt-6 flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-rule/60">
@@ -108,42 +131,38 @@ export default async function BlogPostPage({ params }: Props) {
         {/* Article Content */}
         <article className="mt-10 max-w-none text-ink leading-relaxed">
           {/* Key Takeaways Callout Box */}
-          <div className="mb-8 rounded-2xl border border-brand/20 bg-brand/[0.03] p-6 shadow-xs">
+          <div className="mb-8 rounded-2xl border border-brand/20 bg-brand/[0.03] p-6 sm:p-7 shadow-xs">
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand">
               <Check className="size-4" />
-              <span>Key Placement Assessment Takeaways</span>
+              <span>Key Strategic &amp; Assessment Takeaways</span>
             </div>
-            <ul className="mt-3 space-y-2 text-sm text-ink-muted">
-              <li className="flex items-start gap-2">
-                <span className="mt-1 size-1.5 rounded-full bg-brand shrink-0" />
-                <span>Calibrate your speed to under 60 seconds per quantitative aptitude question.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-1 size-1.5 rounded-full bg-brand shrink-0" />
-                <span>Simulate full 150-minute exam condition test environments to eliminate mid-exam panic.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-1 size-1.5 rounded-full bg-brand shrink-0" />
-                <span>Practice automated LeetCode Medium algorithms with time complexity checks.</span>
-              </li>
+            <ul className="mt-4 space-y-2.5 text-sm text-ink-soft">
+              {takeaways.map((takeaway, idx) => (
+                <li key={idx} className="flex items-start gap-2.5">
+                  <span className="mt-1.5 size-1.5 rounded-full bg-brand shrink-0" />
+                  <span className="leading-relaxed">{takeaway}</span>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* HTML Formatted Content */}
           <div
             className="prose prose-slate max-w-none 
-              [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-ink [&_h2]:mt-8 [&_h2]:mb-4 [&_h2]:tracking-tight
-              [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-ink [&_h3]:mt-6 [&_h3]:mb-3
-              [&_p]:text-base [&_p]:text-ink-soft [&_p]:leading-relaxed [&_p]:mb-4
-              [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2 [&_ul]:text-ink-soft [&_ul]:mb-4
-              [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-2 [&_ol]:text-ink-soft [&_ol]:mb-4
-              [&_li]:text-sm [&_li]:sm:text-base
+              [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-ink [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:tracking-tight [&_h2]:border-b [&_h2]:border-rule/40 [&_h2]:pb-2
+              [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-ink [&_h3]:mt-7 [&_h3]:mb-3
+              [&_p]:text-base [&_p]:text-ink-soft [&_p]:leading-relaxed [&_p]:mb-5
+              [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2.5 [&_ul]:text-ink-soft [&_ul]:mb-6
+              [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-2.5 [&_ol]:text-ink-soft [&_ol]:mb-6
+              [&_li]:text-sm [&_li]:sm:text-base [&_li]:leading-relaxed
               [&_strong]:font-semibold [&_strong]:text-ink
+              [&_em]:italic [&_em]:text-ink
               [&_a]:font-semibold [&_a]:text-brand [&_a]:underline [&_a]:decoration-brand/30 [&_a]:underline-offset-4 [&_a]:hover:decoration-brand
+              [&_blockquote]:border-l-4 [&_blockquote]:border-brand [&_blockquote]:bg-brand/[0.03] [&_blockquote]:px-5 [&_blockquote]:py-4 [&_blockquote]:rounded-r-2xl [&_blockquote]:my-6 [&_blockquote]:text-ink-soft [&_blockquote]:italic
               [&_table]:w-full [&_table]:my-6 [&_table]:border-collapse [&_table]:rounded-xl [&_table]:overflow-hidden [&_table]:border [&_table]:border-rule
               [&_th]:bg-surface [&_th]:text-xs [&_th]:font-bold [&_th]:uppercase [&_th]:tracking-wider [&_th]:p-3.5 [&_th]:text-ink [&_th]:border-b [&_th]:border-rule
               [&_td]:p-3.5 [&_td]:text-xs [&_td]:sm:text-sm [&_td]:text-ink-soft [&_td]:border-b [&_td]:border-rule/60
-              [&_pre]:bg-[#0D1117] [&_pre]:text-white [&_pre]:p-4 [&_pre]:rounded-xl [&_pre]:overflow-x-auto [&_pre]:my-6 [&_pre]:font-mono [&_pre]:text-xs [&_pre]:sm:text-sm
+              [&_pre]:bg-[#0D1117] [&_pre]:text-white [&_pre]:p-5 [&_pre]:rounded-2xl [&_pre]:overflow-x-auto [&_pre]:my-6 [&_pre]:font-mono [&_pre]:text-xs [&_pre]:sm:text-sm
               [&_code]:font-mono [&_code]:text-brand [&_code]:bg-brand/5 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded
               [&_pre_code]:text-emerald-300 [&_pre_code]:bg-transparent [&_pre_code]:p-0"
             dangerouslySetInnerHTML={{ __html: post.content }}
@@ -151,39 +170,45 @@ export default async function BlogPostPage({ params }: Props) {
         </article>
 
         {relatedCompany && (
-          <p className="mb-10 text-sm leading-relaxed text-ink-soft">
-            Want the full picture beyond this guide? See the complete{" "}
-            <Link
-              href={`/companies/${relatedCompany.slug}`}
-              className="font-semibold text-brand hover:underline"
-            >
-              {relatedCompany.shortName} placement preparation guide
-            </Link>{" "}
-            — process, eligibility, syllabus, and commonly asked interview questions.
-          </p>
+          <div className="my-10 rounded-2xl border border-rule bg-white p-5 shadow-xs flex items-center gap-3">
+            <FileText className="size-5 text-brand shrink-0" />
+            <p className="text-sm leading-relaxed text-ink-soft">
+              Looking for company-specific hiring criteria? See the complete{" "}
+              <Link
+                href={`/companies/${relatedCompany.slug}`}
+                className="font-semibold text-brand underline underline-offset-2 hover:text-brand/80"
+              >
+                {relatedCompany.name} preparation guide
+              </Link>{" "}
+              — full syllabus, eligibility, and candidate questions.
+            </p>
+          </div>
         )}
 
-        {/* In-Article Placement Test CTA Banner */}
-        <section className="my-14 rounded-2xl border border-rule bg-surface p-7 sm:p-9 shadow-md">
+        {/* Dynamic CTA Banner */}
+        <section className="my-12 rounded-3xl border border-rule bg-gradient-to-br from-surface via-white to-brand/[0.04] p-7 sm:p-10 shadow-lg">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-            <div>
-              <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-800">
-                Live Test Simulation
+            <div className="max-w-xl">
+              <span className="rounded-full bg-brand/10 px-3 py-1 text-xs font-bold text-brand border border-brand/20">
+                {post.cta?.label || "Skillitrix Placement Platform"}
               </span>
-              <h3 className="mt-2 text-lg sm:text-xl font-bold text-ink">
-                Practice this exact assessment on Skillitrix
+              <h3 className="mt-3 text-xl sm:text-2xl font-bold text-ink tracking-tight">
+                {post.audience?.includes("TPO") || post.audience?.includes("Director")
+                  ? "Elevate Your College Placement Intelligence"
+                  : "Practice under real test conditions"}
               </h3>
-              <p className="mt-1 text-xs sm:text-sm text-ink-soft max-w-lg leading-relaxed">
-                Take full-length timed tests with automated scoring, question matrix navigation, and instant AI study plans.
+              <p className="mt-2 text-sm text-ink-soft leading-relaxed">
+                {post.cta?.text ||
+                  "Take full-length timed tests with automated scoring, question matrix navigation, and instant AI study plans."}
               </p>
             </div>
             <a
-              href="https://intervu-frontend.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-brand hover:scale-105 active:scale-[0.98]"
+              href={post.cta?.href || "https://intervu-frontend.vercel.app/"}
+              target={post.cta?.href?.startsWith("http") ? "_blank" : undefined}
+              rel={post.cta?.href?.startsWith("http") ? "noopener noreferrer" : undefined}
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:bg-brand hover:scale-105 active:scale-[0.98]"
             >
-              <span>Take Free Mock Test</span>
+              <span>{post.cta?.actionText || "Get Started"}</span>
               <ArrowRight className="size-4" />
             </a>
           </div>
@@ -191,7 +216,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Related Articles */}
         <section className="border-t border-rule pt-12">
-          <h3 className="text-xl font-bold text-ink mb-6">Related Placement Guides</h3>
+          <h3 className="text-xl font-bold text-ink mb-6">Related Placement Guides &amp; Analyses</h3>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             {relatedPosts.map((related) => (
               <Link
@@ -200,20 +225,24 @@ export default async function BlogPostPage({ params }: Props) {
                 className="group flex flex-col justify-between rounded-2xl border border-rule bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-black/20 hover:shadow-lg"
               >
                 <div>
-                  <span className="text-[11px] font-bold text-brand uppercase tracking-wider">
-                    {related.category}
-                  </span>
-                  <h4 className="mt-2 text-base font-bold text-ink leading-snug group-hover:text-brand transition-colors">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-[11px] font-bold text-brand uppercase tracking-wider">
+                      {related.category}
+                    </span>
+                    <span className="text-ink-faint">{related.readTime}</span>
+                  </div>
+                  <h4 className="mt-2.5 text-base font-bold text-ink leading-snug group-hover:text-brand transition-colors">
                     {related.title}
                   </h4>
                   <p className="mt-2 text-xs text-ink-soft line-clamp-2">
                     {related.excerpt}
                   </p>
                 </div>
-                <div className="mt-4 flex items-center justify-between text-xs text-ink-faint pt-3 border-t border-rule/50">
-                  <span>{related.readTime}</span>
-                  <span className="font-bold text-brand flex items-center gap-1">
-                    Read guide →
+                <div className="mt-5 flex items-center justify-between text-xs text-ink-faint pt-3 border-t border-rule/50">
+                  <span className="font-semibold text-ink">{related.author.name}</span>
+                  <span className="font-bold text-brand flex items-center gap-1 group-hover:underline">
+                    Read guide
+                    <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
               </Link>

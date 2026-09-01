@@ -274,7 +274,12 @@ export const COMPANIES: CompanyProfile[] = [
       "Walking into the interview without being able to explain your own resume in detail.",
       "Not practicing under a timer, so the real 150-minute format feels unfamiliar.",
     ],
-    relatedBlogSlugs: ["tcs-nqt-2026-complete-syllabus-preparation-strategy"],
+    relatedBlogSlugs: [
+      "tcs-nqt-section-wise-weightage-cutoff-explained",
+      "tcs-nqt-vs-tcs-digital-vs-tcs-ninja-differences",
+      "why-mock-test-percentage-doesnt-predict-tcs-shortlisting",
+      "tcs-nqt-2026-complete-syllabus-preparation-strategy",
+    ],
     lastUpdated: "2026-08-31",
   },
   {
