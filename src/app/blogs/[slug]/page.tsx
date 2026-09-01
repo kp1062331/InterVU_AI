@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { HomeCTA } from "@/components/sections/HomeCTA";
-import { BLOG_POSTS } from "@/lib/blogs";
+import { fetchBlogBySlug, fetchAllBlogs } from "@/lib/blogs";
 import { COMPANIES } from "@/lib/companies";
 import { ArrowRight, Clock, Check, FileText } from "@/components/ui/icons";
 import { buildMetadata, articleJsonLd, toISODate } from "@/lib/seo";
@@ -14,14 +14,15 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return BLOG_POSTS.map((post) => ({
+  const blogs = await fetchAllBlogs();
+  return blogs.map((post) => ({
     slug: post.slug,
   }));
 }
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const post = await fetchBlogBySlug(slug);
   if (!post) return { title: "Blog Post Not Found — Skillitrix" };
 
   return buildMetadata({
@@ -35,13 +36,14 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const post = await fetchBlogBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts = BLOG_POSTS.filter((p) => p.slug !== slug).slice(0, 2);
+  const allPosts = await fetchAllBlogs();
+  const relatedPosts = allPosts.filter((p) => p.slug !== slug).slice(0, 2);
   const relatedCompany = COMPANIES.find((company) => company.relatedBlogSlugs.includes(slug));
 
   const takeaways = post.keyTakeaways && post.keyTakeaways.length > 0 ? post.keyTakeaways : [

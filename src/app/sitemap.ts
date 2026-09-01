@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
-import { BLOG_POSTS } from "@/lib/blogs";
+import { fetchAllBlogs } from "@/lib/blogs";
 import { COMPANIES } from "@/lib/companies";
 import { toISODate } from "@/lib/seo";
 
@@ -12,7 +12,7 @@ import { toISODate } from "@/lib/seo";
  * `publishedAt` as the best available proxy until a separate "updated" field
  * exists.
  */
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${siteConfig.url}/`, changeFrequency: "weekly", priority: 1 },
     { url: `${siteConfig.url}/companies`, changeFrequency: "weekly", priority: 0.9 },
@@ -30,7 +30,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  const blogRoutes: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
+  const blogs = await fetchAllBlogs();
+  const blogRoutes: MetadataRoute.Sitemap = blogs.map((post) => ({
     url: `${siteConfig.url}/blogs/${post.slug}`,
     lastModified: toISODate(post.publishedAt),
     changeFrequency: "monthly",

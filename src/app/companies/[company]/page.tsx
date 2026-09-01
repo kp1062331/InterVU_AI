@@ -9,7 +9,7 @@ import { HomeCTA } from "@/components/sections/HomeCTA";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { ArrowRight, Check } from "@/components/ui/icons";
 import { COMPANIES, getCompanyBySlug } from "@/lib/companies";
-import { BLOG_POSTS } from "@/lib/blogs";
+import { fetchAllBlogs } from "@/lib/blogs";
 import { buildMetadata, faqPageJsonLd, articleJsonLd } from "@/lib/seo";
 
 interface Props {
@@ -42,7 +42,8 @@ export default async function CompanyPage({ params }: Props) {
     notFound();
   }
 
-  const relatedBlogs = BLOG_POSTS.filter((post) => company.relatedBlogSlugs.includes(post.slug));
+  const allBlogs = await fetchAllBlogs();
+  const relatedBlogs = allBlogs.filter((post) => company.relatedBlogSlugs.includes(post.slug));
   const otherCompanies = COMPANIES.filter((c) => c.slug !== company.slug).slice(0, 3);
   const updatedLabel = new Date(company.lastUpdated).toLocaleDateString("en-IN", {
     year: "numeric",

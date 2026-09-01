@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { HomeCTA } from "@/components/sections/HomeCTA";
 import { BlogHubClient } from "@/components/sections/BlogHubClient";
-import { BLOG_POSTS } from "@/lib/blogs";
+import { fetchAllBlogs } from "@/lib/blogs";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -13,7 +13,9 @@ export const metadata: Metadata = buildMetadata({
   path: "/blogs",
 });
 
-export default function BlogsPage() {
+export default async function BlogsPage() {
+  const posts = await fetchAllBlogs();
+
   return (
     <main className="min-h-screen bg-paper pt-28 pb-20 font-sans">
       {/* Blog Hub Hero */}
@@ -38,7 +40,7 @@ export default function BlogsPage() {
         </div>
 
         {/* Interactive Filter & Articles Grid */}
-        <BlogHubClient posts={BLOG_POSTS} />
+        <BlogHubClient posts={posts} />
       </Container>
 
       <div className="mt-20">

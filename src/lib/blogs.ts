@@ -820,3 +820,113 @@ int findOptimalSubarray(vector<int>& arr, int target) {
     `,
   },
 ];
+
+const API_URL = process.env.NEXT_PUBLIC_BLOG_API_URL || "https://blog-dashboard-vkw9.onrender.com/api";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function formatApiBlog(apiBlog: any): BlogPost {
+  const raw = apiBlog.blog_content?.[0]?.content || {};
+  const isObj = typeof raw === "object" && raw !== null;
+  return {
+    slug: apiBlog.slug,
+    title: apiBlog.title,
+    excerpt: isObj
+      ? raw.excerpt || apiBlog.blog_content?.[0]?.meta_description || ""
+      : apiBlog.blog_content?.[0]?.meta_description || "",
+    category: isObj && raw.category ? raw.category : "Placement Intelligence",
+    readTime: isObj && raw.readTime ? raw.readTime : "5 min read",
+    publishedAt:
+      isObj && raw.publishedAt
+        ? raw.publishedAt
+        : new Date(apiBlog.created_at || Date.now()).toLocaleDateString("en-US", {
+            month: "short",
+            day: "2-digit",
+            year: "numeric",
+          }),
+    author: {
+      name: isObj && raw.authorName ? raw.authorName : "Aditya Verma",
+      role:
+        isObj && raw.authorRole
+          ? raw.authorRole
+          : "Lead Placement Assessment Architect",
+      avatar: isObj && raw.authorAvatar ? raw.authorAvatar : "AV",
+    },
+    tags:
+      isObj && Array.isArray(raw.tags)
+        ? raw.tags
+        : isObj && typeof raw.tags === "string"
+        ? raw.tags
+            .split(",")
+            .map((s: string) => s.trim())
+            .filter(Boolean)
+        : ["Placement Intelligence"],
+    featured: isObj ? !!raw.featured : false,
+    targetKeyword: isObj ? raw.targetKeyword : undefined,
+    audience: isObj ? raw.audience : undefined,
+    funnelStage: isObj ? raw.funnelStage : undefined,
+    keyTakeaways:
+      isObj && Array.isArray(raw.keyTakeaways) ? raw.keyTakeaways : undefined,
+    cta:
+      isObj && (raw.cta || raw.ctaLabel)
+        ? raw.cta || {
+            label: raw.ctaLabel,
+            text: raw.ctaText,
+            actionText: raw.ctaActionText,
+            href: raw.ctaHref,
+          }
+        : undefined,
+    content: isObj
+      ? (typeof raw.htmlContent === "string" ? raw.htmlContent : "") ||
+        (typeof raw.content === "string" ? raw.content : "") ||
+        (typeof raw.body === "string" ? raw.body : "") ||
+        (typeof raw.html === "string" ? raw.html : "") ||
+        ""
+      : typeof raw === "string"
+      ? raw
+      : "",
+  };
+}
+
+export async function fetchAllBlogs(): Promise<BlogPost[]> {
+  try {
+    let res = await fetch(`${API_URL}/blogs/published`, { next: { revalidate: 60 } });
+    if (!res.ok) {
+      res = await fetch(`${API_URL}/blogs`, { next: { revalidate: 60 } });
+    }
+    if (!res.ok) throw new Error("Failed to fetch blogs");
+    const data = await res.json();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const dynamicBlogs = (Array.isArray(data) ? data : [])
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      .filter((b: any) => b.template === "template3" || !b.template)
+      .map(formatApiBlog);
+
+    const dynamicSlugs = new Set(dynamicBlogs.map((b: BlogPost) => b.slug));
+    const staticFiltered = BLOG_POSTS.filter((p) => !dynamicSlugs.has(p.slug));
+    return [...dynamicBlogs, ...staticFiltered];
+  } catch (err) {
+    console.error("[Blogs API] Failed to fetch dynamic blogs:", err);
+    return BLOG_POSTS;
+  }
+}
+
+export async function fetchBlogBySlug(slug: string): Promise<BlogPost | null> {
+  try {
+    let res = await fetch(`${API_URL}/blogs/s/${slug}`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) {
+      res = await fetch(`${API_URL}/blogs/${slug}`, {
+        next: { revalidate: 60 },
+      });
+    }
+    if (res.ok) {
+      const data = await res.json();
+      return formatApiBlog(data);
+    }
+  } catch (err) {
+    console.error(`[Blogs API] Failed to fetch blog for slug '${slug}':`, err);
+  }
+  return BLOG_POSTS.find((p) => p.slug === slug) || null;
+}
+
