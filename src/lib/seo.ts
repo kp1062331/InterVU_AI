@@ -36,7 +36,7 @@ export function buildMetadata({
   title,
   description,
   path,
-  image = "/opengraph-image.png",
+  image = "/og-image.png",
   imageAlt,
   type = "website",
   publishedTime,
